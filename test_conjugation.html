@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Conjugação</title>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>Teste de Conjugação de Verbos</h1>
+    <div>
+        <label for="test-verb">Verbo:</label>
+        <select id="test-verb"></select>
+    </div>
+    <div>
+        <label for="test-tense">Tempo:</label>
+        <select id="test-tense">
+            <option value="presente">Presente</option>
+            <option value="preterito-perfeito">Pretérito Perfeito</option>
+            <option value="preterito-imperfeito">Pretérito Imperfeito</option>
+            <option value="futuro-do-indicativo">Futuro do Indicativo</option>
+        </select>
+    </div>
+    <button onclick="testConjugation()">Testar</button>
+    <div id="result"></div>
+
+    <script>
+        // 等待app.js加载完成
+        window.addEventListener('load', function() {
+            console.log('Test script loaded');
+            console.log('verbConjugations:', verbConjugations);
+
+            // 填充动词选择器
+            const verbSelect = document.getElementById('test-verb');
+            for (const verb in verbConjugations) {
+                const option = document.createElement('option');
+                option.value = verb;
+                option.textContent = verb;
+                verbSelect.appendChild(option);
+            }
+        });
+
+        function testConjugation() {
+            const verb = document.getElementById('test-verb').value;
+            const tense = document.getElementById('test-tense').value;
+            const resultDiv = document.getElementById('result');
+
+            try {
+                if (!verbConjugations[verb]) {
+                    resultDiv.innerHTML = `<p>Verbo ${verb} não encontrado.</p>`;
+                    return;
+                }
+
+                if (!verbConjugations[verb][tense]) {
+                    resultDiv.innerHTML = `<p>Tempo ${tense} não encontrado para o verbo ${verb}.</p>`;
+                    return;
+                }
+
+                const conjugations = verbConjugations[verb][tense];
+                let html = `<h3>${verb} - ${tense}</h3><ul>`;
+                conjugations.forEach((conj, index) => {
+                    const persons = ['Eu', 'Tu', 'Ele/Ela/Você', 'Nós', 'Vós', 'Eles/Elas/Vocês'];
+                    html += `<li>${persons[index]}: ${conj}</li>`;
+                });
+                html += `</ul>`;
+                resultDiv.innerHTML = html;
+            } catch (error) {
+                resultDiv.innerHTML = `<p>Erro: ${error.message}</p>`;
+                console.error('Test error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

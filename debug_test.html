@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试测试</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="container mx-auto bg-white rounded-lg shadow-md p-6 max-w-2xl">
+        <h1 class="text-2xl font-bold mb-6 text-center text-indigo-600">动词变位调试工具</h1>
+
+        <div class="mb-4">
+            <label for="verb" class="block text-gray-700 mb-2">选择动词:</label>
+            <select id="verb" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="ser">ser (是)</option>
+                <option value="estar">estar (是)</option>
+                <option value="ter">ter (有)</option>
+                <option value="ir">ir (去)</option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="tense" class="block text-gray-700 mb-2">选择时态:</label>
+            <select id="tense" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <option value="presente">现在时</option>
+                <option value="preterito-perfeito">简单过去时</option>
+            </select>
+        </div>
+
+        <button id="testBtn" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 mb-4 w-full">
+            测试generateConjugation函数
+        </button>
+
+        <button id="testLogBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200 mb-4 w-full">
+            测试日志写入功能
+        </button>
+
+        <button id="viewLogBtn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 mb-6 w-full">
+            查看localStorage日志
+        </button>
+
+        <div id="debugOutput" class="bg-gray-50 p-4 rounded-md h-40 overflow-y-auto text-sm font-mono whitespace-pre-wrap"></div>
+        <div id="conjugation-result" class="mt-4">
+            <h3 id="result-title" class="text-lg font-semibold mb-2 text-gray-700">变位结果:</h3>
+            <ul id="conjugationList" class="list-disc pl-5 space-y-1 text-gray-600"></ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // 重定向console.log到debugOutput元素
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+        const debugOutput = document.getElementById('debugOutput');
+
+        function logToOutput(type, message) {
+            // 保存到浏览器控制台
+            switch(type) {
+                case 'log': originalConsoleLog.apply(console, arguments); break;
+                case 'error': originalConsoleError.apply(console, arguments); break;
+                case 'warn': originalConsoleWarn.apply(console, arguments); break;
+            }
+
+            // 显示到调试面板
+            let output = '\n';
+            if (type === 'error') output += '❌ ERROR: ';
+            else if (type === 'warn') output += '⚠️ WARNING: ';
+
+            if (typeof message === 'object') {
+                output += JSON.stringify(message, null, 2);
+            } else {
+                output += message;
+            }
+            debugOutput.textContent += output;
+            debugOutput.scrollTop = debugOutput.scrollHeight;
+
+            // 保存到localStorage
+            try {
+                const logEntry = '[' + new Date().toISOString() + '] [' + type.toUpperCase() + '] ' +
+                                (typeof message === 'object' ? JSON.stringify(message) : message) + '\n';
+                let logs = localStorage.getItem('debugLogs') || '';
+                logs += logEntry;
+                localStorage.setItem('debugLogs', logs);
+            } catch(e) {
+                originalConsoleError('保存到localStorage失败:', e);
+            }
+        }
+
+        console.log = function(message) { logToOutput('log', message); };
+        console.error = function(message) { logToOutput('error', message); };
+        console.warn = function(message) { logToOutput('warn', message); };
+
+        // 测试按钮点击事件
+        document.getElementById('testBtn').addEventListener('click', function() {
+            debugOutput.textContent = '开始测试...\n';
+            // 确保获取DOM元素
+            const verbSelect = document.getElementById('verb');
+            const tenseSelect = document.getElementById('tense');
+            // 检查元素是否存在
+            if (!verbSelect || !tenseSelect) {
+                console.error('无法获取动词或时态选择器元素');
+                return;
+            }
+            // 调用generateConjugation函数
+            generateConjugation();
+        });
+
+        // 测试日志写入按钮点击事件
+        document.getElementById('testLogBtn').addEventListener('click', function() {
+            debugOutput.textContent = '开始测试日志写入...\n';
+            console.log('测试日志写入功能');
+            console.warn('这是一个警告信息');
+            console.error('这是一个错误信息');
+            console.log({test: '对象数据', number: 123});
+            debugOutput.textContent += '\n日志写入测试完成，可点击"查看localStorage日志"按钮查看';
+        });
+
+        // 查看日志按钮点击事件
+        document.getElementById('viewLogBtn').addEventListener('click', function() {
+            debugOutput.textContent = 'localStorage日志内容:\n';
+            try {
+                const logs = localStorage.getItem('debugLogs') || '没有找到日志数据';
+                debugOutput.textContent += logs;
+            } catch(e) {
+                debugOutput.textContent += '\n❌ 获取日志失败: ' + e.message;
+            }
+        });
+    </script>
+</body>
+</html>

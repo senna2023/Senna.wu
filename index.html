@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjugação de português - 葡萄牙语动词变位练习</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .verb-card {
+            transition: transform 0.3s ease;
+        }
+        .verb-card:hover {
+            transform: translateY(-5px);
+        }
+        .conjugation-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .conjugation-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-indigo-600 text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Conjugação de português</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="hover:text-indigo-200">练习</a></li>
+                    <li><a href="verbs.html" class="hover:text-indigo-200">动词表</a></li>
+                    <li><a href="about.html" class="hover:text-indigo-200">关于</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4">
+        <section class="mb-8">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-4">选择动词和时态</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="difficulty" class="block text-gray-700 mb-2">难度</label>
+                        <select id="difficulty" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="初级">初级</option>
+                            <option value="中级">中级</option>
+                            <option value="高级">高级</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="verb" class="block text-gray-700 mb-2">动词</label>
+                        <select id="verb" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                         <option value="ser">ser (是)</option>
+                         <option value="estar">estar (是)</option>
+                         <option value="ter">ter (有)</option>
+                         <option value="ir">ir (去)</option>
+                         <option value="fazer">fazer (做)</option>
+                         <option value="poder">poder (能够)</option>
+                         <option value="querer">querer (想要)</option>
+                         <option value="saber">saber (知道)</option>
+                         <option value="dar">dar (给)</option>
+                         <option value="ver">ver (看)</option>
+                         <option value="ficar">ficar (停留/变得)</option>
+                         <option value="vir">vir (来)</option>
+                         <option value="chegar">chegar (到达)</option>
+                         <option value="voltar">voltar (返回)</option>
+                         <option value="levar">levar (带走)</option>
+                         <option value="trazer">trazer (带来)</option>
+                         <option value="entrar">entrar (进入)</option>
+                         <option value="sair">sair (出去)</option>
+                         <option value="trabalhar">trabalhar (工作)</option>
+                         <option value="estudar">estudar (学习)</option>
+                         <option value="gostar">gostar (喜欢)</option>
+                         <option value="pensar">pensar (想)</option>
+                         <option value="falar">falar (说)</option>
+                         <option value="ouvir">ouvir (听)</option>
+                         <option value="olhar">olhar (看)</option>
+                         <option value="comer">comer (吃)</option>
+                         <option value="beber">beber (喝)</option>
+                         <option value="andar">andar (走)</option>
+                         <option value="correr">correr (跑)</option>
+                         <option value="dormir">dormir (睡)</option>
+                         <option value="sentir">sentir (感觉)</option>
+                         <option value="comprar">comprar (买)</option>
+                         <option value="vender">vender (卖)</option>
+                         <option value="abrir">abrir (开)</option>
+                         <option value="fechar">fechar (关)</option>
+                         <option value="lavar">lavar (洗)</option>
+                         <option value="cozinhar">cozinhar (做饭)</option>
+                         <option value="limpar">limpar (清理)</option>
+                         <option value="aprender">aprender (学习)</option>
+                         <option value="escrever">escrever (写)</option>
+                         <option value="ler">ler (读)</option>
+                         <option value="receber">receber (收到)</option>
+                         <option value="pagar">pagar (付钱)</option>
+                         <option value="levantar">levantar (起床/举起)</option>
+                         <option value="brincar">brincar (玩耍)</option>
+                         <option value="morar">morar (居住)</option>
+                         <option value="chamar">chamar (叫)</option>
+                         <option value="colocar">colocar (放置)</option>
+                         <option value="deitar">deitar (躺下)</option>
+                         <option value="abracar">abracar (拥抱)</option>
+                         <option value="fumar">fumar (吸烟)</option>
+                         <option value="abrir-se">abrir-se (打开, 反身)</option>
+                         <option value="fechar-se">fechar-se (关闭, 反身)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="tense" class="block text-gray-700 mb-2">时态</label>
+                        <select id="tense" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                          <option value="presente">现在时（Presente）</option>
+                          <option value="preterito-perfeito">简单过去时（Pretérito perfeito simples）</option>
+                          <option value="preterito-imperfeito">未完成过去时（Pretérito imperfeito）</option>
+                          <option value="presente-perfeito">现在完成时(Pretérito perfeito composto)</option>
+                          <option value="preterito-mais-que-perfeito">过去完成时（Pretérito mais-que-perfeito)</option>
+                          <option value="futuro-do-indicativo">将来时（Futuro do presente）</option>
+                          <option value="futuro-perfeito">将来完成时（Futuro perfeito)</option>
+                          <option value="condicional">条件式(Condicional)</option>
+                          <option value="condicional-perfeito">条件式完成时(Condicional-perfeito)</option>
+                          <option value="presente-do-subjuntivo">虚拟式现在时（Presente do subjuntivo)</option>
+                          <option value="preterito-imperfeito-do-subjuntivo">虚拟式未完成过去时（Pretérito imperfeito do subjuntivo)</option>
+                          <option value="preterito-perfeito-do-subjuntivo">虚拟式过去完成时（Pretérito perfeito do subjuntivo)</option>
+                          <option value="futuro-do-subjuntivo">虚拟式将来时（Futuro do subjuntivo）</option>
+                          <option value="imperativo">命令式（Imperativo）</option>
+                          <option value="gerundio">动名词（Gerundio）</option>
+                          <option value="particípio">分词式（Particípio）</option>
+                          <option value="infinitivo">不定式（Infinitivo）</option>
+                          <option value="infinitivo-pessoal">人称不定式（Infinitivo pessoal）</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="generate" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200">
+                    生成变位
+                </button>
+            </div>
+
+            <div id="conjugation-result" class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4" id="result-title">动词变位结果</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="verb-card bg-indigo-50 p-4 rounded-lg shadow-sm">
+                        <h3 class="font-medium text-indigo-800 mb-2">人称</h3>
+                        <ul class="space-y-2">
+                            <li class="conjugation-item">Eu (我)</li>
+                            <li class="conjugation-item">Tu (你)</li>
+                            <li class="conjugation-item">Ele/Ela/Você (他/她/您)</li>
+                            <li class="conjugation-item">Nós (我们)</li>
+                            <li class="conjugation-item">Vós (你们)</li>
+                            <li class="conjugation-item">Eles/Elas/Vocês (他们/她们/您们)</li>
+                        </ul>
+                    </div>
+                    <div class="verb-card bg-green-50 p-4 rounded-lg shadow-sm">
+                        <h3 class="font-medium text-green-800 mb-2">变位</h3>
+                        <ul class="space-y-2" id="conjugation-list">
+                            <li class="conjugation-item"></li>
+                            <li class="conjugation-item"></li>
+                            <li class="conjugation-item"></li>
+                            <li class="conjugation-item"></li>
+                            <li class="conjugation-item"></li>
+                            <li class="conjugation-item"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <button id="practice" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200 mr-2">
+                        练习这个动词
+                    </button>
+                    <button id="next" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200">
+                        下一个动词
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>Protuque - 葡萄牙语动词变位练习（由大连外国语大学开发） &copy; 2025</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="test_gerundio.js"></script>
+</body>
+</html>

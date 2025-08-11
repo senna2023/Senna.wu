@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Debug Conjugação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3a5ae7;
+        }
+        #conjugation-result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+        }
+        .hidden {
+            display: none;
+        }
+        .d-none {
+            display: none;
+        }
+        .invisible {
+            visibility: hidden;
+        }
+        #result-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        #conjugation-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .conjugation-item {
+            margin-bottom: 5px;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .show {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Detailed Debug Verbo Conjugação</h1>
+
+    <div class="container">
+        <label for="difficulty">Dificuldade:</label>
+        <select id="difficulty">
+            <option value="beginner">Iniciante</option>
+            <option value="intermediate" selected>Intermediário</option>
+            <option value="advanced">Avançado</option>
+        </select>
+
+        <label for="verb">Verbo:</label>
+        <select id="verb"></select>
+
+        <label for="tense">Tempo:</label>
+        <select id="tense">
+            <option value="presente" selected>Presente</option>
+            <option value="pretérito">Pretérito</option>
+            <option value="futuro">Futuro</option>
+        </select>
+
+        <button id="generate">Gerar Conjugação</button>
+        <button id="practice">Praticar</button>
+        <button id="next">Próximo Verbo</button>
+    </div>
+
+    <div id="conjugation-result" class="hidden">
+        <h2 id="result-title"></h2>
+        <ul id="conjugation-list"></ul>
+    </div>
+
+    <script>
+        // 模拟数据结构
+        const verbConjugations = {
+            'saber': {
+                'presente': [
+                    'eu: sei',
+                    'tu: sabes',
+                    'ele/ela/você: sabe',
+                    'nós: sabemos',
+                    'vós: sabeis',
+                    'eles/elas/vocês: sabem'
+                ],
+                'pretérito': [
+                    'eu: soube',
+                    'tu: soubeste',
+                    'ele/ela/você: soube',
+                    'nós: soubemos',
+                    'vós: soubestis',
+                    'eles/elas/vocês: souberam'
+                ]
+            },
+            'falar': {
+                'presente': [
+                    'eu: falo',
+                    'tu: falas',
+                    'ele/ela/você: fala',
+                    'nós: falamos',
+                    'vós: falais',
+                    'eles/elas/vocês: falam'
+                ]
+            },
+            'ir': {
+                'presente': [
+                    'eu: vou',
+                    'tu: vais',
+                    'ele/ela/você: vai',
+                    'nós: vamos',
+                    'vós: vais',
+                    'eles/elas/vocês: vão'
+                ]
+            }
+        };
+
+        const verbDifficulty = {
+            'saber': 'intermediate',
+            'falar': 'beginner',
+            'ir': 'beginner'
+        };
+
+        const verbMeanings = {
+            'saber': 'saber (saber)',
+            'falar': 'falar (falar)',
+            'ir': 'ir (ir)'
+        };
+
+        // 全局变量
+        let verbSelect, tenseSelect, difficultySelect, generateBtn, practiceBtn, nextBtn;
+        let conjugationResult, resultTitle, conjugationList;
+
+        // 筛选动词（考虑难度）
+        function filterVerbsByDifficulty() {
+            console.log('filterVerbsByDifficulty called');
+            const selectedDifficulty = difficultySelect.value;
+            console.log('Selected difficulty:', selectedDifficulty);
+
+            // 清空现有选项
+            verbSelect.innerHTML = '';
+
+            // 根据难度筛选动词
+            const filteredVerbs = Object.keys(verbConjugations)
+                .filter(verb => verbDifficulty[verb] === selectedDifficulty);
+
+            console.log('Filtered verbs:', filteredVerbs);
+
+            // 添加选项
+            filteredVerbs.forEach(verb => {
+                const option = document.createElement('option');
+                option.value = verb;
+                option.textContent = verbMeanings[verb] || verb;
+                verbSelect.appendChild(option);
+            });
+
+            // 如果有动词，则选中第一个
+            if (verbSelect.options.length > 0) {
+                verbSelect.selectedIndex = 0;
+                generateConjugation();
+            }
+            console.log('Filtered verbs count:', verbSelect.options.length);
+        }
+
+        // 随机选择下一个动词
+        function nextVerb() {
+            console.log('nextVerb called');
+            const selectedDifficulty = difficultySelect.value;
+            let verbs = Object.keys(verbConjugations);
+
+            // 根据难度筛选动词
+            verbs = verbs.filter(verb => verbDifficulty[verb] === selectedDifficulty);
+
+            // 随机选择一个动词
+            if (verbs.length > 0) {
+                const randomVerbIndex = Math.floor(Math.random() * verbs.length);
+                verbSelect.value = verbs[randomVerbIndex];
+
+                // 重新生成变位
+                generateConjugation();
+            }
+        }
+
+        // 生成变位结果 - 模拟主应用逻辑
+        function generateConjugation() {
+            // 调试信息
+            console.log('generateConjugation function called');
+
+            // 检查DOM元素是否正确获取
+            if (!verbSelect) {
+                console.error('verbSelect is null');
+                verbSelect = document.getElementById('verb');
+                console.log('尝试重新获取verbSelect:', verbSelect);
+            }
+            if (!tenseSelect) {
+                console.error('tenseSelect is null');
+                tenseSelect = document.getElementById('tense');
+                console.log('尝试重新获取tenseSelect:', tenseSelect);
+            }
+            if (!conjugationList) {
+                console.error('conjugationList is null');
+                conjugationList = document.getElementById('conjugation-list');
+                console.log('尝试重新获取conjugationList:', conjugationList);
+            }
+            if (!resultTitle) {
+                console.error('resultTitle is null');
+                resultTitle = document.getElementById('result-title');
+                console.log('尝试重新获取resultTitle:', resultTitle);
+            }
+            if (!conjugationResult) {
+                console.error('conjugationResult is null');
+                conjugationResult = document.getElementById('conjugation-result');
+                console.log('尝试重新获取conjugationResult:', conjugationResult);
+            }
+
+            const verb = verbSelect ? verbSelect.value : 'ser';
+            const tense = tenseSelect ? tenseSelect.value : 'presente';
+
+            console.log('Selected verb:', verb);
+            console.log('Selected tense:', tense);
+
+            // 检查verbConjugations是否包含该动词
+            if (!verbConjugations[verb]) {
+                console.error('Verb not found in verbConjugations:', verb);
+                alert('未找到该动词的变位数据: ' + verb);
+                return;
+            }
+
+            // 检查该动词是否包含该时态
+            if (!verbConjugations[verb][tense]) {
+                console.error('Tense not found for verb:', verb, 'tense:', tense);
+                alert('未找到该动词的' + tense + '时态数据');
+                return;
+            }
+
+            // 检查变位数据是否为数组
+            const conjugations = verbConjugations[verb][tense];
+            if (!Array.isArray(conjugations)) {
+                console.error('Conjugations data is not an array');
+                alert('动词变位数据格式错误');
+                return;
+            }
+
+            if (conjugations.length === 0) {
+                console.error('Conjugations array is empty');
+                alert('没有可用的变位数据');
+                return;
+            }
+
+            // 更新标题
+            const verbName = verbSelect.options[verbSelect.selectedIndex].text;
+            const tenseName = tenseSelect.options[tenseSelect.selectedIndex].text;
+            resultTitle.textContent = `${verbName} - ${tenseName}`;
+
+            // 清空之前的结果
+            conjugationList.innerHTML = '';
+
+            // 添加新的变位结果
+            conjugations.forEach((conj, index) => {
+                const li = document.createElement('li');
+                li.className = 'conjugation-item';
+                li.textContent = conj;
+                conjugationList.appendChild(li);
+            });
+
+            // 强制显示结果
+            console.log('尝试显示conjugationResult');
+            if (conjugationResult) {
+                // 移除所有可能隐藏元素的类
+                conjugationResult.classList.remove('hidden', 'd-none', 'invisible');
+                // 强制设置display属性
+                conjugationResult.style.display = 'block';
+                conjugationResult.style.visibility = 'visible';
+                conjugationResult.style.opacity = '1';
+                console.log('conjugationResult当前状态:', conjugationResult.classList);
+                console.log('conjugationResult样式:', window.getComputedStyle(conjugationResult));
+            } else {
+                console.error('conjugationResult仍然为null，无法显示');
+                // 尝试重新获取元素
+                conjugationResult = document.getElementById('conjugation-result');
+                console.log('重新获取conjugationResult:', conjugationResult);
+                if (conjugationResult) {
+                    conjugationResult.classList.remove('hidden', 'd-none', 'invisible');
+                    conjugationResult.style.display = 'block';
+                    conjugationResult.style.visibility = 'visible';
+                    conjugationResult.style.opacity = '1';
+                }
+            }
+
+            // 添加动画效果
+            setTimeout(() => {
+                const items = document.querySelectorAll('.conjugation-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('show');
+                    }, index * 100);
+                });
+            }, 100);
+        }
+
+        // 练习模式
+        function startPractice() {
+            console.log('startPractice called');
+            const items = document.querySelectorAll('#conjugation-list .conjugation-item');
+            items.forEach(item => {
+                const originalText = item.textContent;
+                item.textContent = '';
+                item.classList.add('border-b', 'border-gray-300', 'pb-1');
+
+                // 创建输入框
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'bg-transparent border-none outline-none w-full';
+                input.placeholder = '输入变位...';
+                item.appendChild(input);
+
+                // 验证答案
+                input.addEventListener('blur', () => {
+                    if (input.value.toLowerCase() === originalText.toLowerCase()) {
+                        input.classList.add('text-green-600');
+                        input.disabled = true;
+                    } else {
+                        input.classList.add('text-red-600');
+                        setTimeout(() => {
+                            input.classList.remove('text-red-600');
+                        }, 1000);
+                    }
+                });
+            });
+
+            practiceBtn.textContent = '检查答案';
+            practiceBtn.onclick = checkAnswers;
+        }
+
+        // 检查答案
+        function checkAnswers() {
+            console.log('checkAnswers called');
+            const verb = verbSelect.value;
+            const tense = tenseSelect.value;
+            const conjugations = verbConjugations[verb][tense];
+            const inputs = document.querySelectorAll('#conjugation-list input');
+            let allCorrect = true;
+
+            inputs.forEach((input, index) => {
+                if (input.value.toLowerCase() === conjugations[index].toLowerCase()) {
+                    input.classList.add('text-green-600');
+                    input.disabled = true;
+                } else {
+                    input.classList.add('text-red-600');
+                    input.value = conjugations[index];
+                    input.disabled = true;
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                alert('太棒了！所有答案都正确！');
+            } else {
+                alert('有些答案不正确，请再试一次！');
+            }
+
+            practiceBtn.textContent = '练习这个动词';
+            practiceBtn.onclick = startPractice;
+        }
+
+        // 初始化
+        function init() {
+            console.log('Initializing...');
+            // 获取DOM元素
+            verbSelect = document.getElementById('verb');
+            tenseSelect = document.getElementById('tense');
+            difficultySelect = document.getElementById('difficulty');
+            generateBtn = document.getElementById('generate');
+            practiceBtn = document.getElementById('practice');
+            nextBtn = document.getElementById('next');
+            conjugationResult = document.getElementById('conjugation-result');
+            resultTitle = document.getElementById('result-title');
+            conjugationList = document.getElementById('conjugation-list');
+
+            console.log('DOM元素获取结果:', {
+                verbSelect: !!verbSelect,
+                tenseSelect: !!tenseSelect,
+                difficultySelect: !!difficultySelect,
+                generateBtn: !!generateBtn,
+                practiceBtn: !!practiceBtn,
+                nextBtn: !!nextBtn,
+                conjugationResult: !!conjugationResult,
+                resultTitle: !!resultTitle,
+                conjugationList: !!conjugationList
+            });
+
+            // 添加事件监听器
+            if (verbSelect) verbSelect.addEventListener('change', generateConjugation);
+            else console.error('verbSelect is null, cannot add change event listener');
+
+            if (tenseSelect) tenseSelect.addEventListener('change', generateConjugation);
+            else console.error('tenseSelect is null, cannot add change event listener');
+
+            if (difficultySelect) difficultySelect.addEventListener('change', filterVerbsByDifficulty);
+            else console.error('difficultySelect is null, cannot add change event listener');
+
+            if (generateBtn) {
+                generateBtn.addEventListener('click', generateConjugation);
+                console.log('Click event listener added to generateBtn');
+            } else {
+                console.error('generateBtn is null, cannot add click event listener');
+            }
+
+            if (practiceBtn) practiceBtn.addEventListener('click', startPractice);
+            else console.error('practiceBtn is null, cannot add click event listener');
+
+            if (nextBtn) nextBtn.addEventListener('click', nextVerb);
+            else console.error('nextBtn is null, cannot add click event listener');
+
+            // 初始化动词列表
+            filterVerbsByDifficulty();
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

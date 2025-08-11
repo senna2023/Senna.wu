@@ -1,0 +1,20 @@
+// 正确的poder动词定义
+    'poder': {
+        'presente': ['posso', 'podes', 'pode', 'podemos', 'podeis', 'podem'],
+        'preterito-perfeito': ['pude', 'pudeste', 'pôde', 'pudemos', 'pudestes', 'puderam'],
+        'preterito-imperfeito': ['podia', 'podias', 'podia', 'podíamos', 'podíeis', 'podiam'],
+        'preterito-mais-que-perfeito': ['pudera', 'puderas', 'pudera', 'pudéramos', 'pudéreis', 'poderam'],
+        'futuro-do-indicativo': ['poderei', 'poderás', 'poderá', 'poderemos', 'podereis', 'poderão'],
+        'condicional': ['poderia', 'poderias', 'poderia', 'poderíamos', 'poderíeis', 'poderiam'],
+        'presente-perfeito': ['tenho podido', 'tens podido', 'tem podido', 'temos podido', 'tendes podido', 'têm podido'],
+        'mais-que-perfeito-composto': ['tinha podido', 'tinhas podido', 'tinha podido', 'tínhamos podido', 'tínheis podido', 'tinham podido'],
+        'presente-do-subjuntivo': ['possa', 'possas', 'possa', 'possamos', 'possais', 'possam'],
+        'preterito-imperfeito-do-subjuntivo': ['pudesse', 'pudesses', 'pudesse', 'pudéssemos', 'pudésseis', 'pudessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha podido', 'tenhas podido', 'tenha podido', 'tenhamos podido', 'tenhais podido', 'tenham podido'],
+        'futuro-do-subjuntivo': ['puder', 'puderes', 'puder', 'pudermos', 'puderdes', 'poderem'],
+        'imperativo': ['-', 'pode', 'possa', 'possamos', 'possam', 'possam'],
+        'gerundio': ['podendo', 'podendo', 'podendo', 'podendo', 'podendo', 'podendo'],
+        'particípio': ['podido', 'podido', 'podido', 'podidos', 'podidas', 'podidos'],
+        'infinitivo': ['poder'],
+        'infinitivo-pessoal': ['poder', 'poderes', 'poder', 'podermos', 'poderdes', 'poderem']
+    },

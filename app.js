@@ -1,0 +1,3424 @@
+// 葡萄牙语动词变位数据库
+// 动词难度级别定义
+const verbDifficulty = {
+    // 初级动词 (53个)
+    'ser': '初级',
+    'estar': '初级',
+    'ter': '初级',
+    'ir': '初级',
+    'fazer': '初级',
+    'comer': '初级',
+    'beber': '初级',
+    'falar': '初级',
+    'ler': '初级',
+    'andar': '初级',
+    'caminhar': '初级',
+    'correr': '初级',
+    'dormir': '初级',
+    'levantar': '初级',
+    'comprar': '初级',
+    'vender': '初级',
+    'abrir': '初级',
+    'fechar': '初级',
+    'olhar': '初级',
+    'ouvir': '初级',
+    'sentir': '初级',
+    'fumar': '初级',
+    'pagar': '初级',
+    'receber': '初级',
+    'chegar': '初级',
+    'sair': '初级',
+    'lavar': '初级',
+    'cozinhar': '初级',
+    'limpar': '初级',
+    'brincar': '初级',
+    'morar': '初级',
+    'chamar': '初级',
+    'colocar': '初级',
+    'deitar': '初级',
+    'abracar': '初级',
+    'abrir-se': '初级',
+    'fechar-se': '初级',
+    'trazer': '初级',
+    'levar': '初级',
+    'entrar': '初级',
+    'voltar': '初级',
+    'vir': '初级',
+    'ficar': '初级',
+    'dar': '初级',
+    'ver': '初级',
+    'saber': '初级',
+    'poder': '初级',
+    'escrever': '初级',
+    'aprender': '初级',
+    'trabalhar': '初级',
+    'estudar': '初级',
+
+    // 中级动词 (53个)
+    'usar': '中级',
+    'seguir': '中级',
+    'pedir': '中级',
+    'esperar': '中级',
+    'perder': '中级',
+    'perguntar': '中级',
+    'servir': '中级',
+    'encontrar': '中级',
+    'deixar': '中级',
+    'entender': '中级',
+    'responder': '中级',
+    'aceitar': '中级',
+    'ligar': '中级',
+    'ganhar': '中级',
+    'cuidar': '中级',
+    'esquecer': '中级',
+    'odiar': '中级',
+    'jogar': '中级',
+    'proteger': '中级',
+    'decidir': '中级',
+    'beijar': '中级',
+    'trocar': '中级',
+    'prometer': '中级',
+    'chorar': '中级',
+    'sorrir': '中级',
+    'ajudar': '中级',
+    'avisar': '中级',
+    'buscar': '中级',
+    'telefonar': '中级',
+    'visitar': '中级',
+    'agradecer': '中级',
+    'descrever': '中级',
+    'assistir': '中级',
+    'gritar': '中级',
+    'dançar': '中级',
+    'queixar': '中级',
+    'fugir': '中级',
+    'rir': '中级',
+    'ensinar': '中级',
+    'gravar': '中级',
+    'amare': '中级',
+    'desenhar': '中级',
+    'inventar': '中级',
+    'decorar': '中级',
+    'festejar': '中级',
+    'salvar': '中级',
+    'quebrar': '中级',
+    'discuter': '中级',
+    'nadar': '中级',
+    'explicar': '中级',
+    'pular': '中级',
+    'cantar': '中级',
+    'dizer': '中级',
+    'parar': '中级',
+    'conhecer': '中级',
+    'explorar': '中级',
+    'guiar': '中级',
+    'tentar': '中级',
+    'preparar': '中级',
+    'escolher': '中级',
+
+    // 高级动词 (88个)
+    'viver': '高级',
+    'manter': '高级',
+    'mudar': '高级',
+    'acontecer': '高级',
+    'precisar': '高级',
+    'terminar': '高级',
+    'valer': '高级',
+    'produzir': '高级',
+    'resolver': '高级',
+    'ocorrer': '高级',
+    'participar': '高级',
+    'descobrir': '高级',
+    'considerar': '高级',
+    'oferecer': '高级',
+    'procurar': '高级',
+    'defender': '高级',
+    'representar': '高级',
+    'existir': '高级',
+    'criar': '高级',
+    'sugerir': '高级',
+    'compreender': '高级',
+    'aparecer': '高级',
+    'controlar': '高级',
+    'construir': '高级',
+    'investir': '高级',
+    'desenvolver': '高级',
+    'avaliar': '高级',
+    'relatar': '高级',
+    'funcionar': '高级',
+    'superar': '高级',
+    'propor': '高级',
+    'diminuir': '高级',
+    'tratar': '高级',
+    'gerar': '高级',
+    'assumir': '高级',
+    'retornar': '高级',
+    'avançar': '高级',
+    'revelar': '高级',
+    'recusar': '高级',
+    'planejar': '高级',
+    'abordar': '高级',
+    'convencer': '高级',
+    'preparar': '高级',
+    'transferir': '高级',
+    'regressar': '高级',
+    'definir': '高级',
+    'articular': '高级',
+    'apreciar': '高级',
+    'cooperar': '高级',
+    'corresponder': '高级',
+    'suspeitar': '高级',
+    'transportar': '高级',
+    'selecionar': '高级',
+    'adequar': '高级',
+    'duvidar': '高级',
+    'distinguir': '高级',
+    'provar': '高级',
+    'insistir': '高级',
+    'separar': '高级',
+    'testar': '高级',
+    'argumentar': '高级',
+    'dominar': '高级',
+    'durar': '高级',
+    'reunir': '高级',
+    'dividir': '高级',
+    'transmitir': '高级',
+    'gostar': '高级',
+    'querer': '高级',
+    'pensar': '高级',
+    'adquirir': '高级',
+    'analisar': '高级',
+    'elegir': '高级',
+    'eliminar': '高级',
+    'envolver': '高级',
+    'esconder': '高级',
+    'esforçar': '高级',
+    'estabelecer': '高级',
+    'estimar': '高级',
+    'expressar': '高级',
+    'facilitar': '高级',
+    'fomentar': '高级',
+    'formar': '高级',
+    'frequentar': '高级',
+    'gozar': '高级',
+    'guardar': '高级',
+    'conversar': '高级',
+    'contribuir': '高级',
+    'publicar': '高级',
+    'incluir': '高级',
+    'interromper': '高级',
+    'adquirir': '高级',
+    'discutir': '高级',
+    'organizar': '高级',
+    'vencer': '高级',
+    'impedir': '高级',
+    'analisar': '高级',
+    'satisfazer': '高级',
+    'gozar': '高级'
+};
+
+// 动词变位数据
+const verbConjugations = {
+    'assistir': {
+        'presente': ['assisto', 'assistes', 'assiste', 'assistimos', 'assistis', 'assistem'],
+        'preterito-perfeito': ['assisti', 'assisteste', 'assistiu', 'assistimos', 'assististes', 'assistiram'],
+        'preterito-imperfeito': ['assistia', 'assistias', 'assistia', 'assistíamos', 'assistíeis', 'assistiam'],
+        'presente-perfeito': ['tenho assistido', 'tens assistido', 'tem assistido', 'temos assistido', 'tendes assistido', 'têm assistido'],
+        'preterito-mais-que-perfeito': ['tinha assistido', 'tinhas assistido', 'tinha assistido', 'tínhamos assistido', 'tínheis assistido', 'tinham assistido'],
+        'presente-perfecto-continuo': ['tenho assistindo', 'tens assistindo', 'tem assistindo', 'temos assistindo', 'tendes assistindo', 'têm assistindo'],
+        'futuro-perfeito': ['terei assistido', 'terás assistido', 'terá assistido', 'teremos assistido', 'tereis assistido', 'terão assistido'],
+        'futuro-do-indicativo': ['assistirei', 'assistirás', 'assistirá', 'assistiremos', 'assistireis', 'assistirão'],
+        'condicional-perfeito': ['teria assistido', 'terias assistido', 'teria assistido', 'teríamos assistido', 'teríeis assistido', 'teriam assistido'],
+        'mais-que-perfeito-composto': ['tinha assistido', 'tinhas assistido', 'tinha assistido', 'tínhamos assistido', 'tínheis assistido', 'tinham assistido'],
+        'condicional': ['assistiria', 'assistirias', 'assistiria', 'assistiríamos', 'assistiríeis', 'assistiriam'],
+        'presente-do-subjuntivo': ['assista', 'assistas', 'assista', 'assistamos', 'assistais', 'assistam'],
+        'preterito-imperfeito-do-subjuntivo': ['assistisse', 'assistisses', 'assistisse', 'assistíssemos', 'assistísseis', 'assistissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha assistido', 'tenhas assistido', 'tenha assistido', 'tenhamos assistido', 'tenhais assistido', 'tenham assistido'],
+        'futuro-do-subjuntivo': ['assisti', 'assistires', 'assisti', 'assistirmos', 'assistirdes', 'assistirem'],
+        'imperativo': ['-', 'assiste', 'assista', 'assistamos', 'assistam', 'assistam'],
+        'gerundio': ['assistindo', 'assistindo', 'assistindo', 'assistindo', 'assistindo', 'assistindo'],
+        'particípio': ['assistido', 'assistido', 'assistido', 'assistidos', 'assistidas', 'assistidos'],
+    'infinitivo': ['assistir'],
+        'infinitivo-pessoal': ['assistir', 'assistires', 'assistir', 'assistirmos', 'assistirdes', 'assistirem']
+    },
+    'andar': {
+        'presente': ['ando', 'andas', 'anda', 'andamos', 'andais', 'andam'],
+        'preterito-perfeito': ['andei', 'andaste', 'andou', 'andamos', 'andastes', 'andaram'],
+        'preterito-imperfeito': ['andava', 'andavas', 'andava', 'andávamos', 'andáveis', 'andavam'],
+        'presente-perfeito': ['tenho andado', 'tens andado', 'tem andado', 'temos andado', 'tendes andado', 'têm andado'],
+        'preterito-mais-que-perfeito': ['tinha andado', 'tinhas andado', 'tinha andado', 'tínhamos andado', 'tínheis andado', 'tinham andado'],
+        'presente-perfecto-continuo': ['tenho andando', 'tens andando', 'tem andando', 'temos andando', 'tendes andando', 'têm andando'],
+        'futuro-perfeito': ['terei andado', 'terás andado', 'terá andado', 'teremos andado', 'tereis andado', 'terão andado'],
+        'futuro-do-indicativo': ['andarei', 'andarás', 'andará', 'andaremos', 'andareis', 'andarão'],
+        'condicional-perfeito': ['teria andado', 'terias andado', 'teria andado', 'teríamos andado', 'teríeis andado', 'teriam andado'],
+        'mais-que-perfeito-composto': ['tinha andado', 'tinhas andado', 'tinha andado', 'tínhamos andado', 'tínheis andado', 'tinham andado'],
+        'condicional': ['andaria', 'andarias', 'andaria', 'andaríamos', 'andaríeis', 'andariam'],
+        'presente-do-subjuntivo': ['ande', 'andes', 'ande', 'andemos', 'andeis', 'andem'],
+        'preterito-imperfeito-do-subjuntivo': ['andasse', 'andasses', 'andasse', 'andássemos', 'andásseis', 'andassem'],
+        'preterito-perfeito-do-subjuntivo': ['andei', 'andaste', 'andeu', 'andamos', 'andastes', 'andaram'],
+        'futuro-do-subjuntivo': ['andar', 'andares', 'andar', 'andarmos', 'andardes', 'andarem'],
+        'imperativo': ['-', 'anda', 'ande', 'andemos', 'andei', 'andem'],
+        'gerundio': ['andando', 'andando', 'andando', 'andando', 'andando', 'andando'],
+        'particípio': ['andado', 'andado', 'andado', 'andado', 'andado', 'andado'],
+        'infinitivo': ['andar'],
+        'infinitivo-pessoal': ['andar', 'andares', 'andar', 'andarmos', 'andardes', 'andarem']
+    },
+    'beber': {
+        'presente': ['bebo', 'bebes', 'bebe', 'bebemos', 'bebeis', 'bebem'],
+        'preterito-perfeito': ['bebi', 'bebeste', 'bebeu', 'bebemos', 'bebestes', 'beberam'],
+        'preterito-imperfeito': ['bebia', 'bebias', 'bebia', 'bebíamos', 'bebíeis', 'bebiam'],
+        'presente-perfeito': ['tenho bebido', 'tens bebido', 'tem bebido', 'temos bebido', 'tendes bebido', 'têm bebido'],
+        'preterito-mais-que-perfeito': ['tinha bebido', 'tinhas bebido', 'tinha bebido', 'tínhamos bebido', 'tínheis bebido', 'tinham bebido'],
+        'presente-perfecto-continuo': ['tenho bebendo', 'tens bebendo', 'tem bebendo', 'temos bebendo', 'tendes bebendo', 'têm bebendo'],
+        'futuro-perfeito': ['terei bebido', 'terás bebido', 'terá bebido', 'teremos bebido', 'tereis bebido', 'terão bebido'],
+        'futuro-do-indicativo': ['beberei', 'beberás', 'beberá', 'beberemos', 'bebereis', 'beberão'],
+        'condicional-perfeito': ['teria bebido', 'terias bebido', 'teria bebido', 'teríamos bebido', 'teríeis bebido', 'teriam bebido'],
+        'mais-que-perfeito-composto': ['tinha bebido', 'tinhas bebido', 'tinha bebido', 'tínhamos bebido', 'tínheis bebido', 'tinham bebido'],
+        'condicional': ['beberia', 'beberias', 'beberia', 'beberíamos', 'beberíeis', 'beberiam'],
+        'presente-do-subjuntivo': ['beba', 'bebas', 'beba', 'bebamos', 'bebais', 'bebam'],
+        'preterito-imperfeito-do-subjuntivo': ['bebesse', 'bebesses', 'bebesse', 'bebêssemos', 'bebêsseis', 'bebessem'],
+        'gerundio': ['bebendo', 'bebendo', 'bebendo', 'bebendo', 'bebendo', 'bebendo'],
+        'preterito-perfeito-do-subjuntivo': ['bebi', 'bebeste', 'bebeu', 'bebemos', 'bebestes', 'beberam'],
+        'futuro-do-subjuntivo': ['beber', 'beberes', 'beber', 'bebermos', 'beberdes', 'beberem'],
+        'imperativo': ['-', 'bebe', 'beba', 'bebamos', 'bebi', 'bebam'],
+        'gerundio': ['bebendo', 'bebendo', 'bebendo', 'bebendo', 'bebendo', 'bebendo'],
+        'particípio': ['bebido', 'bebido', 'bebido', 'bebido', 'bebido', 'bebido'],
+        'infinitivo': ['beber'],
+        'infinitivo-pessoal': ['beber', 'beberes', 'beber', 'bebermos', 'beberdes', 'beberem']
+    },
+    'comer': {
+        'presente': ['como', 'comes', 'come', 'comemos', 'comeis', 'comem'],
+        'preterito-perfeito': ['comi', 'comeste', 'comeu', 'comemos', 'comestes', 'comeram'],
+        'preterito-imperfeito': ['comia', 'comias', 'comia', 'comíamos', 'comíeis', 'comiam'],
+        'presente-perfeito': ['tenho comido', 'tens comido', 'tem comido', 'temos comido', 'tendes comido', 'têm comido'],
+        'preterito-mais-que-perfeito': ['tinha comido', 'tinhas comido', 'tinha comido', 'tínhamos comido', 'tínheis comido', 'tinham comido'],
+        'presente-perfecto-continuo': ['tenho comendo', 'tens comendo', 'tem comendo', 'temos comendo', 'tendes comendo', 'têm comendo'],
+        'futuro-perfeito': ['terei comido', 'terás comido', 'terá comido', 'teremos comido', 'tereis comido', 'terão comido'],
+        'futuro-do-indicativo': ['comerei', 'comerás', 'comerá', 'comeremos', 'comereis', 'comerão'],
+        'condicional-perfeito': ['teria comido', 'terias comido', 'teria comido', 'teríamos comido', 'teríeis comido', 'teriam comido'],
+        'mais-que-perfeito-composto': ['tinha comido', 'tinhas comido', 'tinha comido', 'tínhamos comido', 'tínheis comido', 'tinham comido'],
+        'condicional': ['comeria', 'comerias', 'comeria', 'comeríamos', 'comeríeis', 'comeriam'],
+        'presente-do-subjuntivo': ['coma', 'comas', 'coma', 'comamos', 'comais', 'comam'],
+        'preterito-imperfeito-do-subjuntivo': ['comesse', 'comesses', 'comesse', 'comêssemos', 'comêsseis', 'comessem'],
+        'gerundio': ['comendo', 'comendo', 'comendo', 'comendo', 'comendo', 'comendo'],
+        'preterito-perfeito-do-subjuntivo': ['comi', 'comeste', 'comeu', 'comemos', 'comestes', 'comeram'],
+        'futuro-do-subjuntivo': ['comer', 'comeres', 'comer', 'comermos', 'comerdes', 'comerem'],
+        'imperativo': ['-', 'come', 'coma', 'comamos', 'comei', 'comam'],
+        'gerundio': ['comendo', 'comendo', 'comendo', 'comendo', 'comendo', 'comendo'],
+        'particípio': ['comido', 'comido', 'comido', 'comido', 'comido', 'comido'],
+        'infinitivo': ['comer'],
+        'infinitivo-pessoal': ['comer', 'comeres', 'comer', 'comermos', 'comerdes', 'comerem']
+    },
+    'colocar': {
+        'presente': ['coloco', 'colocas', 'coloca', 'colocamos', 'colocais', 'colocam'],
+        'preterito-perfeito': ['coloquei', 'colocaste', 'colocou', 'colocamos', 'colocastes', 'colocaram'],
+        'preterito-imperfeito': ['colocava', 'colocavas', 'colocava', 'colocávamos', 'colocáveis', 'colocavam'],
+        'presente-perfeito': ['tenho colocado', 'tens colocado', 'tem colocado', 'temos colocado', 'tendes colocado', 'têm colocado'],
+        'preterito-mais-que-perfeito': ['tinha colocado', 'tinhas colocado', 'tinha colocado', 'tínhamos colocado', 'tínheis colocado', 'tinham colocado'],
+        'presente-perfecto-continuo': ['tenho colocando', 'tens colocando', 'tem colocando', 'temos colocando', 'tendes colocando', 'têm colocando'],
+        'futuro-perfeito': ['terei colocado', 'terás colocado', 'terá colocado', 'teremos colocado', 'tereis colocado', 'terão colocado'],
+        'futuro-do-indicativo': ['colocarei', 'colocarás', 'colocará', 'colocaremos', 'colocareis', 'colocarão'],
+        'condicional-perfeito': ['teria colocado', 'terias colocado', 'teria colocado', 'teríamos colocado', 'teríeis colocado', 'teriam colocado'],
+        'mais-que-perfeito-composto': ['tinha colocado', 'tinhas colocado', 'tinha colocado', 'tínhamos colocado', 'tínheis colocado', 'tinham colocado'],
+        'condicional': ['colocaria', 'colocarias', 'colocaria', 'colocaríamos', 'colocaríeis', 'colocariam'],
+        'presente-do-subjuntivo': ['coloque', 'coloques', 'coloque', 'coloquemos', 'coloqueis', 'coloquem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha colocado', 'tenhas colocado', 'tenha colocado', 'tenhamos colocado', 'tenhais colocado', 'tenham colocado'],
+        'futuro-do-subjuntivo': ['colocar', 'colocares', 'colocar', 'colocarmos', 'colocardes', 'colocarem'],
+        'imperativo': ['-', 'coloca', 'coloque', 'coloquemos', 'colocai', 'coloquem'],
+        'gerundio': ['colocando', 'colocando', 'colocando', 'colocando', 'colocando', 'colocando'],
+        'particípio': ['colocado', 'colocado', 'colocado', 'colocado', 'colocado', 'colocado'],
+        'infinitivo': ['colocar'],
+        'infinitivo-pessoal': ['colocar', 'colocares', 'colocar', 'colocarmos', 'colocardes', 'colocarem']
+    },
+    'conhecer': {
+        'presente': ['conheço', 'conheces', 'conhece', 'conhecemos', 'conheceis', 'conhecem'],
+        'preterito-perfeito': ['conheci', 'conheceste', 'conheceu', 'conhecemos', 'conhecestes', 'conheceram'],
+        'preterito-imperfeito': ['conhecia', 'conhecias', 'conhecia', 'conhecíamos', 'conhecíeis', 'conheciam'],
+        'presente-perfeito': ['tenho conhecido', 'tens conhecido', 'tem conhecido', 'temos conhecido', 'tendes conhecido', 'têm conhecido'],
+        'preterito-mais-que-perfeito': ['tinha conhecido', 'tinhas conhecido', 'tinha conhecido', 'tínhamos conhecido', 'tínheis conhecido', 'tinham conhecido'],
+        'presente-perfecto-continuo': ['tenho conhecendo', 'tens conhecendo', 'tem conhecendo', 'temos conhecendo', 'tendes conhecendo', 'têm conhecendo'],
+        'futuro-perfeito': ['terei conhecido', 'terás conhecido', 'terá conhecido', 'teremos conhecido', 'tereis conhecido', 'terão conhecido'],
+        'futuro-do-indicativo': ['conhecerei', 'conhecerás', 'conhecerá', 'conheceremos', 'conhecereis', 'conhecerão'],
+        'condicional-perfeito': ['teria conhecido', 'terias conhecido', 'teria conhecido', 'teríamos conhecido', 'teríeis conhecido', 'teriam conhecido'],
+        'mais-que-perfeito-composto': ['tinha conhecido', 'tinhas conhecido', 'tinha conhecido', 'tínhamos conhecido', 'tínheis conhecido', 'tinham conhecido'],
+        'condicional': ['conheceria', 'conhecerias', 'conheceria', 'conheceríamos', 'conheceríeis', 'conheceriam'],
+        'presente-do-subjuntivo': ['conheça', 'conheças', 'conheça', 'conheçamos', 'conheçais', 'conheçam'],
+        'preterito-perfeito-do-subjuntivo': ['tenha conhecido', 'tenhas conhecido', 'tenha conhecido', 'tenhamos conhecido', 'tenhais conhecido', 'tenham conhecido'],
+        'futuro-do-subjuntivo': ['conhecer', 'conheceres', 'conhecer', 'conhecermos', 'conhecerdes', 'conhecerem'],
+        'imperativo': ['-', 'conhece', 'conheça', 'conheçamos', 'conhecei', 'conheçam'],
+        'gerundio': ['conhecendo', 'conhecendo', 'conhecendo', 'conhecendo', 'conhecendo', 'conhecendo'],
+        'particípio': ['conhecido', 'conhecido', 'conhecido', 'conhecido', 'conhecido', 'conhecido'],
+        'infinitivo': ['conhecer'],
+        'infinitivo-pessoal': ['conhecer', 'conheceres', 'conhecer', 'conhecermos', 'conhecerdes', 'conhecerem']
+    },
+    'correr': {
+        'presente': ['corro', 'corres', 'corre', 'corremos', 'correis', 'correm'],
+        'preterito-perfeito': ['corri', 'correste', 'correu', 'corremos', 'correstes', 'correram'],
+        'preterito-imperfeito': ['corria', 'corrias', 'corria', 'corríamos', 'corríeis', 'corriam'],
+        'presente-perfeito': ['tenho corrido', 'tens corrido', 'tem corrido', 'temos corrido', 'tendes corrido', 'têm corrido'],
+        'preterito-mais-que-perfeito': ['tinha corrido', 'tinhas corrido', 'tinha corrido', 'tínhamos corrido', 'tínheis corrido', 'tinham corrido'],
+        'presente-perfecto-continuo': ['tenho correndo', 'tens correndo', 'tem correndo', 'temos correndo', 'tendes correndo', 'têm correndo'],
+        'futuro-perfeito': ['terei corrido', 'terás corrido', 'terá corrido', 'teremos corrido', 'tereis corrido', 'terão corrido'],
+        'futuro-do-indicativo': ['correrei', 'correrás', 'correrá', 'correremos', 'correreis', 'correrão'],
+        'condicional-perfeito': ['teria corrido', 'terias corrido', 'teria corrido', 'teríamos corrido', 'teríeis corrido', 'teriam corrido'],
+        'mais-que-perfeito-composto': ['tinha corrido', 'tinhas corrido', 'tinha corrido', 'tínhamos corrido', 'tínheis corrido', 'tinham corrido'],
+        'condicional': ['correria', 'correrias', 'correria', 'correríamos', 'correríeis', 'correriam'],
+        'presente-do-subjuntivo': ['corra', 'corras', 'corra', 'corramos', 'corrais', 'corram'],
+        'preterito-perfeito-do-subjuntivo': ['corri', 'correste', 'correu', 'corremos', 'correstes', 'correram'],
+        'futuro-do-subjuntivo': ['correr', 'correres', 'correr', 'corrermos', 'correrdes', 'correrem'],
+        'imperativo': ['-', 'corre', 'corra', 'corramos', 'correi', 'corram'],
+        'gerundio': ['correndo', 'correndo', 'correndo', 'correndo', 'correndo', 'correndo'],
+        'particípio': ['corrido', 'corrido', 'corrido', 'corrido', 'corrido', 'corrido'],
+        'infinitivo': ['correr'],
+        'infinitivo-pessoal': ['correr', 'correres', 'correr', 'corrermos', 'correrdes', 'correrem']
+    },
+    'deixar': {
+        'presente': ['deixo', 'deixas', 'deixa', 'deixamos', 'deixais', 'deixam'],
+        'preterito-perfeito': ['deixei', 'deixaste', 'deixou', 'deixamos', 'deixastes', 'deixaram'],
+        'preterito-imperfeito': ['deixava', 'deixavas', 'deixava', 'deixávamos', 'deixáveis', 'deixavam'],
+        'presente-perfeito': ['tenho deixado', 'tens deixado', 'tem deixado', 'temos deixado', 'tendes deixado', 'têm deixado'],
+        'preterito-mais-que-perfeito': ['tinha deixado', 'tinhas deixado', 'tinha deixado', 'tínhamos deixado', 'tínheis deixado', 'tinham deixado'],
+        'presente-perfecto-continuo': ['tenho deixando', 'tens deixando', 'tem deixando', 'temos deixando', 'tendes deixando', 'têm deixando'],
+        'futuro-perfeito': ['terei deixado', 'terás deixado', 'terá deixado', 'teremos deixado', 'tereis deixado', 'terão deixado'],
+        'futuro-do-indicativo': ['deixarei', 'deixarás', 'deixará', 'deixaremos', 'deixareis', 'deixarão'],
+        'condicional-perfeito': ['teria deixado', 'terias deixado', 'teria deixado', 'teríamos deixado', 'teríeis deixado', 'teriam deixado'],
+        'mais-que-perfeito-composto': ['tinha deixado', 'tinhas deixado', 'tinha deixado', 'tínhamos deixado', 'tínheis deixado', 'tinham deixado'],
+        'condicional': ['deixaria', 'deixarias', 'deixaria', 'deixaríamos', 'deixaríeis', 'deixariam'],
+        'presente-do-subjuntivo': ['deixe', 'deixes', 'deixe', 'deixemos', 'deixeis', 'deixem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha deixado', 'tenhas deixado', 'tenha deixado', 'tenhamos deixado', 'tenhais deixado', 'tenham deixado'],
+        'futuro-do-subjuntivo': ['deixar', 'deixares', 'deixar', 'deixarmos', 'deixardes', 'deixarem'],
+        'imperativo': ['-', 'deixa', 'deixe', 'deixemos', 'deixai', 'deixem'],
+        'gerundio': ['deixando', 'deixando', 'deixando', 'deixando', 'deixando', 'deixando'],
+        'particípio': ['deixado', 'deixado', 'deixado', 'deixado', 'deixado', 'deixado'],
+        'infinitivo': ['deixar'],
+        'infinitivo-pessoal': ['deixar', 'deixares', 'deixar', 'deixarmos', 'deixardes', 'deixarem']
+    },
+    'dizer': {
+        'presente': ['digo', 'dizes', 'diz', 'dizemos', 'dizeis', 'dizem'],
+        'preterito-perfeito': ['disse', 'dizeste', 'disse', 'dizemos', 'dizestes', 'disseram'],
+        'preterito-imperfeito': ['dizia', 'dizias', 'dizia', 'dizíamos', 'dizíeis', 'diziam'],
+        'presente-perfeito': ['tenho dito', 'tens dito', 'tem dito', 'temos dito', 'tendes dito', 'têm dito'],
+        'preterito-mais-que-perfeito': ['tinha dito', 'tinhas dito', 'tinha dito', 'tínhamos dito', 'tínheis dito', 'tinham dito'],
+        'presente-perfecto-continuo': ['tenho dizendo', 'tens dizendo', 'tem dizendo', 'temos dizendo', 'tendes dizendo', 'têm dizendo'],
+        'futuro-perfeito': ['terei dito', 'terás dito', 'terá dito', 'teremos dito', 'tereis dito', 'terão dito'],
+        'futuro-do-indicativo': ['direi', 'dirás', 'dirá', 'diremos', 'direis', 'dirão'],
+        'condicional-perfeito': ['teria dito', 'terias dito', 'teria dito', 'teríamos dito', 'teríeis dito', 'teriam dito'],
+        'mais-que-perfeito-composto': ['tinha dito', 'tinhas dito', 'tinha dito', 'tínhamos dito', 'tínheis dito', 'tinham dito'],
+        'condicional': ['diria', 'dirias', 'diria', 'diríamos', 'diríeis', 'diriam'],
+        'presente-do-subjuntivo': ['diga', 'digas', 'diga', 'digamos', 'digais', 'digam'],
+        'preterito-perfeito-do-subjuntivo': ['tenha dito', 'tenhas dito', 'tenha dito', 'tenhamos dito', 'tenhais dito', 'tenham dito'],
+        'futuro-do-subjuntivo': ['dizer', 'disseres', 'dizer', 'dissermos', 'disserdes', 'disserem'],
+        'imperativo': ['-', 'diz', 'diga', 'digamos', 'dizei', 'digam'],
+        'gerundio': ['dizendo', 'dizendo', 'dizendo', 'dizendo', 'dizendo', 'dizendo'],
+        'particípio': ['dito', 'dito', 'dito', 'dito', 'dito', 'dito'],
+        'infinitivo': ['dizer'],
+        'infinitivo-pessoal': ['dizer', 'disseres', 'dizer', 'dissermos', 'disserdes', 'disserem']
+    },
+    'dormir': {
+        'presente': ['durmo', 'dormes', 'dorme', 'dormimos', 'dormeis', 'dormem'],
+        'preterito-perfeito': ['dormi', 'dormiste', 'dormiu', 'dormimos', 'dormistes', 'dormiram'],
+        'preterito-imperfeito': ['dormia', 'dormias', 'dormia', 'dormíamos', 'dormíeis', 'dormiam'],
+        'presente-perfeito': ['tenho dormido', 'tens dormido', 'tem dormido', 'temos dormido', 'tendes dormido', 'têm dormido'],
+        'preterito-mais-que-perfeito': ['tinha dormido', 'tinhas dormido', 'tinha dormido', 'tínhamos dormido', 'tínheis dormido', 'tinham dormido'],
+        'presente-perfecto-continuo': ['tenho dormindo', 'tens dormindo', 'tem dormindo', 'temos dormindo', 'tendes dormindo', 'têm dormindo'],
+        'futuro-perfeito': ['terei dormido', 'terás dormido', 'terá dormido', 'teremos dormido', 'tereis dormido', 'terão dormido'],
+        'futuro-do-indicativo': ['dormirei', 'dormirás', 'dormirá', 'dormiremos', 'dormireis', 'dormirão'],
+        'condicional-perfeito': ['teria dormido', 'terias dormido', 'teria dormido', 'teríamos dormido', 'teríeis dormido', 'teriam dormido'],
+        'mais-que-perfeito-composto': ['tinha dormido', 'tinhas dormido', 'tinha dormido', 'tínhamos dormido', 'tínheis dormido', 'tinham dormido'],
+        'condicional': ['dormiria', 'dormirias', 'dormiria', 'dormiríamos', 'dormiríeis', 'dormiriam'],
+        'presente-do-subjuntivo': ['durma', 'dormas', 'durma', 'durmamos', 'durmais', 'durmam'],
+        'preterito-perfeito-do-subjuntivo': ['dormi', 'dormiste', 'dormi', 'dormimos', 'dormistes', 'dormiram'],
+        'futuro-do-subjuntivo': ['dormir', 'dormires', 'dormir', 'dormirmos', 'dormirdes', 'dormirem'],
+        'imperativo': ['-', 'dorme', 'durma', 'durmamos', 'dormi', 'durmam'],
+        'gerundio': ['dormindo', 'dormindo', 'dormindo', 'dormindo', 'dormindo', 'dormindo'],
+        'particípio': ['dormido', 'dormido', 'dormido', 'dormido', 'dormido', 'dormido'],
+        'infinitivo': ['dormir'],
+        'infinitivo-pessoal': ['dormir', 'dormires', 'dormir', 'dormirmos', 'dormirdes', 'dormirem']
+    },
+    'entrar': {
+        'presente': ['entro', 'entras', 'entra', 'entramos', 'entrais', 'entram'],
+        'preterito-perfeito': ['entrei', 'entraste', 'entrou', 'entramos', 'entrastes', 'entraram'],
+        'preterito-imperfeito': ['entrava', 'entravas', 'entrava', 'entrávamos', 'entráveis', 'entravam'],
+        'presente-perfeito': ['tenho entrado', 'tens entrado', 'tem entrado', 'temos entrado', 'tendes entrado', 'têm entrado'],
+        'preterito-mais-que-perfeito': ['tinha entrado', 'tinhas entrado', 'tinha entrado', 'tínhamos entrado', 'tínheis entrado', 'tinham entrado'],
+        'presente-perfecto-continuo': ['tenho entrando', 'tens entrando', 'tem entrando', 'temos entrando', 'tendes entrando', 'têm entrando'],
+        'futuro-perfeito': ['terei entrado', 'terás entrado', 'terá entrado', 'teremos entrado', 'tereis entrado', 'terão entrado'],
+        'futuro-do-indicativo': ['entrarei', 'entrarás', 'entrará', 'entraremos', 'entrareis', 'entrarão'],
+        'condicional-perfeito': ['teria entrado', 'terias entrado', 'teria entrado', 'teríamos entrado', 'teríeis entrado', 'teriam entrado'],
+        'mais-que-perfeito-composto': ['tinha entrado', 'tinhas entrado', 'tinha entrado', 'tínhamos entrado', 'tínheis entrado', 'tinham entrado'],
+        'condicional': ['entraria', 'entrarias', 'entraria', 'entraríamos', 'entraríeis', 'entrariam'],
+        'presente-do-subjuntivo': ['entre', 'entres', 'entre', 'entremos', 'entreis', 'entrem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha entrado', 'tenhas entrado', 'tenha entrado', 'tenhamos entrado', 'tenhais entrado', 'tenham entrado'],
+        'futuro-do-subjuntivo': ['entrar', 'entrares', 'entrar', 'entrarmos', 'entrardes', 'entraram'],
+        'imperativo': ['-', 'entra', 'entre', 'entremos', 'entrai', 'entrem'],
+        'gerundio': ['entrando', 'entrando', 'entrando', 'entrando', 'entrando', 'entrando'],
+        'particípio': ['entrado', 'entrado', 'entrado', 'entrado', 'entrado', 'entrado'],
+        'infinitivo': ['entrar'],
+        'infinitivo-pessoal': ['entrar', 'entrares', 'entrar', 'entrarmos', 'entrardes', 'entraram']
+    },
+    'fazer': {
+        'presente': ['faço', 'fazes', 'faz', 'fazemos', 'fazeis', 'fazem'],
+        'preterito-perfeito': ['fiz', 'fizeste', 'fez', 'fizemos', 'fizestes', 'fizeram'],
+        'preterito-imperfeito': ['fazia', 'fazias', 'fazia', 'fazíamos', 'fazíeis', 'faziam'],
+        'presente-perfeito': ['tenho feito', 'tens feito', 'tem feito', 'temos feito', 'tendes feito', 'têm feito'],
+        'preterito-mais-que-perfeito': ['tinha feito', 'tinhas feito', 'tinha feito', 'tínhamos feito', 'tínheis feito', 'tinham feito'],
+        'presente-perfecto-continuo': ['tenho fazendo', 'tens fazendo', 'tem fazendo', 'temos fazendo', 'tendes fazendo', 'têm fazendo'],
+        'futuro-perfeito': ['terei feito', 'terás feito', 'terá feito', 'teremos feito', 'tereis feito', 'terão feito'],
+        'futuro-do-indicativo': ['farei', 'farás', 'fará', 'faremos', 'fareis', 'farão'],
+        'condicional-perfeito': ['teria feito', 'terias feito', 'teria feito', 'teríamos feito', 'teríeis feito', 'teriam feito'],
+        'mais-que-perfeito-composto': ['tinha feito', 'tinhas feito', 'tinha feito', 'tínhamos feito', 'tínheis feito', 'tinham feito'],
+        'condicional': ['faria', 'farias', 'faria', 'faríamos', 'faríeis', 'fariam'],
+        'presente-do-subjuntivo': ['faça', 'faças', 'faça', 'façamos', 'façais', 'façam'],
+        'preterito-imperfeito-do-subjuntivo': ['fizesse', 'fizesse', 'fizesse', 'fizéssemos', 'fizésseis', 'fizessem'],
+        'preterito-perfeito-do-subjuntivo': ['fiz', 'fizeste', 'fez', 'fizemos', 'fizestes', 'fizeram'],
+        'futuro-do-subjuntivo': ['fazer', 'fizeres', 'fazer', 'fizermos', 'fizerdes', 'fizerem'],
+        'imperativo': ['-', 'faz', 'faça', 'façamos', 'fazei', 'façam'],
+        'gerundio': ['fazendo', 'fazendo', 'fazendo', 'fazendo', 'fazendo', 'fazendo'],
+        'particípio': ['feito', 'feito', 'feito', 'feito', 'feito', 'feito'],
+        'infinitivo': ['fazer'],
+        'infinitivo-pessoal': ['fazer', 'fizeres', 'fazer', 'fizermos', 'fizerdes', 'fizerem']
+    },
+    'falar': {
+        'presente': ['falo', 'falas', 'fala', 'falamos', 'falais', 'falam'],
+        'preterito-perfeito': ['falei', 'falaste', 'falou', 'falamos', 'falastes', 'falaram'],
+        'preterito-imperfeito': ['falava', 'falavas', 'falava', 'falávamos', 'faláveis', 'falavam'],
+        'presente-perfeito': ['tenho falado', 'tens falado', 'tem falado', 'temos falado', 'tendes falado', 'têm falado'],
+        'preterito-mais-que-perfeito': ['tinha falado', 'tinhas falado', 'tinha falado', 'tínhamos falado', 'tínheis falado', 'tinham falado'],
+        'presente-perfecto-continuo': ['tenho falando', 'tens falando', 'tem falando', 'temos falando', 'tendes falando', 'têm falando'],
+        'futuro-perfeito': ['terei falado', 'terás falado', 'terá falado', 'teremos falado', 'tereis falado', 'terão falado'],
+        'futuro-do-indicativo': ['falarei', 'falarás', 'falará', 'falaremos', 'falareis', 'falarão'],
+        'condicional-perfeito': ['teria falado', 'terias falado', 'teria falado', 'teríamos falado', 'teríeis falado', 'teriam falado'],
+        'mais-que-perfeito-composto': ['tinha falado', 'tinhas falado', 'tinha falado', 'tínhamos falado', 'tínheis falado', 'tinham falado'],
+        'condicional': ['falaria', 'falarias', 'falaria', 'falaríamos', 'falaríeis', 'falariam'],
+        'presente-do-subjuntivo': ['fale', 'fales', 'fale', 'falemos', 'faleis', 'falem'],
+        'preterito-imperfeito-do-subjuntivo': ['falasse', 'falasses', 'falasse', 'falássemos', 'falásseis', 'falassem'],
+        'preterito-perfeito-do-subjuntivo': ['falei', 'falaste', 'falou', 'falamos', 'falastes', 'falaram'],
+        'futuro-do-subjuntivo': ['falar', 'falares', 'falar', 'falarmos', 'falardes', 'falarem'],
+        'imperativo': ['-', 'fala', 'fale', 'falemos', 'falai', 'falem'],
+        'gerundio': ['falando', 'falando', 'falando', 'falando', 'falando', 'falando'],
+        'particípio': ['falado', 'falado', 'falado', 'falado', 'falado', 'falado'],
+        'infinitivo': ['falar'],
+        'infinitivo-pessoal': ['falar', 'falares', 'falar', 'falarmos', 'falardes', 'falarem']
+    },
+    'ir': {
+        'presente': ['vou', 'vais', 'vai', 'vamos', 'vais', 'vão'],
+        'preterito-perfeito': ['fui', 'foste', 'foi', 'fomos', 'fostes', 'foram'],
+        'preterito-imperfeito': ['ia', 'ias', 'ia', 'íamos', 'íeis', 'iam'],
+        'presente-perfeito': ['tenho ido', 'tens ido', 'tem ido', 'temos ido', 'tendes ido', 'têm ido'],
+        'preterito-mais-que-perfeito': ['tinha ido', 'tinhas ido', 'tinha ido', 'tínhamos ido', 'tínheis ido', 'tinham ido'],
+        'presente-perfecto-continuo': ['tenho indo', 'tens indo', 'tem indo', 'temos indo', 'tendes indo', 'têm indo'],
+        'futuro-perfeito': ['terei ido', 'terás ido', 'terá ido', 'teremos ido', 'tereis ido', 'terão ido'],
+        'futuro-do-indicativo': ['irei', 'irás', 'irá', 'iremos', 'ireis', 'irão'],
+        'condicional-perfeito': ['teria ido', 'terias ido', 'teria ido', 'teríamos ido', 'teríeis ido', 'teriam ido'],
+        'mais-que-perfeito-composto': ['tinha ido', 'tinhas ido', 'tinha ido', 'tínhamos ido', 'tínheis ido', 'tinham ido'],
+        'condicional': ['iria', 'irias', 'iria', 'iríamos', 'iríeis', 'iriam'],
+        'presente-do-subjuntivo': ['vá', 'vás', 'vá', 'vamos', 'vais', 'vão'],
+        'preterito-imperfeito-do-subjuntivo': ['fosse', 'fosses', 'fosse', 'fôssemos', 'fôsseis', 'fossem'],
+        'preterito-perfeito-do-subjuntivo': ['fui', 'foste', 'foi', 'fomos', 'fostes', 'foram'],
+        'futuro-do-subjuntivo': ['ir', 'ires', 'ir', 'irmos', 'irdes', 'irem'],
+        'imperativo': ['-', 'vai', 'vá', 'vamos', 'ide', 'vão'],
+        'gerundio': ['indo', 'indo', 'indo', 'indo', 'indo', 'indo'],
+        'particípio': ['ido', 'ido', 'ido', 'ido', 'ido', 'ido'],
+        'infinitivo': ['ir'],
+        'infinitivo-pessoal': ['ir', 'ires', 'ir', 'irmos', 'irdes', 'irem']
+    },
+    'morar': {
+        'presente': ['moro', 'moras', 'mora', 'moramos', 'morais', 'moram'],
+        'preterito-perfeito': ['morei', 'moraste', 'morou', 'moramos', 'morastes', 'moraram'],
+        'preterito-imperfeito': ['morava', 'moravas', 'morava', 'morávamos', 'moráveis', 'moravam'],
+        'presente-perfeito': ['tenho morado', 'tens morado', 'tem morado', 'temos morado', 'tendes morado', 'têm morado'],
+        'preterito-mais-que-perfeito': ['tinha morado', 'tinhas morado', 'tinha morado', 'tínhamos morado', 'tínheis morado', 'tinham morado'],
+        'presente-perfecto-continuo': ['tenho morando', 'tens morando', 'tem morando', 'temos morando', 'tendes morando', 'têm morando'],
+        'futuro-perfeito': ['terei morado', 'terás morado', 'terá morado', 'teremos morado', 'tereis morado', 'terão morado'],
+        'futuro-do-indicativo': ['morarei', 'morarás', 'morará', 'moraremos', 'morareis', 'morarão'],
+        'condicional-perfeito': ['teria morado', 'terias morado', 'teria morado', 'teríamos morado', 'teríeis morado', 'teriam morado'],
+        'mais-que-perfeito-composto': ['tinha morado', 'tinhas morado', 'tinha morado', 'tínhamos morado', 'tínheis morado', 'tinham morado'],
+        'condicional': ['moraria', 'morarias', 'moraria', 'moraríamos', 'moraríeis', 'morariam'],
+        'presente-do-subjuntivo': ['more', 'mores', 'more', 'moremos', 'moreis', 'morem'],
+        'preterito-imperfeito-do-subjuntivo': ['morasse', 'morasses', 'morasse', 'morássemos', 'morásseis', 'morassem'],
+        'preterito-perfeito-do-subjuntivo': ['morei', 'moraste', 'morou', 'moramos', 'morastes', 'moraram'],
+        'futuro-do-subjuntivo': ['morar', 'morares', 'morar', 'morarmos', 'morardes', 'morarem'],
+        'imperativo': ['-', 'mora', 'more', 'moremos', 'morai', 'morem'],
+        'gerundio': ['morando', 'morando', 'morando', 'morando', 'morando', 'morando'],
+        'particípio': ['morado', 'morado', 'morado', 'morado', 'morado', 'morado'],
+        'infinitivo': ['morar'],
+        'infinitivo-pessoal': ['morar', 'morares', 'morar', 'morarmos', 'morardes', 'morarem']
+    },
+    'ter': {
+        'presente': ['tenho', 'tens', 'tem', 'temos', 'tendes', 'têm'],
+        'preterito-perfeito': ['tive', 'tiveste', 'teve', 'tivemos', 'tivestes', 'tiveram'],
+        'preterito-imperfeito': ['tinha', 'tinhas', 'tinha', 'tínhamos', 'tínheis', 'tinham'],
+        'presente-perfeito': ['tenho tido', 'tens tido', 'tem tido', 'temos tido', 'tendes tido', 'têm tido'],
+        'preterito-mais-que-perfeito': ['tinha tido', 'tinhas tido', 'tinha tido', 'tínhamos tido', 'tínheis tido', 'tinham tido'],
+        'presente-perfecto-continuo': ['tenho tendo', 'tens tendo', 'tem tendo', 'temos tendo', 'tendes tendo', 'têm tendo'],
+        'futuro-perfeito': ['terei tido', 'terás tido', 'terá tido', 'teremos tido', 'tereis tido', 'terão tido'],
+        'futuro-do-indicativo': ['terei', 'terás', 'terá', 'teremos', 'tereis', 'terão'],
+        'condicional-perfeito': ['teria tido', 'terias tido', 'teria tido', 'teríamos tido', 'teríeis tido', 'teriam tido'],
+        'mais-que-perfeito-composto': ['tinha tido', 'tinhas tido', 'tinha tido', 'tínhamos tido', 'tínheis tido', 'tinham tido'],
+        'condicional': ['teria', 'terias', 'teria', 'teríamos', 'teríeis', 'teriam'],
+        'presente-do-subjuntivo': ['tenha', 'tenhas', 'tenha', 'tenhamos', 'tenhais', 'tenham'],
+        'preterito-imperfeito-do-subjuntivo': ['tivesse', 'tivesses', 'tivesse', 'tivéssemos', 'tivésseis', 'tivessem'],
+        'preterito-perfeito-do-subjuntivo': ['tive', 'tiveste', 'teve', 'tivemos', 'tivestes', 'tiveram'],
+        'futuro-do-subjuntivo': ['ter', 'teres', 'ter', 'termos', 'terdes', 'terem'],
+        'imperativo': ['-', 'tem', 'tenha', 'tenhamos', 'tende', 'tenham'],
+        'gerundio': ['tendo', 'tendo', 'tendo', 'tendo', 'tendo', 'tendo'],
+        'particípio': ['tido', 'tido', 'tido', 'tido', 'tido', 'tido'],
+        'infinitivo': ['ter'],
+        'infinitivo-pessoal': ['ter', 'teres', 'ter', 'termos', 'terdes', 'terem']
+    },
+    'comunicar': {
+        'presente': ['comunico', 'comunicas', 'comunica', 'comunicamos', 'comunicais', 'comunicam'],
+        'preterito-perfeito': ['comuniquei', 'comunicaste', 'comunicou', 'comunicamos', 'comunicastes', 'comunicaram'],
+        'preterito-imperfeito': ['comunicava', 'comunicavas', 'comunicava', 'comunicávamos', 'comunicáveis', 'comunicavam'],
+        'presente-perfeito': ['tenho comunicado', 'tens comunicado', 'tem comunicado', 'temos comunicado', 'tendes comunicado', 'têm comunicado'],
+        'preterito-mais-que-perfeito': ['tinha comunicado', 'tinhas comunicado', 'tinha comunicado', 'tínhamos comunicado', 'tínheis comunicado', 'tinham comunicado'],
+        'presente-perfecto-continuo': ['tenho comunicando', 'tens comunicando', 'tem comunicando', 'temos comunicando', 'tendes comunicando', 'têm comunicando'],
+        'futuro-perfeito': ['terei comunicado', 'terás comunicado', 'terá comunicado', 'teremos comunicado', 'tereis comunicado', 'terão comunicado'],
+        'futuro-do-indicativo': ['comunicarei', 'comunicarás', 'comunicará', 'comunicaremos', 'comunicareis', 'comunicarão'],
+        'condicional-perfeito': ['teria comunicado', 'terias comunicado', 'teria comunicado', 'teríamos comunicado', 'teríeis comunicado', 'teriam comunicado'],
+        'mais-que-perfeito-composto': ['tinha comunicado', 'tinhas comunicado', 'tinha comunicado', 'tínhamos comunicado', 'tínheis comunicado', 'tinham comunicado'],
+        'condicional': ['comunicaria', 'comunicarías', 'comunicaria', 'comunicaríamos', 'comunicaríeis', 'comunicariam'],
+        'presente-do-subjuntivo': ['comunique', 'comuniques', 'comunique', 'comunicemos', 'comuniqueis', 'comuniquem'],
+        'preterito-perfeito-do-subjuntivo': ['comuniquei', 'comunicaste', 'comunicou', 'comunicamos', 'comunicastes', 'comunicaram'],
+        'futuro-do-subjuntivo': ['comunicar', 'comunicares', 'comunicar', 'comunicarmos', 'comunicardes', 'comunicarem'],
+        'imperativo': ['-', 'comunica', 'comunique', 'comuniquemos', 'comunicai', 'comuniquem'],
+        'gerundio': ['comunicando', 'comunicando', 'comunicando', 'comunicando', 'comunicando', 'comunicando'],
+        'particípio': ['comunicado', 'comunicado', 'comunicado', 'comunicado', 'comunicado', 'comunicado'],
+        'infinitivo': ['comunicar'],
+        'infinitivo-pessoal': ['comunicar', 'comunicares', 'comunicar', 'comunicarmos', 'comunicardes', 'comunicarem']
+    },
+    'considerar': {
+        'presente': ['considero', 'consideras', 'considera', 'consideramos', 'considerais', 'consideram'],
+        'preterito-perfeito': ['considerei', 'consideraste', 'considerou', 'consideramos', 'considerastes', 'consideraram'],
+        'preterito-imperfeito': ['considerava', 'consideravas', 'considerava', 'considerávamos', 'consideráveis', 'consideravam'],
+        'presente-perfeito': ['tenho considerado', 'tens considerado', 'tem considerado', 'temos considerado', 'tendes considerado', 'têm considerado'],
+        'preterito-mais-que-perfeito': ['tinha considerado', 'tinhas considerado', 'tinha considerado', 'tínhamos considerado', 'tínheis considerado', 'tinham considerado'],
+        'presente-perfecto-continuo': ['tenho considerando', 'tens considerando', 'tem considerando', 'temos considerando', 'tendes considerando', 'têm considerando'],
+        'futuro-perfeito': ['terei considerado', 'terás considerado', 'terá considerado', 'teremos considerado', 'tereis considerado', 'terão considerado'],
+        'futuro-do-indicativo': ['considerarei', 'considerarás', 'considerará', 'consideraremos', 'considerareis', 'considerarão'],
+        'condicional-perfeito': ['teria considerado', 'terias considerado', 'teria considerado', 'teríamos considerado', 'teríeis considerado', 'teriam considerado'],
+        'mais-que-perfeito-composto': ['tinha considerado', 'tinhas considerado', 'tinha considerado', 'tínhamos considerado', 'tínheis considerado', 'tinham considerado'],
+        'condicional': ['consideraria', 'considerarias', 'consideraria', 'consideraríamos', 'consideraríeis', 'considerariam'],
+        'presente-do-subjuntivo': ['considere', 'consideres', 'considere', 'consideremos', 'considereis', 'considerem'],
+        'preterito-imperfeito-do-subjuntivo': ['considerasse', 'considerasses', 'considerasse', 'considerássemos', 'considerásseis', 'considerassem'],
+        'preterito-perfeito-do-subjuntivo': ['considerei', 'consideraste', 'considerou', 'consideramos', 'considerastes', 'consideraram'],
+        'futuro-do-subjuntivo': ['considerar', 'considerares', 'considerar', 'considerarmos', 'considerardes', 'considerarem'],
+        'imperativo': ['-', 'considera', 'considere', 'consideremos', 'considerai', 'considerem'],
+        'gerundio': ['considerando', 'considerando', 'considerando', 'considerando', 'considerando', 'considerando'],
+        'particípio': ['considerado', 'considerado', 'considerado', 'considerado', 'considerado', 'considerado'],
+        'infinitivo': ['considerar'],
+        'infinitivo-pessoal': ['considerar', 'considerares', 'considerar', 'considerarmos', 'considerardes', 'considerarem']
+    },
+    'contribuir': {
+        'presente': ['contribuo', 'contribuis', 'contribui', 'contribuímos', 'contribuís', 'contribuem'],
+        'preterito-perfeito': ['contribuí', 'contribuíste', 'contribuiu', 'contribuímos', 'contribuístes', 'contribuíram'],
+        'preterito-imperfeito': ['contribuía', 'contribuías', 'contribuía', 'contribuíamos', 'contribuíeis', 'contribuíam'],
+        'presente-perfeito': ['tenho contribuído', 'tens contribuído', 'tem contribuído', 'temos contribuído', 'tendes contribuído', 'têm contribuído'],
+        'preterito-mais-que-perfeito': ['tinha contribuído', 'tinhas contribuído', 'tinha contribuído', 'tínhamos contribuído', 'tínheis contribuído', 'tinham contribuído'],
+        'presente-perfecto-continuo': ['tenho contribuindo', 'tens contribuindo', 'tem contribuindo', 'temos contribuindo', 'tendes contribuindo', 'têm contribuindo'],
+        'futuro-perfeito': ['terei contribuído', 'terás contribuído', 'terá contribuído', 'teremos contribuído', 'tereis contribuído', 'terão contribuído'],
+        'futuro-do-indicativo': ['contribuirei', 'contribuirás', 'contribuirá', 'contribuiremos', 'contribuireis', 'contribuirão'],
+        'condicional-perfeito': ['teria contribuído', 'terias contribuído', 'teria contribuído', 'teríamos contribuído', 'teríeis contribuído', 'teriam contribuído'],
+        'mais-que-perfeito-composto': ['tinha contribuído', 'tinhas contribuído', 'tinha contribuído', 'tínhamos contribuído', 'tínheis contribuído', 'tinham contribuído'],
+        'condicional': ['contribuiria', 'contribuirias', 'contribuiria', 'contribuiríamos', 'contribuiríeis', 'contribuiriam'],
+        'presente-do-subjuntivo': ['contribua', 'contribuas', 'contribua', 'contribuamos', 'contribuais', 'contribuam'],
+        'preterito-imperfeito-do-subjuntivo': ['contribuísse', 'contribuísses', 'contribuísse', 'contribuíssemos', 'contribuísseis', 'contribuíssem'],
+        'preterito-perfeito-do-subjuntivo': ['contribuí', 'contribuíste', 'contribuiu', 'contribuímos', 'contribuístes', 'contribuíram'],
+        'futuro-do-subjuntivo': ['contribuir', 'contribuires', 'contribuir', 'contribuirmos', 'contribuirdes', 'contribuirem'],
+        'imperativo': ['-', 'contribui', 'contribua', 'contribuamos', 'contribuii', 'contribuam'],
+        'gerundio': ['contribuindo', 'contribuindo', 'contribuindo', 'contribuindo', 'contribuindo', 'contribuindo'],
+        'particípio': ['contribuído', 'contribuído', 'contribuído', 'contribuído', 'contribuído', 'contribuído'],
+        'infinitivo': ['contribuir'],
+        'infinitivo-pessoal': ['contribuir', 'contribuires', 'contribuir', 'contribuirmos', 'contribuirdes', 'contribuirem']
+    },
+    'conversar': {
+        'presente': ['converso', 'conversas', 'conversa', 'conversamos', 'conversais', 'conversam'],
+        'preterito-perfeito': ['conversei', 'conversaste', 'conversou', 'conversamos', 'conversastes', 'conversaram'],
+        'preterito-imperfeito': ['conversava', 'conversavas', 'conversava', 'conversávamos', 'conversáveis', 'conversavam'],
+        'presente-perfeito': ['tenho conversado', 'tens conversado', 'tem conversado', 'temos conversado', 'tendes conversado', 'têm conversado'],
+        'preterito-mais-que-perfeito': ['tinha conversado', 'tinhas conversado', 'tinha conversado', 'tínhamos conversado', 'tínheis conversado', 'tinham conversado'],
+        'presente-perfecto-continuo': ['tenho conversando', 'tens conversando', 'tem conversando', 'temos conversando', 'tendes conversando', 'têm conversando'],
+        'futuro-perfeito': ['terei conversado', 'terás conversado', 'terá conversado', 'teremos conversado', 'tereis conversado', 'terão conversado'],
+        'futuro-do-indicativo': ['conversarei', 'conversarás', 'conversará', 'conversaremos', 'conversareis', 'conversarão'],
+        'condicional-perfeito': ['teria conversado', 'terias conversado', 'teria conversado', 'teríamos conversado', 'teríeis conversado', 'teriam conversado'],
+        'mais-que-perfeito-composto': ['tinha conversado', 'tinhas conversado', 'tinha conversado', 'tínhamos conversado', 'tínheis conversado', 'tinham conversado'],
+        'condicional': ['conversaria', 'conversarias', 'conversaria', 'conversaríamos', 'conversaríeis', 'conversariam'],
+        'presente-do-subjuntivo': ['converse', 'converses', 'converse', 'conversemos', 'converseis', 'conversem'],
+        'preterito-imperfeito-do-subjuntivo': ['conversasse', 'conversasses', 'conversasse', 'conversássemos', 'conversásseis', 'conversassem'],
+        'preterito-perfeito-do-subjuntivo': ['conversei', 'conversaste', 'conversou', 'conversamos', 'conversastes', 'conversaram'],
+        'futuro-do-subjuntivo': ['conversar', 'conversares', 'conversar', 'conversarmos', 'conversardes', 'conversarem'],
+        'imperativo': ['-', 'conversa', 'converse', 'conversemos', 'conversai', 'conversem'],
+        'gerundio': ['conversando', 'conversando', 'conversando', 'conversando', 'conversando', 'conversando'],
+        'particípio': ['conversado', 'conversado', 'conversado', 'conversado', 'conversado', 'conversado'],
+        'infinitivo': ['conversar'],
+        'infinitivo-pessoal': ['conversar', 'conversares', 'conversar', 'conversarmos', 'conversardes', 'conversarem']
+    },
+    'cozinhar': {
+        'presente': ['cozinho', 'cozinhas', 'cozinha', 'cozinhamos', 'cozinhais', 'cozinham'],
+        'preterito-perfeito': ['cozinhei', 'cozinhaste', 'cozinhou', 'cozinhamos', 'cozinhastes', 'cozinharam'],
+        'preterito-imperfeito': ['cozinhava', 'cozinhavas', 'cozinhava', 'cozinhávamos', 'cozinháveis', 'cozinhavam'],
+        'presente-perfeito': ['tenho cozinhado', 'tens cozinhado', 'tem cozinhado', 'temos cozinhado', 'tendes cozinhado', 'têm cozinhado'],
+        'preterito-mais-que-perfeito': ['tinha cozinhado', 'tinhas cozinhado', 'tinha cozinhado', 'tínhamos cozinhado', 'tínheis cozinhado', 'tinham cozinhado'],
+        'presente-perfecto-continuo': ['tenho cozinhando', 'tens cozinhando', 'tem cozinhando', 'temos cozinhando', 'tendes cozinhando', 'têm cozinhando'],
+        'futuro-perfeito': ['terei cozinhado', 'terás cozinhado', 'terá cozinhado', 'teremos cozinhado', 'tereis cozinhado', 'terão cozinhado'],
+        'futuro-do-indicativo': ['cozinharei', 'cozinharás', 'cozinhará', 'cozinharemos', 'cozinhareis', 'cozinharão'],
+        'condicional-perfeito': ['teria cozinhado', 'terias cozinhado', 'teria cozinhado', 'teríamos cozinhado', 'teríeis cozinhado', 'teriam cozinhado'],
+        'mais-que-perfeito-composto': ['tinha cozinhado', 'tinhas cozinhado', 'tinha cozinhado', 'tínhamos cozinhado', 'tínheis cozinhado', 'tinham cozinhado'],
+        'condicional': ['cozinharia', 'cozinharías', 'cozinharia', 'cozinharíamos', 'cozinharíeis', 'cozinhariam'],
+        'presente-do-subjuntivo': ['cozinhe', 'cozinhes', 'cozinhe', 'cozinhemos', 'cozinheis', 'cozinhem'],
+        'preterito-imperfeito-do-subjuntivo': ['cozinhasse', 'cozinhasses', 'cozinhasse', 'cozinhássemos', 'cozinhásseis', 'cozinhassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha cozinhado', 'tenhas cozinhado', 'tenha cozinhado', 'tenhamos cozinhado', 'tenhais cozinhado', 'tenham cozinhado'],
+        'futuro-do-subjuntivo': ['cozinhar', 'cozinhares', 'cozinhar', 'cozinharmos', 'cozinhardes', 'cozinharam'],
+        'imperativo': ['-', 'cozinha', 'cozinhe', 'cozinhemos', 'cozinhai', 'cozinhem'],
+        'gerundio': ['cozinhando', 'cozinhando', 'cozinhando', 'cozinhando', 'cozinhando', 'cozinhando'],
+        'particípio': ['cozinhado', 'cozinhado', 'cozinhado', 'cozinhado', 'cozinhado', 'cozinhado'],
+        'infinitivo-pessoal': ['cozinhar', 'cozinhares', 'cozinhar', 'cozinharmos', 'cozinhardes', 'cozinharam']
+    },
+    'criar': {
+        'presente': ['crio', 'crias', 'cria', 'criamos', 'criais', 'criam'],
+        'preterito-perfeito': ['criei', 'criaste', 'criou', 'criamos', 'criastes', 'criaram'],
+        'preterito-imperfeito': ['criava', 'criavas', 'criava', 'criávamos', 'criáveis', 'criavam'],
+        'presente-perfeito': ['tenho criado', 'tens criado', 'tem criado', 'temos criado', 'tendes criado', 'têm criado'],
+        'preterito-mais-que-perfeito': ['tinha criado', 'tinhas criado', 'tinha criado', 'tínhamos criado', 'tínheis criado', 'tinham criado'],
+        'presente-perfecto-continuo': ['tenho criando', 'tens criando', 'tem criando', 'temos criando', 'tendes criando', 'têm criando'],
+        'futuro-perfeito': ['terei criado', 'terás criado', 'terá criado', 'teremos criado', 'tereis criado', 'terão criado'],
+        'futuro-do-indicativo': ['criarei', 'criarás', 'criará', 'criaremos', 'criareis', 'criarão'],
+        'condicional-perfeito': ['teria criado', 'terias criado', 'teria criado', 'teríamos criado', 'teríeis criado', 'teriam criado'],
+        'mais-que-perfeito-composto': ['tinha criado', 'tinhas criado', 'tinha criado', 'tínhamos criado', 'tínheis criado', 'tinham criado'],
+        'condicional': ['criaria', 'criarías', 'criaria', 'criaríamos', 'criaríeis', 'criariam'],
+        'presente-do-subjuntivo': ['crie', 'cries', 'crie', 'criemos', 'crieis', 'criem'],
+        'preterito-imperfeito-do-subjuntivo': ['criasse', 'criasses', 'criasse', 'criássemos', 'criásseis', 'criassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha criado', 'tenhas criado', 'tenha criado', 'tenhamos criado', 'tenhais criado', 'tenham criado'],
+        'futuro-do-subjuntivo': ['criar', 'criares', 'criar', 'criarmos', 'criaríes', 'criarem'],
+        'imperativo': ['-', 'cria', 'crie', 'criemos', 'criai', 'criem'],
+        'gerundio': ['criando', 'criando', 'criando', 'criando', 'criando', 'criando'],
+        'particípio': ['criado', 'criado', 'criado', 'criado', 'criado', 'criado'],
+        'infinitivo': ['criar'],
+        'infinitivo-pessoal': ['criar', 'criares', 'criar', 'criarmos', 'criaríes', 'criarem']
+    },
+    'defender': {
+        'presente': ['defendo', 'defendes', 'defende', 'defendemos', 'defendeis', 'defendem'],
+        'preterito-perfeito': ['defendi', 'defendeste', 'defendeu', 'defendemos', 'defendestes', 'defenderam'],
+        'preterito-imperfeito': ['defendia', 'defendias', 'defendia', 'defendíamos', 'defendíeis', 'defendiam'],
+        'presente-perfeito': ['tenho defendido', 'tens defendido', 'tem defendido', 'temos defendido', 'tendes defendido', 'têm defendido'],
+        'preterito-mais-que-perfeito': ['tinha defendido', 'tinhas defendido', 'tinha defendido', 'tínhamos defendido', 'tínheis defendido', 'tinham defendido'],
+        'presente-perfecto-continuo': ['tenho defendendo', 'tens defendendo', 'tem defendendo', 'temos defendendo', 'tendes defendendo', 'têm defendendo'],
+        'futuro-perfeito': ['terei defendido', 'terás defendido', 'terá defendido', 'teremos defendido', 'tereis defendido', 'terão defendido'],
+        'futuro-do-indicativo': ['defenderei', 'defenderás', 'defenderá', 'defenderemos', 'defendereis', 'defenderão'],
+        'condicional-perfeito': ['teria defendido', 'terias defendido', 'teria defendido', 'teríamos defendido', 'teríeis defendido', 'teriam defendido'],
+        'mais-que-perfeito-composto': ['tinha defendido', 'tinhas defendido', 'tinha defendido', 'tínhamos defendido', 'tínheis defendido', 'tinham defendido'],
+        'condicional': ['defenderia', 'defenderías', 'defenderia', 'defenderíamos', 'defenderíeis', 'defenderiam'],
+        'presente-do-subjuntivo': ['defenda', 'defendas', 'defenda', 'defendamos', 'defendais', 'defendam'],
+        'preterito-imperfeito-do-subjuntivo': ['defendesse', 'defendesses', 'defendesse', 'defendêssemos', 'defendêsseis', 'defendessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha defendido', 'tenhas defendido', 'tenha defendido', 'tenhamos defendido', 'tenhais defendido', 'tenham defendido'],
+        'futuro-do-subjuntivo': ['defender', 'defenderes', 'defender', 'defendermos', 'defenderdes', 'defenderem'],
+        'imperativo': ['-', 'defende', 'defenda', 'defendamos', 'defendei', 'defendam'],
+        'gerundio': ['defendendo', 'defendendo', 'defendendo', 'defendendo', 'defendendo', 'defendendo'],
+        'particípio': ['defendido', 'defendido', 'defendido', 'defendido', 'defendido', 'defendido'],
+        'infinitivo': ['defender'],
+        'infinitivo-pessoal': ['defender', 'defenderes', 'defender', 'defendermos', 'defenderdes', 'defenderem']
+    },
+    'descrever': {
+        'presente': ['descrevo', 'descreves', 'descreve', 'descrevemos', 'descreveis', 'descrevem'],
+        'preterito-perfeito': ['descrevi', 'descreveste', 'descreveu', 'descrevemos', 'descrevestes', 'descreveram'],
+        'preterito-imperfeito': ['descrevia', 'descrevias', 'descrevia', 'descrevíamos', 'descrevíeis', 'descreviam'],
+        'presente-perfeito': ['tenho descrito', 'tens descrito', 'tem descrito', 'temos descrito', 'tendes descrito', 'têm descrito'],
+        'preterito-mais-que-perfeito': ['tinha descrito', 'tinhas descrito', 'tinha descrito', 'tínhamos descrito', 'tínheis descrito', 'tinham descrito'],
+        'presente-perfecto-continuo': ['tenho descrevendo', 'tens descrevendo', 'tem descrevendo', 'temos descrevendo', 'tendes descrevendo', 'têm descrevendo'],
+        'futuro-perfeito': ['terei descrito', 'terás descrito', 'terá descrito', 'teremos descrito', 'tereis descrito', 'terão descrito'],
+        'futuro-do-indicativo': ['descreverei', 'descreverás', 'descreverá', 'descreveremos', 'descrevereis', 'descreverão'],
+        'condicional-perfeito': ['teria descrito', 'terias descrito', 'teria descrito', 'teríamos descrito', 'teríeis descrito', 'teriam descrito'],
+        'mais-que-perfeito-composto': ['tinha descrito', 'tinhas descrito', 'tinha descrito', 'tínhamos descrito', 'tínheis descrito', 'tinham descrito'],
+        'condicional': ['descreveria', 'descreverías', 'descreveria', 'descreveríamos', 'descreveríeis', 'descreveriam'],
+        'presente-do-subjuntivo': ['descreva', 'descrevas', 'descreva', 'descrevamos', 'descrevais', 'descrevam'],
+        'preterito-imperfeito-do-subjuntivo': ['descrevesse', 'descrevesses', 'descrevesse', 'descrevíssemos', 'descrevísseis', 'descrevessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha descrito', 'tenhas descrito', 'tenha descrito', 'tenhamos descrito', 'tenhais descrito', 'tenham descrito'],
+        'futuro-do-subjuntivo': ['descrever', 'descreveres', 'descrever', 'descrevermos', 'descreverdes', 'descreverem'],
+        'imperativo': ['-', 'descreve', 'descreva', 'descrevamos', 'descrevei', 'descrevam'],
+        'gerundio': ['descrevendo', 'descrevendo', 'descrevendo', 'descrevendo', 'descrevendo', 'descrevendo'],
+        'particípio': ['descrito', 'descrito', 'descrito', 'descrito', 'descrito', 'descrito'],
+        'infinitivo': ['descrever'],
+        'infinitivo-pessoal': ['descrever', 'descreveres', 'descrever', 'descrevermos', 'descreverdes', 'descreverem']
+    },
+    'discutir': {
+        'presente': ['discuto', 'discutes', 'discute', 'discutimos', 'discuteis', 'discutem'],
+        'preterito-perfeito': ['discuti', 'discuteste', 'discutiu', 'discutimos', 'discutestes', 'discutiram'],
+        'preterito-imperfeito': ['discutia', 'discutias', 'discutia', 'discutíamos', 'discutíeis', 'discutiam'],
+        'presente-perfeito': ['tenho discutido', 'tens discutido', 'tem discutido', 'temos discutido', 'tendes discutido', 'têm discutido'],
+        'preterito-mais-que-perfeito': ['tinha discutido', 'tinhas discutido', 'tinha discutido', 'tínhamos discutido', 'tínheis discutido', 'tinham discutido'],
+        'presente-perfecto-continuo': ['tenho discutindo', 'tens discutindo', 'tem discutindo', 'temos discutindo', 'tendes discutindo', 'têm discutindo'],
+        'futuro-perfeito': ['terei discutido', 'terás discutido', 'terá discutido', 'teremos discutido', 'tereis discutido', 'terão discutido'],
+        'futuro-do-indicativo': ['discutirei', 'discutirás', 'discutirá', 'discutiremos', 'discutireis', 'discutirão'],
+        'condicional-perfeito': ['teria discutido', 'terias discutido', 'teria discutido', 'teríamos discutido', 'teríeis discutido', 'teriam discutido'],
+        'mais-que-perfeito-composto': ['tinha discutido', 'tinhas discutido', 'tinha discutido', 'tínhamos discutido', 'tínheis discutido', 'tinham discutido'],
+        'condicional': ['discutiria', 'discutirías', 'discutiria', 'discutiríamos', 'discutiríeis', 'discutiriam'],
+        'presente-do-subjuntivo': ['discuta', 'discutas', 'discuta', 'discutamos', 'discutais', 'discutam'],
+        'preterito-imperfeito-do-subjuntivo': ['discutisse', 'discutisses', 'discutisse', 'discutíssemos', 'discutísseis', 'discutissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha discutido', 'tenhas discutido', 'tenha discutido', 'tenhamos discutido', 'tenhais discutido', 'tenham discutido'],
+        'futuro-do-subjuntivo': ['discutir', 'discutires', 'discutir', 'discutirmos', 'discutirdes', 'discutirem'],
+        'imperativo': ['-', 'discute', 'discuta', 'discutamos', 'discutei', 'discuta'],
+        'gerundio': ['discutindo', 'discutindo', 'discutindo', 'discutindo', 'discutindo', 'discutindo'],
+        'particípio': ['discutido', 'discutido', 'discutido', 'discutido', 'discutido', 'discutido'],
+        'infinitivo': ['discutir'],
+        'infinitivo-pessoal': ['discutir', 'discutires', 'discutir', 'discutirmos', 'discutirdes', 'discutirem']
+    },
+    'dominar': {
+        'presente': ['domino', 'dominas', 'domina', 'dominamos', 'dominais', 'dominam'],
+        'preterito-perfeito': ['dominei', 'dominaste', 'dominou', 'dominamos', 'dominastes', 'dominaram'],
+        'preterito-imperfeito': ['dominava', 'dominavas', 'dominava', 'dominávamos', 'domináveis', 'dominavam'],
+        'presente-perfeito': ['tenho dominado', 'tens dominado', 'tem dominado', 'temos dominado', 'tendes dominado', 'têm dominado'],
+        'preterito-mais-que-perfeito': ['tinha dominado', 'tinhas dominado', 'tinha dominado', 'tínhamos dominado', 'tínheis dominado', 'tinham dominado'],
+        'presente-perfecto-continuo': ['tenho dominando', 'tens dominando', 'tem dominando', 'temos dominando', 'tendes dominando', 'têm dominando'],
+        'futuro-perfeito': ['terei dominado', 'terás dominado', 'terá dominado', 'teremos dominado', 'tereis dominado', 'terão dominado'],
+        'futuro-do-indicativo': ['dominarei', 'dominarás', 'dominará', 'dominaremos', 'dominareis', 'dominarão'],
+        'condicional-perfeito': ['teria dominado', 'terias dominado', 'teria dominado', 'teríamos dominado', 'teríeis dominado', 'teriam dominado'],
+        'mais-que-perfeito-composto': ['tinha dominado', 'tinhas dominado', 'tinha dominado', 'tínhamos dominado', 'tínheis dominado', 'tinham dominado'],
+        'condicional': ['dominaria', 'dominarias', 'dominaria', 'dominaríamos', 'dominaríeis', 'dominariam'],
+        'presente-do-subjuntivo': ['domine', 'domines', 'domine', 'dominemos', 'domineis', 'dominem'],
+        'preterito-imperfeito-do-subjuntivo': ['dominasse', 'dominasses', 'dominasse', 'dominássemos', 'dominásseis', 'dominassem'],
+        'preterito-perfeito-do-subjuntivo': ['dominei', 'dominaste', 'dominou', 'dominamos', 'dominastes', 'dominaram'],
+        'futuro-do-subjuntivo': ['dominar', 'dominares', 'dominar', 'dominarmos', 'dominardes', 'dominarem'],
+        'imperativo': ['-', 'domina', 'domine', 'dominemos', 'dominem', 'dominem'],
+        'gerundio': ['dominando', 'dominando', 'dominando', 'dominando', 'dominando', 'dominando'],
+        'particípio': ['dominado', 'dominado', 'dominado', 'dominados', 'dominadas', 'dominados'],
+        'infinitivo': ['dominar'],
+        'infinitivo-pessoal': ['dominar', 'dominares', 'dominar', 'dominarmos', 'dominardes', 'dominarem']
+    },
+    'duvidar': {
+        'presente': ['duvido', 'duvidas', 'duvida', 'duvidamos', 'duvidais', 'duvidam'],
+        'preterito-perfeito': ['duvidei', 'duvidaste', 'duvidou', 'duvidamos', 'duvidastes', 'duvidaram'],
+        'preterito-imperfeito': ['duvidava', 'duvidavas', 'duvidava', 'duvidávamos', 'duvidáveis', 'duvidavam'],
+        'presente-perfeito': ['tenho duvidado', 'tens duvidado', 'tem duvidado', 'temos duvidado', 'tendes duvidado', 'têm duvidado'],
+        'preterito-mais-que-perfeito': ['tinha duvidado', 'tinhas duvidado', 'tinha duvidado', 'tínhamos duvidado', 'tínheis duvidado', 'tinham duvidado'],
+        'presente-perfecto-continuo': ['tenho duvidando', 'tens duvidando', 'tem duvidando', 'temos duvidando', 'tendes duvidando', 'têm duvidando'],
+        'futuro-perfeito': ['terei duvidado', 'terás duvidado', 'terá duvidado', 'teremos duvidado', 'tereis duvidado', 'terão duvidado'],
+        'futuro-do-indicativo': ['duvidarei', 'duvidarás', 'duvidará', 'duvidaremos', 'duvidareis', 'duvidarão'],
+        'condicional-perfeito': ['teria duvidado', 'terias duvidado', 'teria duvidado', 'teríamos duvidado', 'teríeis duvidado', 'teriam duvidado'],
+        'mais-que-perfeito-composto': ['tinha duvidado', 'tinhas duvidado', 'tinha duvidado', 'tínhamos duvidado', 'tínheis duvidado', 'tinham duvidado'],
+        'condicional': ['duvidaria', 'duvidarias', 'duvidaria', 'duvidaríamos', 'duvidaríeis', 'duvidariam'],
+        'presente-do-subjuntivo': ['duvide', 'duvides', 'duvide', 'duvidemos', 'duvideis', 'duvidem'],
+        'preterito-imperfeito-do-subjuntivo': ['duvidasse', 'duvidasses', 'duvidasse', 'duvidássemos', 'duvidásseis', 'duvidassem'],
+        'preterito-perfeito-do-subjuntivo': ['duvide', 'duvides', 'duvide', 'duvidemos', 'duvideis', 'duvidem'],
+        'futuro-do-subjuntivo': ['duvidar', 'duvidares', 'duvidar', 'duvidarmos', 'duvidardes', 'duvidarem'],
+        'imperativo': ['-', 'duvida', 'duvide', 'duvidemos', 'duvidem', 'duvidem'],
+        'gerundio': ['duvidando', 'duvidando', 'duvidando', 'duvidando', 'duvidando', 'duvidando'],
+        'particípio': ['duvidado', 'duvidado', 'duvidado', 'duvidados', 'duvidadas', 'duvidados'],
+        'infinitivo': ['duvidar'],
+        'infinitivo-pessoal': ['duvidar', 'duvidares', 'duvidar', 'duvidarmos', 'duvidardes', 'duvidarem']
+    },
+    'educar': {
+        'presente': ['educo', 'educas', 'educa', 'educamos', 'educais', 'educam'],
+        'preterito-perfeito': ['eduquei', 'educaste', 'educou', 'educamos', 'educastes', 'educaram'],
+        'preterito-imperfeito': ['educava', 'educavas', 'educava', 'educávamos', 'educáveis', 'educavam'],
+        'presente-perfeito': ['tenho educado', 'tens educado', 'tem educado', 'temos educado', 'tendes educado', 'têm educado'],
+        'preterito-mais-que-perfeito': ['tinha educado', 'tinhas educado', 'tinha educado', 'tínhamos educado', 'tínheis educado', 'tinham educado'],
+        'presente-perfecto-continuo': ['tenho educando', 'tens educando', 'tem educando', 'temos educando', 'tendes educando', 'têm educando'],
+        'futuro-perfeito': ['terei educado', 'terás educado', 'terá educado', 'teremos educado', 'tereis educado', 'terão educado'],
+        'futuro-do-indicativo': ['educarei', 'educarás', 'educará', 'educaremos', 'educareis', 'educarão'],
+        'condicional-perfeito': ['teria educado', 'terias educado', 'teria educado', 'teríamos educado', 'teríeis educado', 'teriam educado'],
+        'mais-que-perfeito-composto': ['tinha educado', 'tinhas educado', 'tinha educado', 'tínhamos educado', 'tínheis educado', 'tinham educado'],
+        'condicional': ['educaria', 'educarias', 'educaria', 'educaríamos', 'educaríeis', 'educariam'],
+        'presente-do-subjuntivo': ['eduque', 'eduques', 'eduque', 'eduquemos', 'eduqueis', 'eduquem'],
+        'preterito-perfeito-do-subjuntivo': ['eduquei', 'educaste', 'educou', 'educamos', 'educastes', 'educaram'],
+        'futuro-do-subjuntivo': ['educar', 'educares', 'educar', 'educarmos', 'educardes', 'educarem'],
+        'imperativo': ['-', 'educa', 'eduque', 'eduquemos', 'eduquem', 'eduquem'],
+        'gerundio': ['educando', 'educando', 'educando', 'educando', 'educando', 'educando'],
+        'particípio': ['educado', 'educado', 'educado', 'educados', 'educadas', 'educados'],
+        'infinitivo': ['educar'],
+        'infinitivo-pessoal': ['educar', 'educares', 'educar', 'educarmos', 'educardes', 'educarem']
+    },
+    'encontrar': {
+        'presente': ['encontro', 'encontras', 'encontra', 'encontramos', 'encontrais', 'encontram'],
+        'preterito-perfeito': ['encontrei', 'encontraste', 'encontrou', 'encontramos', 'encontrastes', 'encontraram'],
+        'preterito-imperfeito': ['encontrava', 'encontravas', 'encontrava', 'encontrávamos', 'encontráveis', 'encontravam'],
+        'presente-perfeito': ['tenho encontrado', 'tens encontrado', 'tem encontrado', 'temos encontrado', 'tendes encontrado', 'têm encontrado'],
+        'preterito-mais-que-perfeito': ['tinha encontrado', 'tinhas encontrado', 'tinha encontrado', 'tínhamos encontrado', 'tínheis encontrado', 'tinham encontrado'],
+        'presente-perfecto-continuo': ['tenho encontrando', 'tens encontrando', 'tem encontrando', 'temos encontrando', 'tendes encontrando', 'têm encontrando'],
+        'futuro-perfeito': ['terei encontrado', 'terás encontrado', 'terá encontrado', 'teremos encontrado', 'tereis encontrado', 'terão encontrado'],
+        'futuro-do-indicativo': ['encontrarei', 'encontrarás', 'encontrará', 'encontraremos', 'encontrareis', 'encontrarão'],
+        'condicional-perfeito': ['teria encontrado', 'terias encontrado', 'teria encontrado', 'teríamos encontrado', 'teríeis encontrado', 'teriam encontrado'],
+        'mais-que-perfeito-composto': ['tinha encontrado', 'tinhas encontrado', 'tinha encontrado', 'tínhamos encontrado', 'tínheis encontrado', 'tinham encontrado'],
+        'condicional': ['encontraria', 'encontrarias', 'encontraria', 'encontraríamos', 'encontraríeis', 'encontrariam'],
+        'presente-do-subjuntivo': ['encontre', 'encontres', 'encontre', 'encontremos', 'encontreis', 'encontrem'],
+        'preterito-imperfeito-do-subjuntivo': ['encontrasse', 'encontrasses', 'encontrasse', 'encontrássemos', 'encontrásseis', 'encontrassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha encontrado', 'tenhas encontrado', 'tenha encontrado', 'tenhamos encontrado', 'tenhais encontrado', 'tenham encontrado'],
+        'futuro-do-subjuntivo': ['encontrar', 'encontrares', 'encontrar', 'encontrarmos', 'encontrardes', 'encontrarem'],
+        'imperativo': ['-', 'encontra', 'encontre', 'encontremos', 'encontrem', 'encontrem'],
+        'gerundio': ['encontrando', 'encontrando', 'encontrando', 'encontrando', 'encontrando', 'encontrando'],
+        'particípio': ['encontrado', 'encontrado', 'encontrado', 'encontrados', 'encontradas', 'encontrados'],
+        'infinitivo': ['encontrar'],
+        'infinitivo-pessoal': ['encontrar', 'encontrares', 'encontrar', 'encontrarmos', 'encontrardes', 'encontrarem']
+    },
+    'entregar': {
+        'presente':       ['entrego', 'entregas', 'entrega', 'entregamos', 'entregais', 'entregam'],
+        'preterito-perfeito':       ['entreguei', 'entregaste', 'entregou', 'entregamos', 'entregastes', 'entregaram'],
+        'preterito-imperfeito':     ['entregava', 'entregavas', 'entregava', 'entregávamos', 'entregáveis', 'entregavam'],
+        'presente-perfeito':        ['tenho entregado', 'tens entregado', 'tem entregado', 'temos entregado', 'tendes entregado', 'têm entregado'],
+        'preterito-mais-que-perfeito': ['tinha entregado', 'tinhas entregado', 'tinha entregado', 'tínhamos entregado', 'tínheis entregado', 'tinham entregado'],
+        'presente-perfecto-continuo':  ['tenho entregando', 'tens entregando', 'tem entregando', 'temos entregando', 'tendes entregando', 'têm entregando'],
+        'futuro-perfeito':          ['terei entregado', 'terás entregado', 'terá entregado', 'teremos entregado', 'tereis entregado', 'terão entregado'],
+        'futuro-do-indicativo':    ['entregarei', 'entregarás', 'entregará', 'entregaremos', 'entregareis', 'entregarão'],
+        'condicional-perfeito':     ['teria entregado', 'terias entregado', 'teria entregado', 'teríamos entregado', 'teríeis entregado', 'teriam entregado'],
+        'mais-que-perfeito-composto': ['tinha entregado', 'tinhas entregado', 'tinha entregado', 'tínhamos entregado', 'tínheis entregado', 'tinham entregado'],
+        'condicional':              ['entregaria', 'entregarias', 'entregaria', 'entregaríamos', 'entregaríeis', 'entregariam'],
+        'presente-do-subjuntivo':   ['entregue', 'entregues', 'entregue', 'entreguemos', 'entregueis', 'entreguem'],
+        'preterito-perfeito-do-subjuntivo': ['entreguei', 'entregaste', 'entregou', 'entregamos', 'entregastes', 'entregaram'],
+        'futuro-do-subjuntivo':     ['entregar', 'entregares', 'entregar', 'entregarmos', 'entregardes', 'entregarem'],
+        'imperativo':               ['-', 'entrega', 'entregue', 'entreguemos', 'entreguem', 'entreguem'],
+        'gerundio': ['entregando', 'entregando', 'entregando', 'entregando', 'entregando', 'entregando'],
+        'particípio':               ['entregado','entregado','entregado','entregados','entregadas','entregados'],
+        'infinitivo':               ['entregar'],
+        'infinitivo-pessoal':       ['entregar', 'entregares', 'entregar', 'entregarmos', 'entregardes', 'entregarem']
+    },
+    'escolher': {
+        'presente':       ['escolho', 'escolhes', 'escolhe', 'escolhemos', 'escolheis', 'escolhem'],
+        'preterito-perfeito':       ['escolhi', 'escolheste', 'escolheu', 'escolhemos', 'escolhestes', 'escolheram'],
+        'preterito-imperfeito':     ['escolhia', 'escolhias', 'escolhia', 'escolhíamos', 'escolhíeis', 'escolhiam'],
+        'presente-perfeito':        ['tenho escolhido', 'tens escolhido', 'tem escolhido', 'temos escolhido', 'tendes escolhido', 'têm escolhido'],
+        'preterito-mais-que-perfeito': ['tinha escolhido', 'tinhas escolhido', 'tinha escolhido', 'tínhamos escolhido', 'tínheis escolhido', 'tinham escolhido'],
+        'presente-perfecto-continuo':  ['tenho escolhendo', 'tens escolhendo', 'tem escolhendo', 'temos escolhendo', 'tendes escolhendo', 'têm escolhendo'],
+        'futuro-perfeito':          ['terei escolhido', 'terás escolhido', 'terá escolhido', 'teremos escolhido', 'tereis escolhido', 'terão escolhido'],
+        'futuro-do-indicativo':    ['escolherei', 'escolherás', 'escolherá', 'escolheremos', 'escolhereis', 'escolherão'],
+        'condicional-perfeito':     ['teria escolhido', 'terias escolhido', 'teria escolhido', 'teríamos escolhido', 'teríeis escolhido', 'teriam escolhido'],
+        'mais-que-perfeito-composto': ['tinha escolhido', 'tinhas escolhido', 'tinha escolhido', 'tínhamos escolhido', 'tínheis escolhido', 'tinham escolhido'],
+        'condicional':              ['escolheria', 'escolherias', 'escolheria', 'escolheríamos', 'escolheríeis', 'escolheriam'],
+        'presente-do-subjuntivo': ['escolha', 'escolhas', 'escolha', 'escolhamos', 'escolhais', 'escolham'],
+        'preterito-imperfeito-do-subjuntivo': ['escolhesse', 'escolhessses', 'escolhesse', 'escolhêssemos', 'escolhêsseis', 'escolhessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha escolhido', 'tenhas escolhido', 'tenha escolhido', 'tenhamos escolhido', 'tenhais escolhido', 'tenham escolhido'],
+        'futuro-do-subjuntivo':     ['escolher', 'escolheres', 'escolher', 'escolhermos', 'escolherdes', 'escolherem'],
+        'imperativo':               ['-', 'escolhe', 'escolha', 'escolhamos', 'escolham', 'escolham'],
+        'gerundio': ['escolhendo', 'escolhendo', 'escolhendo', 'escolhendo', 'escolhendo', 'escolhendo'],
+        'particípio':               ['escolhido','escolhido','escolhido','escolhidos','escolhidas','escolhidos'],
+        'infinitivo':               ['escolher'],
+        'infinitivo-pessoal':       ['escolher', 'escolheres', 'escolher', 'escolhermos', 'escolherdes', 'escolherem']
+    },
+    'estabelecer': {
+        'presente':       ['estabeleço', 'estabeleces', 'estabelece', 'estabelecemos', 'estabeleceis', 'estabelecem'],
+        'preterito-perfeito':       ['estabeleci', 'estabeleceste', 'estabeleceu', 'estabelecemos', 'estabelecestes', 'estabeleceram'],
+        'preterito-imperfeito':     ['estabelecia', 'estabelecias', 'estabelecia', 'estabelecíamos', 'estabelecíeis', 'estabeleciam'],
+        'presente-perfeito':        ['tenho estabelecido', 'tens estabelecido', 'tem estabelecido', 'temos estabelecido', 'tendes estabelecido', 'têm estabelecido'],
+        'preterito-mais-que-perfeito': ['tinha estabelecido', 'tinhas estabelecido', 'tinha estabelecido', 'tínhamos estabelecido', 'tínheis estabelecido', 'tinham estabelecido'],
+        'presente-perfecto-continuo':  ['tenho estabelecendo', 'tens estabelecendo', 'tem estabelecendo', 'temos estabelecendo', 'tendes estabelecendo', 'têm estabelecendo'],
+        'futuro-perfeito':          ['terei estabelecido', 'terás estabelecido', 'terá estabelecido', 'teremos estabelecido', 'tereis estabelecido', 'terão estabelecido'],
+        'futuro-do-indicativo':    ['estabelecerei', 'estabelecerás', 'estabelecerá', 'estabeleceremos', 'estabelecereis', 'estabelecerão'],
+        'condicional-perfeito':     ['teria estabelecido', 'terias estabelecido', 'teria estabelecido', 'teríamos estabelecido', 'teríeis estabelecido', 'teriam estabelecido'],
+        'mais-que-perfeito-composto': ['tinha estabelecido', 'tinhas estabelecido', 'tinha estabelecido', 'tínhamos estabelecido', 'tínheis estabelecido', 'tinham estabelecido'],
+        'condicional':              ['estabeleceria', 'estabelecerias', 'estabeleceria', 'estabeleceríamos', 'estabeleceríeis', 'estabeleceriam'],
+        'presente-do-subjuntivo':   ['estabeleça', 'estabeleças', 'estabeleça', 'estabeleçamos', 'estabeleçais', 'estabeleçam'],
+        'preterito-imperfeito-do-subjuntivo': ['estabelecesse', 'estabelecesses', 'estabelecesse', 'estabelecíssemos', 'estabelecísseis', 'estabelecessem'],
+        'preterito-perfeito-do-subjuntivo': ['estabeleci', 'estabeleceste', 'estabeleceu', 'estabelecemos', 'estabelecestes', 'estabeleceram'],
+        'futuro-do-subjuntivo':     ['estabelecer', 'estabeleceres', 'estabelecer', 'estabelecermos', 'estabelecerdes', 'estabelecerem'],
+        'imperativo':               ['-', 'estabelece', 'estabeleça', 'estabeleçamos', 'estabeleçam', 'estabeleçam'],
+        'gerundio': ['estabelecendo', 'estabelecendo', 'estabelecendo', 'estabelecendo', 'estabelecendo', 'estabelecendo'],
+        'particípio':               ['estabelecido','estabelecido','estabelecido','estabelecidos','estabelecidas','estabelecidos'],
+        'infinitivo':               ['estabelecer'],
+        'infinitivo-pessoal':       ['estabelecer', 'estabeleceres', 'estabelecer', 'estabelecermos', 'estabelecerdes', 'estabelecerem']
+    },
+    'estudar': {
+        'presente':       ['estudo', 'estudas', 'estuda', 'estudamos', 'estudais', 'estudam'],
+        'preterito-perfeito':       ['estudei', 'estudaste', 'estudou', 'estudamos', 'estudastes', 'estudaram'],
+        'preterito-imperfeito':     ['estudava', 'estudavas', 'estudava', 'estudávamos', 'estudáveis', 'estudavam'],
+        'presente-perfeito':        ['tenho estudado', 'tens estudado', 'tem estudado', 'temos estudado', 'tendes estudado', 'têm estudado'],
+        'preterito-mais-que-perfeito': ['tinha estudado', 'tinhas estudado', 'tinha estudado', 'tínhamos estudado', 'tínheis estudado', 'tinham estudado'],
+        'presente-perfecto-continuo':  ['tenho estudando', 'tens estudando', 'tem estudando', 'temos estudando', 'tendes estudando', 'têm estudando'],
+        'futuro-perfeito':          ['terei estudado', 'terás estudado', 'terá estudado', 'teremos estudado', 'tereis estudado', 'terão estudado'],
+        'futuro-do-indicativo':    ['estudarei', 'estudarás', 'estudará', 'estudaremos', 'estudareis', 'estudarão'],
+        'condicional-perfeito':     ['teria estudado', 'terias estudado', 'teria estudado', 'teríamos estudado', 'teríeis estudado', 'teriam estudado'],
+        'mais-que-perfeito-composto': ['tinha estudado', 'tinhas estudado', 'tinha estudado', 'tínhamos estudado', 'tínheis estudado', 'tinham estudado'],
+        'condicional':              ['estudaria', 'estudarias', 'estudaria', 'estudaríamos', 'estudaríeis', 'estudariam'],
+        'presente-do-subjuntivo':   ['estude', 'estudes', 'estude', 'estudemos', 'estudeis', 'estudem'],
+        'preterito-perfeito-do-subjuntivo': ['estudei', 'estudaste', 'estudou', 'estudamos', 'estudastes', 'estudaram'],
+        'futuro-do-subjuntivo':     ['estudar', 'estudares', 'estudar', 'estudarmos', 'estudardes', 'estudarem'],
+        'imperativo':               ['-', 'estuda', 'estude', 'estudemos', 'estudem', 'estudem'],
+        'gerundio': ['estudando', 'estudando', 'estudando', 'estudando', 'estudando', 'estudando'],
+        'particípio':               ['estudado','estudado','estudado','estudados','estudadas','estudados'],
+        'infinitivo':               ['estudar'],
+        'infinitivo-pessoal':       ['estudar', 'estudares', 'estudar', 'estudarmos', 'estudardes', 'estudarem']
+    },
+    'explicar': {
+        'presente': ['explico', 'explicas', 'explica', 'explicamos', 'explicais', 'explicam'],
+        'preterito-perfeito': ['expliquei', 'explicaste', 'explicou', 'explicamos', 'explicastes', 'explicaram'],
+        'preterito-imperfeito': ['explicava', 'explicavas', 'explicava', 'explicávamos', 'explicáveis', 'explicavam'],
+        'presente-perfeito': ['tenho explicado', 'tens explicado', 'tem explicado', 'temos explicado', 'tendes explicado', 'têm explicado'],
+        'preterito-mais-que-perfeito': ['tinha explicado', 'tinhas explicado', 'tinha explicado', 'tínhamos explicado', 'tínheis explicado', 'tinham explicado'],
+        'presente-perfecto-continuo': ['tenho explicando', 'tens explicando', 'tem explicando', 'temos explicando', 'tendes explicando', 'têm explicando'],
+        'futuro-perfeito': ['terei explicado', 'terás explicado', 'terá explicado', 'teremos explicado', 'tereis explicado', 'terão explicado'],
+        'futuro-do-indicativo': ['explicarei', 'explicarás', 'explicará', 'explicaremos', 'explicareis', 'explicarão'],
+        'condicional-perfeito': ['teria explicado', 'terias explicado', 'teria explicado', 'teríamos explicado', 'teríeis explicado', 'teriam explicado'],
+        'mais-que-perfeito-composto': ['tinha explicado', 'tinhas explicado', 'tinha explicado', 'tínhamos explicado', 'tínheis explicado', 'tinham explicado'],
+        'condicional': ['explicaria', 'explicarias', 'explicaria', 'explicaríamos', 'explicaríeis', 'explicariam'],
+        'presente-do-subjuntivo': ['explique', 'expliques', 'explique', 'expliquemos', 'expliqueis', 'expliquem'],
+        'preterito-imperfeito-do-subjuntivo': ['explicasse', 'explícasses', 'explicasse', 'explicássemos', 'explicásseis', 'explicassem'],
+        'preterito-perfeito-do-subjuntivo': ['expliquei', 'explicaste', 'explicou', 'explicamos', 'explicastes', 'explicaram'],
+        'futuro-do-subjuntivo': ['explicar', 'explicares', 'explicar', 'explicarmos', 'explicardes', 'explicarem'],
+        'imperativo': ['-', 'explica', 'explique', 'expliquemos', 'expliquem', 'expliquem'],
+        'gerundio': ['explicando', 'explicando', 'explicando', 'explicando', 'explicando', 'explicando'],
+        'particípio': ['explicado', 'explicado', 'explicado', 'explicados', 'explicadas', 'explicados'],
+        'infinitivo': ['explicar'],
+        'infinitivo-pessoal': ['explicar', 'explicares', 'explicar', 'explicarmos', 'explicardes', 'explicarem']
+    },
+    'ganhar': {
+        'presente': ['ganho', 'ganhas', 'ganha', 'ganhamos', 'ganhais', 'ganham'],
+        'preterito-perfeito': ['ganhei', 'ganhaste', 'ganhou', 'ganhamos', 'ganhastes', 'ganharam'],
+        'preterito-imperfeito': ['ganhava', 'ganhavas', 'ganhava', 'ganhávamos', 'ganháveis', 'ganhavam'],
+        'presente-perfeito': ['tenho ganhado', 'tens ganhado', 'tem ganhado', 'temos ganhado', 'tendes ganhado', 'têm ganhado'],
+        'preterito-mais-que-perfeito': ['tinha ganhado', 'tinhas ganhado', 'tinha ganhado', 'tínhamos ganhado', 'tínheis ganhado', 'tinham ganhado'],
+        'presente-perfecto-continuo': ['tenho ganhando', 'tens ganhando', 'tem ganhando', 'temos ganhando', 'tendes ganhando', 'têm ganhando'],
+        'futuro-perfeito': ['terei ganhado', 'terás ganhado', 'terá ganhado', 'teremos ganhado', 'tereis ganhado', 'terão ganhado'],
+        'futuro-do-indicativo': ['ganharei', 'ganharás', 'ganhará', 'ganharemos', 'ganhareis', 'ganharão'],
+        'condicional-perfeito': ['teria ganhado', 'terias ganhado', 'teria ganhado', 'teríamos ganhado', 'teríeis ganhado', 'teriam ganhado'],
+        'mais-que-perfeito-composto': ['tinha ganhado', 'tinhas ganhado', 'tinha ganhado', 'tínhamos ganhado', 'tínheis ganhado', 'tinham ganhado'],
+        'condicional': ['ganharia', 'ganharias', 'ganharia', 'ganharíamos', 'ganharíeis', 'ganhariam'],
+        'presente-do-subjuntivo': ['ganhe', 'ganhes', 'ganhe', 'ganhemos', 'ganheis', 'ganhem'],
+        'preterito-imperfeito-do-subjuntivo': ['ganhasse', 'ganhasses', 'ganhasse', 'ganhássemos', 'ganhásseis', 'ganhassem'],
+        'preterito-perfeito-do-subjuntivo': ['ganhei', 'ganhaste', 'ganhou', 'ganhamos', 'ganhastes', 'ganharam'],
+        'futuro-do-subjuntivo': ['ganhar', 'ganhares', 'ganhar', 'ganharmos', 'ganhardes', 'ganharem'],
+        'imperativo': ['-', 'ganha', 'ganhe', 'ganhemos', 'ganhem', 'ganhem'],
+        'gerundio': ['ganhando', 'ganhando', 'ganhando', 'ganhando', 'ganhando', 'ganhando'],
+        'particípio': ['ganhado', 'ganhado', 'ganhado', 'ganhados', 'ganhadas', 'ganhados'],
+        'infinitivo': ['ganhar'],
+        'infinitivo-pessoal': ['ganhar', 'ganhares', 'ganhar', 'ganharmos', 'ganhardes', 'ganharem']
+    },
+    'governar': {
+        'presente': ['governo', 'governas', 'governa', 'governamos', 'governais', 'governam'],
+        'preterito-perfeito': ['governei', 'governaste', 'governou', 'governamos', 'governastes', 'governaram'],
+        'preterito-imperfeito': ['governava', 'governavas', 'governava', 'governávamos', 'governáveis', 'governavam'],
+        'presente-perfeito': ['tenho governado', 'tens governado', 'tem governado', 'temos governado', 'tendes governado', 'têm governado'],
+        'preterito-mais-que-perfeito': ['tinha governado', 'tinhas governado', 'tinha governado', 'tínhamos governado', 'tínheis governado', 'tinham governado'],
+        'presente-perfecto-continuo': ['tenho governando', 'tens governando', 'tem governando', 'temos governando', 'tendes governando', 'têm governando'],
+        'futuro-perfeito': ['terei governado', 'terás governado', 'terá governado', 'teremos governado', 'tereis governado', 'terão governado'],
+        'futuro-do-indicativo': ['governarei', 'governarás', 'governará', 'governaremos', 'governareis', 'governarão'],
+        'condicional-perfeito': ['teria governado', 'terias governado', 'teria governado', 'teríamos governado', 'teríeis governado', 'teriam governado'],
+        'mais-que-perfeito-composto': ['tinha governado', 'tinhas governado', 'tinha governado', 'tínhamos governado', 'tínheis governado', 'tinham governado'],
+        'condicional': ['governaria', 'governarias', 'governaria', 'governaríamos', 'governaríeis', 'governariam'],
+        'presente-do-subjuntivo': ['governe', 'governes', 'governe', 'governemos', 'governeis', 'governem'],
+        'preterito-perfeito-do-subjuntivo': ['governei', 'governaste', 'governou', 'governamos', 'governastes', 'governaram'],
+        'futuro-do-subjuntivo': ['governar', 'governares', 'governar', 'governarmos', 'governardes', 'governarem'],
+        'imperativo': ['-', 'governa', 'governe', 'governemos', 'governem', 'governem'],
+        'gerundio': ['governando', 'governando', 'governando', 'governando', 'governando', 'governando'],
+        'particípio': ['governado', 'governado', 'governado', 'governados', 'governadas', 'governados'],
+        'infinitivo': ['governar'],
+        'infinitivo-pessoal': ['governar', 'governares', 'governar', 'governarmos', 'governardes', 'governarem']
+    },
+    'gritar': {
+        'presente': ['grito', 'gritas', 'grita', 'gritamos', 'gritais', 'gritam'],
+        'preterito-perfeito': ['gritei', 'gritaste', 'gritou', 'gritamos', 'gritastes', 'gritaram'],
+        'preterito-imperfeito': ['gritava', 'gritavas', 'gritava', 'gritávamos', 'gritáveis', 'gritavam'],
+        'presente-perfeito': ['tenho gritado', 'tens gritado', 'tem gritado', 'temos gritado', 'tendes gritado', 'têm gritado'],
+        'preterito-mais-que-perfeito': ['tinha gritado', 'tinhas gritado', 'tinha gritado', 'tínhamos gritado', 'tínheis gritado', 'tinham gritado'],
+        'presente-perfecto-continuo': ['tenho gritando', 'tens gritando', 'tem gritando', 'temos gritando', 'tendes gritando', 'têm gritando'],
+        'futuro-perfeito': ['terei gritado', 'terás gritado', 'terá gritado', 'teremos gritado', 'tereis gritado', 'terão gritado'],
+        'futuro-do-indicativo': ['gritarei', 'gritarás', 'gritará', 'gritaremos', 'gritareis', 'gritarão'],
+        'condicional-perfeito': ['teria gritado', 'terias gritado', 'teria gritado', 'teríamos gritado', 'teríeis gritado', 'teriam gritado'],
+        'mais-que-perfeito-composto': ['tinha gritado', 'tinhas gritado', 'tinha gritado', 'tínhamos gritado', 'tínheis gritado', 'tinham gritado'],
+        'condicional': ['gritaria', 'gritarias', 'gritaria', 'gritaríamos', 'gritaríeis', 'gritariam'],
+        'presente-do-subjuntivo': ['grite', 'grites', 'grite', 'gritemos', 'griteis', 'gritem'],
+        'preterito-imperfeito-do-subjuntivo': ['gritasse', 'gritasses', 'gritasse', 'gritássemos', 'gritásseis', 'gritassem'],
+        'preterito-perfeito-do-subjuntivo': ['gritei', 'gritaste', 'gritou', 'gritamos', 'gritastes', 'gritaram'],
+        'futuro-do-subjuntivo': ['gritar', 'gritares', 'gritar', 'gritarmos', 'gritardes', 'gritarem'],
+        'imperativo': ['-', 'grita', 'grite', 'gritemos', 'gritem', 'gritem'],
+        'gerundio': ['gritando', 'gritando', 'gritando', 'gritando', 'gritando', 'gritando'],
+        'particípio': ['gritado', 'gritado', 'gritado', 'gritados', 'gritadas', 'gritados'],
+        'infinitivo': ['gritar'],
+        'infinitivo-pessoal': ['gritar', 'gritares', 'gritar', 'gritarmos', 'gritardes', 'gritarem']
+    },
+    'guardar': {
+        'presente': ['guardo', 'guardas', 'guarda', 'guardamos', 'guardais', 'guardam'],
+        'preterito-perfeito': ['guardei', 'guardaste', 'guardou', 'guardámos', 'guardastes', 'guardaram'],
+        'preterito-imperfeito': ['guardava', 'guardavas', 'guardava', 'guardávamos', 'guardáveis', 'guardavam'],
+        'presente-perfeito': ['tenho guardado', 'tens guardado', 'tem guardado', 'temos guardado', 'tendes guardado', 'têm guardado'],
+        'preterito-mais-que-perfeito': ['tinha guardado', 'tinhas guardado', 'tinha guardado', 'tínhamos guardado', 'tínheis guardado', 'tinham guardado'],
+        'futuro-perfeito': ['terei guardado', 'terás guardado', 'terá guardado', 'teremos guardado', 'tereis guardado', 'terão guardado'],
+        'futuro-do-indicativo': ['guardarei', 'guardarás', 'guardará', 'guardaremos', 'guardareis', 'guardarão'],
+        'condicional-perfeito': ['teria guardado', 'terias guardado', 'teria guardado', 'teríamos guardado', 'teríeis guardado', 'teriam guardado'],
+        'condicional': ['guardaria', 'guardarias', 'guardaria', 'guardaríamos', 'guardaríeis', 'guardariam'],
+        'presente-do-subjuntivo': ['guarde', 'guardes', 'guarde', 'guardemos', 'guardeis', 'guardem'],
+        'preterito-imperfeito-do-subjuntivo': ['guardasse', 'guardasses', 'guardasse', 'guardássemos', 'guardásseis', 'guardassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha guardado', 'tenhas guardado', 'tenha guardado', 'tenhamos guardado', 'tenhais guardado', 'tenham guardado'],
+        'futuro-do-subjuntivo': ['guardar', 'guardares', 'guardar', 'guardarmos', 'guardardes', 'guardarem'],
+        'imperativo': ['-', 'guarda', 'guarde', 'guardemos', 'guardem', 'guardem'],
+        'gerundio': ['guardando', 'guardando', 'guardando', 'guardando', 'guardando', 'guardando'],
+        'particípio': ['guardado', 'guardado', 'guardado', 'guardados', 'guardadas', 'guardados'],
+        'infinitivo': ['guardar'],
+        'infinitivo-pessoal': ['guardar', 'guardares', 'guardar', 'guardarmos', 'guardardes', 'guardarem']
+    },
+    'guiar': {
+        'presente': ['guio', 'guias', 'guia', 'guiamos', 'guiais', 'guiam'],
+        'preterito-perfeito': ['guiei', 'guiaste', 'guiou', 'guiámos', 'guiastes', 'guiaram'],
+        'preterito-imperfeito': ['guiava', 'guiavas', 'guiava', 'guiávamos', 'guiáveis', 'guiavam'],
+        'presente-perfeito': ['tenho guiado', 'tens guiado', 'tem guiado', 'temos guiado', 'tendes guiado', 'têm guiado'],
+        'preterito-mais-que-perfeito': ['tinha guiado', 'tinhas guiado', 'tinha guiado', 'tínhamos guiado', 'tínheis guiado', 'tinham guiado'],
+        'futuro-perfeito': ['terei guiado', 'terás guiado', 'terá guiado', 'teremos guiado', 'tereis guiado', 'terão guiado'],
+        'futuro-do-indicativo': ['guiarei', 'guiarás', 'guiará', 'guiaremos', 'guiareis', 'guiarão'],
+        'condicional-perfeito': ['teria guiado', 'terias guiado', 'teria guiado', 'teríamos guiado', 'teríeis guiado', 'teriam guiado'],
+        'condicional': ['guiaria', 'guiarias', 'guiaria', 'guiaríamos', 'guiaríeis', 'guiariam'],
+        'presente-do-subjuntivo': ['guie', 'guies', 'guie', 'guiemos', 'guieis', 'guiem'],
+        'preterito-imperfeito-do-subjuntivo': ['guiasse', 'guiasses', 'guiasse', 'guiássemos', 'guiásseis', 'guiassem'],
+        'preterito-perfeito-do-subjuntivo': ['guiei', 'guiaste', 'guiou', 'guiámos', 'guiastes', 'guiaram'],
+        'futuro-do-subjuntivo': ['guiar', 'guiar­es', 'guiar', 'guiarmos', 'guiardes', 'guiarem'],
+        'imperativo': ['-', 'guia', 'guie', 'guiemos', 'guiem', 'guiem'],
+        'gerundio': ['guiando', 'guiando', 'guiando', 'guiando', 'guiando', 'guiando'],
+        'particípio': ['guiado', 'guiado', 'guiado', 'guiados', 'guiadas', 'guiados'],
+        'infinitivo': ['guiar'],
+        'infinitivo-pessoal': ['guiar', 'guiar­es', 'guiar', 'guiarmos', 'guiardes', 'guiarem']
+    },
+    'identificar': {
+        'presente': ['identifico', 'identificas', 'identifica', 'identificamos', 'identificais', 'identificam'],
+        'preterito-perfeito': ['identifiquei', 'identificaste', 'identificou', 'identificámos', 'identificastes', 'identificaram'],
+        'preterito-imperfeito': ['identificava', 'identificavas', 'identificava', 'identificávamos', 'identificáveis', 'identificavam'],
+        'presente-perfeito': ['tenho identificado', 'tens identificado', 'tem identificado', 'temos identificado', 'tendes identificado', 'têm identificado'],
+        'preterito-mais-que-perfeito': ['tinha identificado', 'tinhas identificado', 'tinha identificado', 'tínhamos identificado', 'tínheis identificado', 'tinham identificado'],
+        'futuro-perfeito': ['terei identificado', 'terás identificado', 'terá identificado', 'teremos identificado', 'tereis identificado', 'terão identificado'],
+        'futuro-do-indicativo': ['identificarei', 'identificarás', 'identificará', 'identificaremos', 'identificareis', 'identificarão'],
+        'condicional-perfeito': ['teria identificado', 'terias identificado', 'teria identificado', 'teríamos identificado', 'teríeis identificado', 'teriam identificado'],
+        'condicional': ['identificaria', 'identificarias', 'identificaria', 'identificaríamos', 'identificaríeis', 'identificariam'],
+        'presente-do-subjuntivo': ['identifique', 'identifiques', 'identifique', 'identifiquemos', 'identifiqueis', 'identifiquem'],
+        'preterito-perfeito-do-subjuntivo': ['identifiquei', 'identificaste', 'identificou', 'identificámos', 'identificastes', 'identificaram'],
+        'futuro-do-subjuntivo': ['identificar', 'identificares', 'identificar', 'identificarmos', 'identificardes', 'identificarem'],
+        'imperativo': ['-', 'identifica', 'identifique', 'identifiquemos', 'identifiquem', 'identifiquem'],
+        'gerundio': ['identificando', 'identificando', 'identificando', 'identificando', 'identificando', 'identificando'],
+        'particípio': ['identificado', 'identificado', 'identificado', 'identificados', 'identificadas', 'identificados'],
+        'infinitivo': ['identificar'],
+        'infinitivo-pessoal': ['identificar', 'identificares', 'identificar', 'identificarmos', 'identificardes', 'identificarem']
+    },
+    'iniciar': {
+        'presente': ['inicio', 'inicias', 'inicia', 'iniciamos', 'iniciais', 'iniciam'],
+        'preterito-perfeito': ['iniciei', 'iniciaste', 'iniciou', 'iniciámos', 'iniciastes', 'iniciaram'],
+        'preterito-imperfeito': ['iniciava', 'iniciavas', 'iniciava', 'iniciávamos', 'iniciáveis', 'iniciavam'],
+        'presente-perfeito': ['tenho iniciado', 'tens iniciado', 'tem iniciado', 'temos iniciado', 'tendes iniciado', 'têm iniciado'],
+        'preterito-mais-que-perfeito': ['tinha iniciado', 'tinhas iniciado', 'tinha iniciado', 'tínhamos iniciado', 'tínheis iniciado', 'tinham iniciado'],
+        'futuro-perfeito': ['terei iniciado', 'terás iniciado', 'terá iniciado', 'teremos iniciado', 'tereis iniciado', 'terão iniciado'],
+        'futuro-do-indicativo': ['iniciarei', 'iniciarás', 'iniciará', 'iniciaremos', 'iniciareis', 'iniciarão'],
+        'condicional-perfeito': ['teria iniciado', 'terias iniciado', 'teria iniciado', 'teríamos iniciado', 'teríeis iniciado', 'teriam iniciado'],
+        'condicional': ['iniciaria', 'iniciarias', 'iniciaria', 'iniciaríamos', 'iniciaríeis', 'iniciariam'],
+        'presente-do-subjuntivo': ['inicie', 'inicies', 'inicie', 'iniciemos', 'inicieis', 'ini­ciem'],
+        'preterito-perfeito-do-subjuntivo': ['iniciei', 'iniciaste', 'iniciou', 'iniciámos', 'iniciastes', 'iniciaram'],
+        'futuro-do-subjuntivo': ['iniciar', 'iniciares', 'iniciar', 'iniciarmos', 'iniciardes', 'iniciarem'],
+        'imperativo': ['-', 'inicia', 'inicie', 'iniciemos', 'iniciem', 'iniciem'],
+        'gerundio': ['iniciando', 'iniciando', 'iniciando', 'iniciando', 'iniciando', 'iniciando'],
+        'particípio': ['iniciado', 'iniciado', 'iniciado', 'iniciados', 'iniciadas', 'iniciados'],
+        'infinitivo': ['iniciar'],
+        'infinitivo-pessoal': ['iniciar', 'iniciares', 'iniciar', 'iniciarmos', 'iniciardes', 'iniciarem']
+    },
+    'insistir': {
+        'presente': ['insisto', 'insistes', 'insiste', 'insistimos', 'insistis', 'insistem'],
+        'preterito-perfeito': ['insisti', 'insististe', 'insistiu', 'insistimos', 'insististes', 'insistiram'],
+        'preterito-imperfeito': ['insistia', 'insistias', 'insistia', 'insistí­amos', 'insistíeis', 'insistiam'],
+        'presente-perfeito': ['tenho insistido', 'tens insistido', 'tem insistido', 'temos insistido', 'tendes insistido', 'têm insistido'],
+        'preterito-mais-que-perfeito': ['tinha insistido', 'tinhas insistido', 'tinha insistido', 'tínhamos insistido', 'tínheis insistido', 'tinham insistido'],
+        'futuro-perfeito': ['terei insistido', 'terás insistido', 'terá insistido', 'teremos insistido', 'tereis insistido', 'terão insistido'],
+        'futuro-do-indicativo': ['insistirei', 'insistirás', 'insistirá', 'insistiremos', 'insistireis', 'insistirão'],
+        'condicional-perfeito': ['teria insistido', 'terias insistido', 'teria insistido', 'teríamos insistido', 'teríeis insistido', 'teriam insistido'],
+        'condicional': ['insistiria', 'insistirias', 'insistiria', 'insistiríamos', 'insistiríeis', 'insistiriam'],
+        'presente-do-subjuntivo': ['insista', 'insistas', 'insista', 'insistamos', 'insistais', 'insistam'],
+        'preterito-imperfeito-do-subjuntivo': ['insistisse', 'insistisses', 'insistisse', 'insistíssemos', 'insistísseis', 'insistissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha insistido', 'tenhas insistido', 'tenha insistido', 'tenhamos insistido', 'tenhais insistido', 'tenham insistido'],
+        'futuro-do-subjuntivo': ['insistir', 'insistires', 'insistir', 'insistirmos', 'insistirdes', 'insistirem'],
+        'imperativo': ['-', 'insiste', 'insista', 'insistamos', 'insistam', 'insistam'],
+        'gerundio': ['insistindo', 'insistindo', 'insistindo', 'insistindo', 'insistindo', 'insistindo'],
+        'particípio': ['insistido', 'insistido', 'insistido', 'insistidos', 'insistidas', 'insistidos'],
+        'infinitivo': ['insistir'],
+        'infinitivo-pessoal': ['insistir', 'insistires', 'insistir', 'insistirmos', 'insistirdes', 'insistirem']
+    },
+    'investigar': {
+        'presente': ['investigo', 'investigas', 'investiga', 'investigamos', 'investigais', 'investigam'],
+        'preterito-perfeito': ['investiguei', 'investigaste', 'investigou', 'investigámos', 'investigastes', 'investigaram'],
+        'preterito-imperfeito': ['investigava', 'investigavas', 'investigava', 'investigávamos', 'investigáveis', 'investigavam'],
+        'presente-perfeito': ['tenho investigado', 'tens investigado', 'tem investigado', 'temos investigado', 'tendes investigado', 'têm investigado'],
+        'preterito-mais-que-perfeito': ['tinha investigado', 'tinhas investigado', 'tinha investigado', 'tínhamos investigado', 'tínheis investigado', 'tinham investigado'],
+        'futuro-perfeito': ['terei investigado', 'terás investigado', 'terá investigado', 'teremos investigado', 'tereis investigado', 'terão investigado'],
+        'futuro-do-indicativo': ['investigarei', 'investigarás', 'investigará', 'investigaremos', 'investigareis', 'investigarão'],
+        'condicional-perfeito': ['teria investigado', 'terias investigado', 'teria investigado', 'teríamos investigado', 'teríeis investigado', 'teriam investigado'],
+        'condicional': ['investigaria', 'investigarias', 'investigaria', 'investigaríamos', 'investigaríeis', 'investigariam'],
+        'presente-do-subjuntivo': ['investigue', 'investigues', 'investigue', 'investiguemos', 'investigueis', 'investiguem'],
+        'preterito-perfeito-do-subjuntivo': ['investiguei', 'investigaste', 'investigou', 'investigámos', 'investigastes', 'investigaram'],
+        'futuro-do-subjuntivo': ['investigar', 'investigares', 'investigar', 'investigarmos', 'investigardes', 'investigarem'],
+        'imperativo': ['-', 'investiga', 'investigue', 'investiguemos', 'investiguem', 'investiguem'],
+        'gerundio': ['investigando', 'investigando', 'investigando', 'investigando', 'investigando', 'investigando'],
+        'particípio': ['investigado', 'investigado', 'investigado', 'investigados', 'investigadas', 'investigados'],
+        'infinitivo': ['investigar'],
+        'infinitivo-pessoal': ['investigar', 'investigares', 'investigar', 'investigarmos', 'investigardes', 'investigarem']
+    },
+    'jogar': {
+        'presente': ['jogo', 'jogas', 'joga', 'jogamos', 'jogais', 'jogam'],
+        'preterito-perfeito': ['joguei', 'jogaste', 'jogou', 'jogámos', 'jogastes', 'jogaram'],
+        'preterito-imperfeito': ['jogava', 'jogavas', 'jogava', 'jogávamos', 'jogáveis', 'jogavam'],
+        'pre­sente-perfeito': ['tenho jogado', 'tens jogado', 'tem jogado', 'temos jogado', 'tendes jogado', 'têm jogado'],
+        'preterito-mais-que-perfeito': ['tinha jogado', 'tinhas jogado', 'tinha jogado', 'tínhamos jogado', 'tínheis jogado', 'tinham jogado'],
+        'futuro-perfeito': ['terei jogado', 'terás jogado', 'terá jogado', 'teremos jogado', 'tereis jogado', 'terão jogado'],
+        'futuro-do-indicativo': ['jogarei', 'jogarás', 'jogará', 'jogaremos', 'jogareis', 'jogarão'],
+        'condicional-perfeito': ['teria jogado', 'terias jogado', 'teria jogado', 'teríamos jogado', 'teríeis jogado', 'teriam jogado'],
+        'condicional': ['jogaria', 'jogarias', 'jogaria', 'jogaríamos', 'jogaríeis', 'jogariam'],
+        'presente-do-subjuntivo': ['jogue', 'jogues', 'jogue', 'joguemos', 'jogueis', 'joguem'],
+        'preterito-imperfeito-do-subjuntivo': ['jogasse', 'jogasses', 'jogasse', 'jogássemos', 'jogásseis', 'jogassem'],
+        'preterito-perfeito-do-subjuntivo': ['joguei', 'jogaste', 'jogou', 'jogámos', 'jogastes', 'jogaram'],
+        'futuro-do-subjuntivo': ['jogar', 'jogares', 'jogar', 'jogarmos', 'jogardes', 'jogarem'],
+        'imperativo': ['-', 'joga', 'jogue', 'joguemos', 'joguem', 'joguem'],
+        'gerundio': ['jogando', 'jogando', 'jogando', 'jogando', 'jogando', 'jogando'],
+        'particípio': ['jogado', 'jogado', 'jogado', 'jogados', 'jogadas', 'jogados'],
+        'infinitivo': ['jogar'],
+        'infinitivo-pessoal': ['jogar', 'jogares', 'jogar', 'jogarmos', 'jogardes', 'jogarem']
+    },
+    'livrar': {
+        'presente': ['livro','livras','livra','livramos','livrais','livram'],
+        'preterito-perfeito': ['livrei','livraste','livrou','livrámos','livrastes','livraram'],
+        'preterito-imperfeito': ['livrava','livravas','livrava','livrávamos','livráveis','livravam'],
+        'preterito-mais-que-perfeito': ['livrara','livraras','livrara','livráramos','livráreis','livraram'],
+        'futuro-do-indicativo': ['livrarei','livrarás','livrará','livraremos','livrareis','livrarão'],
+        'condicional': ['livraria','livrarias','livraria','livraríamos','livraríeis','livrariam'],
+        'presente-perfeito': ['tenho livrado','tens livrado','tem livrado','temos livrado','tendes livrado','têm livrado'],
+        'mais-que-perfeito-composto': ['tinha livrado','tinhas livrado','tinha livrado','tínhamos livrado','tínheis livrado','tinham livrado'],
+        'presente-do-subjuntivo': ['livre','livres','livre','livremos','livreis','livrem'],
+        'preterito-perfeito-do-subjuntivo': ['livrara','livraras','livrara','livráramos','livráreis','livraram'],
+        'preterito-imperfeito-do-subjuntivo': ['livrasse','livrasses','livrasse','livrássemos','livrásseis','livrassem'],
+        'futuro-do-subjuntivo': ['livrar','livrares','livrar','livrarmos','livrardes','livrarem'],
+        'imperativo': ['-','livra','livre','livremos','livrai','livrem'],
+        'gerundio': ['livrando', 'livrando', 'livrando', 'livrando', 'livrando', 'livrando'],
+        'particípio': ['livrado','livrado','livrado','livrados','livradas','livrados'],
+        'infinitivo': ['livrar'],
+        'infinitivo-pessoal': ['livrar','livrares','livrar','livrarmos','livrardes','livrarem']
+    },
+    'manter': {
+        'presente': ['mantenho','manténs','mantém','mantemos','mantendes','mantêm'],
+        'preterito-perfeito': ['mantive','mantiveste','manteve','mantivemos','mantivestes','mantiveram'],
+        'preterito-imperfeito': ['mantinha','mantinhas','mantinha','mantínhamos','mantínheis','mantinham'],
+        'preterito-mais-que-perfeito': ['mantivera','mantiveras','mantivera','mantivéramos','mantivéreis','mantiveram'],
+        'futuro-do-indicativo': ['manterei','manterás','manterá','manteremos','mantereis','manterão'],
+        'futuro-perfeito': ['terei mantido','terás mantido','terá mantido','teremos mantido','tereis mantido','terão mantido'],
+        'condicional': ['manteria','manterias','manteria','manteríamos','manteríeis','manteriam'],
+        'condicional-perfeito': ['teria mantido','terias mantido','teria mantido','teríamos mantido','teríeis mantido','teriam mantido'],
+        'presente-perfeito': ['tenho mantido','tens mantido','tem mantido','temos mantido','tendes mantido','têm mantido'],
+        'mais-que-perfeito-composto': ['tinha mantido','tinhas mantido','tinha mantido','tínhamos mantido','tínheis mantido','tinham mantido'],
+        'presente-do-subjuntivo': ['mantenha','mantenhas','mantenha','mantenhamos','mantenhais','mantenham'],
+        'preterito-perfeito-do-subjuntivo': ['mantivera','mantiveras','mantivera','mantivéramos','mantivéreis','mantiveram'],
+        'preterito-imperfeito-do-subjuntivo': ['mantivesse','mantivesses','mantivesse','mantivéssemos','mantivésseis','mantivessem'],
+        'futuro-do-subjuntivo': ['mantiver','mantiveres','mantiver','mantivermos','mantiverdes','mantiverem'],
+        'imperativo': ['-','mantém','mantenha','mantenhamos','mantendam','mantenham'],
+        'gerundio': ['mantendo', 'mantendo', 'mantendo', 'mantendo', 'mantendo', 'mantendo'],
+        'particípio': ['mantido','mantido','mantido','mantidos','mantidas','mantidos'],
+        'infinitivo': ['manter'],
+        'infinitivo-pessoal': ['manter','manteres','manter','mantermos','manterdes','manterem']
+    },
+    'melhorar': {
+        'presente': ['melhoro','melhoras','melhora','melhoramos','melhorais','melhoram'],
+        'preterito-perfeito': ['melhorei','melhoraste','melhorou','melhoramos','melhorastes','melhoraram'],
+        'preterito-imperfeito': ['melhorava','melhoravas','melhorava','melhorávamos','melhoráveis','melhoravam'],
+        'preterito-mais-que-perfeito': ['melhorara','melhoraras','melhorara','melhoráramos','melhoráreis','melhoraram'],
+        'futuro-do-indicativo': ['melhorarei','melhorarás','melhorará','melhoraremos','melhorareis','melhorarão'],
+        'futuro-do-pretérito (condicional)': ['melhoraria','melhorarias','melhoraria','melhoraríamos','melhoraríeis','melhorariam'],
+        'presente-perfeito': ['tenho melhorado','tens melhorado','tem melhorado','temos melhorado','tendes melhorado','têm melhorado'],
+        'mais-que-perfeito-composto': ['tinha melhorado','tinhas melhorado','tinha melhorado','tínhamos melhorado','tínheis melhorado','tinham melhorado'],
+        'presente-do-subjuntivo': ['melhore','melhores','melhore','melhoremos','melhoreis','melhorem'],
+        'preterito-imperfeito-do-subjuntivo': ['melhorasse','melhorasses','melhorasse','melhorássemos','melhorásseis','melhorassem'],
+        'futuro-do-subjuntivo': ['melhorar','melhores','melhorar','melhorarmos','melhorardes','melhorarem'],
+        'imperativo': ['-','melhora','melhore','melhoremos','melhorem','melhorem'],
+        'gerundio': ['melhorando', 'melhorando', 'melhorando', 'melhorando', 'melhorando', 'melhorando'],
+        'participo': ['melhorado','melhorado','melhorado','melhorados','melhoradas','melhorados'],
+        'infinitivo': ['melhorar'],
+        'infinitivo-pessoal': ['melhorar','melhorares','melhorar','melhorarmos','melhorardes','melhorarem']
+    },
+    'monitorar': {
+        'presente': ['monitoro','monitoras','monitora','monitoramos','monitorais','monitoram'],
+        'preterito-perfeito': ['monitorei','monitoraste','monitorou','monitorámos','monitorastes','monitoraram'],
+        'preterito-imperfeito': ['monitorava','monitoravas','monitorava','monitorávamos','monitoráveis','monitoravam'],
+        'preterito-mais-que-perfeito': ['monitorara','monitoraras','monitorara','monitoráramos','monitoráreis','monitoraram'],
+        'futuro-do-indicativo': ['monitorarei','monitorarás','monitorará','monitoraremos','monitorareis','monitorarão'],
+        'futuro-do-pretérito (condicional)': ['monitoraria','monitorarias','monitoraria','monitoraríamos','monitoraríeis','monitorariam'],
+        'presente-perfeito': ['tenho monitorado','tens monitorado','tem monitorado','temos monitorado','tendes monitorado','têm monitorado'],
+        'mais-que-perfeito-composto': ['tinha monitorado','tinhas monitorado','tinha monitorado','tínhamos monitorado','tínheis monitorado','tinham monitorado'],
+        'presente-do-subjuntivo': ['monitore','monitores','monitore','monitoremos','monitoreis','monitorem'],
+        'preterito-imperfeito-do-subjuntivo': ['monitorasse','monitorasses','monitorasse','monitorássemos','monitorásseis','monitorassem'],
+        'futuro-do-subjuntivo': ['monitorar','monitorares','monitorar','monitorarmos','monitorardes','monitorarem'],
+        'imperativo': ['-','monitora','monitore','monitoremos','monitorem','monitorem'],
+        'gerundio': ['monitorando', 'monitorando', 'monitorando', 'monitorando', 'monitorando', 'monitorando'],
+        'participo': ['monitorado','monitorado','monitorado','monitorados','monitoradas','monitorados'],
+        'infinitivo': ['monitorar'],
+        'infinitivo-pessoal': ['monitorar','monitorares','monitorar','monitorarmos','monitorardes','monitorarem']
+    },
+    'mudar': {
+        'presente': ['mudo','mudas','muda','mudamos','mudais','mudam'],
+        'preterito-perfeito': ['mudei','mudaste','mudou','mudámos','mudastes','mudaram'],
+        'preterito-imperfeito': ['mudava','mudavas','mudava','mudávamos','mudáveis','mudavam'],
+        'preterito-mais-que-perfeito': ['mudara','mudaras','mudara','mudáramos','mudáreis','mudaram'],
+        'futuro-do-indicativo': ['mudarei','mudarás','mudará','mudaremos','mudareis','mudarão'],
+        'futuro-perfeito': ['terei mudado','terás mudado','terá mudado','teremos mudado','tereis mudado','terão mudado'],
+        'condicional': ['mudaria','mudarias','mudaria','mudaríamos','mudaríeis','mudariam'],
+        'condicional-perfeito': ['teria mudado','terias mudado','teria mudado','teríamos mudado','teríeis mudado','teriam mudado'],
+        'presente-perfeito': ['tenho mudado','tens mudado','tem mudado','temos mudado','tendes mudado','têm mudado'],
+        'mais-que-perfeito-composto': ['tinha mudado','tinhas mudado','tinha mudado','tínhamos mudado','tínheis mudado','tinham mudado'],
+        'presente-do-subjuntivo': ['mude','mudes','mude','mudemos','mudeis','mudem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha mudado','tenhas mudado','tenha mudado','tenhamos mudado','tenhais mudado','tenham mudado'],
+        'preterito-imperfeito-do-subjuntivo': ['mudasse','mudasses','mudasse','mudássemos','mudásseis','mudassem'],
+        'futuro-do-subjuntivo': ['mudar','mudares','mudar','mudarmos','mudares','mudarem'],
+        'imperativo': ['-','muda','mude','mudemos','mudem','mudem'],
+        'gerundio': ['mudando', 'mudando', 'mudando', 'mudando', 'mudando', 'mudando'],
+        'participo': ['mudado','mudado','mudado','mudados','mudadas','mudados'],
+        'infinitivo': ['mudar'],
+        'infinitivo-pessoal': ['mudar','mudares','mudar','mudarmos','mudardes','mudarem']
+    },
+    'negar': {
+        'presente': ['nego','negas','nega','negamos','negais','negam'],
+        'preterito-perfeito': ['neguei','negaste','negou','negámos','negastes','negaram'],
+        'preterito-imperfeito': ['negava','negavas','negava','negávamos','negáveis','negavam'],
+        'preterito-mais-que-perfeito': ['negara','negaras','negara','negáramos','negáreis','negaram'],
+        'futuro-do-indicativo': ['negarei','negarás','negará','negaremos','negareis','negarão'],
+        'condicional': ['negaria','negarias','negaria','negaríamos','negaríeis','negariam'],
+        'presente-perfeito': ['tenho negado','tens negado','tem negado','temos negado','tendes negado','têm negado'],
+        'mais-que-perfeito-composto': ['tinha negado','tinhas negado','tinha negado','tínhamos negado','tínheis negado','tinham negado'],
+        'presente-do-subjuntivo': ['negue','negues','negue','neguemos','negueis','neguem'],
+        'preterito-perfeito-do-subjuntivo': ['negara','negaras','negara','negáramos','negáreis','negaram'],
+        'preterito-imperfeito-do-subjuntivo': ['negasse','negasses','negasse','negássemos','negásseis','negassem'],
+        'futuro-do-subjuntivo': ['negar','negares','negar','negarmos','negardes','negarem'],
+        'imperativo': ['-','nega','negue','neguemos','negai','neguem'],
+        'gerundio': ['negando', 'negando', 'negando', 'negando', 'negando', 'negando'],
+        'particípio': ['negado','negado','negado','negados','negadas','negados'],
+        'infinitivo': ['negar'],
+        'infinitivo-pessoal': ['negar','negares','negar','negarmos','negardes','negarem']
+    },
+    'observar': {
+        'presente': ['observo','observas','observa','observamos','observais','observam'],
+        'preterito-perfeito': ['observei','observaste','observou','observámos','observastes','observaram'],
+        'preterito-imperfeito': ['observava','observavas','observava','observávamos','observáveis','observavam'],
+        'preterito-mais-que-perfeito': ['observara','observaras','observara','observáramos','observáreis','observaram'],
+        'futuro-do-indicativo': ['observarei','observarás','observará','observaremos','observareis','observarão'],
+        'condicional': ['observaria','observarias','observaria','observaríamos','observaríeis','observariam'],
+        'presente-perfeito': ['tenho observado','tens observado','tem observado','temos observado','tendes observado','têm observado'],
+        'mais-que-perfeito-composto': ['tinha observado','tinhas observado','tinha observado','tínhamos observado','tínheis observado','tinham observado'],
+        'presente-do-subjuntivo': ['observe','observes','observe','observemos','observeis','observem'],
+        'preterito-perfeito-do-subjuntivo': ['observara','observaras','observara','observáramos','observáreis','observaram'],
+        'preterito-imperfeito-do-subjuntivo': ['observasse','observasses','observasse','observássemos','observásseis','observassem'],
+        'futuro-do-subjuntivo': ['observar','observares','observar','observarmos','observardes','observarem'],
+        'imperativo': ['-','observa','observe','observemos','observai','observem'],
+        'gerundio': ['observando', 'observando', 'observando', 'observando', 'observando', 'observando'],
+        'particípio': ['observado','observado','observado','observados','observadas','observados'],
+        'infinitivo': ['observar'],
+        'infinitivo-pessoal': ['observar','observares','observar','observarmos','observardes','observarem']
+    },
+    'organizar': {
+        'presente': ['organizo','organizas','organiza','organizamos','organizais','organizam'],
+        'preterito-perfeito': ['organizei','organizaste','organizou','organizámos','organizastes','organizaram'],
+        'preterito-imperfeito': ['organizava','organizavas','organizava','organizávamos','organizáveis','organizavam'],
+        'preterito-mais-que-perfeito': ['organizara','organizaras','organizara','organizáramos','organizáreis','organizaram'],
+        'futuro-do-indicativo': ['organizarei','organizarás','organizará','organizaremos','organizareis','organizarão'],
+        'futuro-perfeito': ['terei organizado','terás organizado','terá organizado','teremos organizado','tereis organizado','terão organizado'],
+        'condicional': ['organizaria','organizarias','organizaria','organizaríamos','organizaríeis','organizariam'],
+        'condicional-perfeito': ['teria organizado','terias organizado','teria organizado','teríamos organizado','teríeis organizado','teriam organizado'],
+        'presente-perfeito': ['tenho organizado','tens organizado','tem organizado','temos organizado','tendes organizado','têm organizado'],
+        'mais-que-perfeito-composto': ['tinha organizado','tinhas organizado','tinha organizado','tínhamos organizado','tínheis organizado','tinham organizado'],
+        'presente-do-subjuntivo': ['organize','organizes','organize','organizemos','organizeis','organizem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha organizado','tenhas organizado','tenha organizado','tenhamos organizado','tenhais organizado','tenham organizado'],
+        'preterito-imperfeito-do-subjuntivo': ['organizasse','organizasses','organizasse','organizássemos','organizásseis','organizassem'],
+        'futuro-do-subjuntivo': ['organizar','organizares','organizar','organizarmos','organizardes','organizarem'],
+        'imperativo': ['-','organiza','organize','organizemos','organizai','organizem'],
+        'gerundio': ['organizando', 'organizando', 'organizando', 'organizando', 'organizando', 'organizando'],
+        'particípio': ['organizado','organizado','organizado','organizados','organizadas','organizados'],
+        'infinitivo': ['organizar'],
+        'infinitivo-pessoal': ['organizar','organizares','organizar','organizarmos','organizardes','organizarem']
+    },
+    'participar': {
+        'presente': ['participo','participas','participa','participamos','participais','participam'],
+        'preterito-perfeito': ['participei','participaste','participou','participámos','participastes','participaram'],
+        'preterito-imperfeito': ['participava','participavas','participava','participávamos','participáveis','participavam'],
+        'preterito-mais-que-perfeito': ['participara','participaras','participara','participáramos','participáreis','participaram'],
+        'futuro-do-indicativo': ['participarei','participarás','participará','participaremos','participareis','participarão'],
+        'futuro-perfeito': ['terei participado','terás participado','terá participado','teremos participado','tereis participado','terão participado'],
+        'condicional': ['participaria','participarias','participaria','participaríamos','participaríeis','participariam'],
+        'condicional-perfeito': ['teria participado','terias participado','teria participado','teríamos participado','teríeis participado','teriam participado'],
+        'presente-perfeito': ['tenho participado','tens participado','tem participado','temos participado','tendes participado','têm participado'],
+        'mais-que-perfeito-composto': ['tinha participado','tinhas participado','tinha participado','tínhamos participado','tínheis participado','tinham participado'],
+        'presente-do-subjuntivo': ['participe','participes','participe','participemos','participeis','participem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha participado','tenhas participado','tenha participado','tenhamos participado','tenhais participado','tenham participado'],
+        'preterito-imperfeito-do-subjuntivo': ['participasse','participasses','participasse','participássemos','participásseis','participassem'],
+        'futuro-do-subjuntivo': ['participar','participares','participar','participarmos','participardes','participarem'],
+        'imperativo': ['-','participa','participe','participemos','participai','participem'],
+        'gerundio': ['participando', 'participando', 'participando', 'participando', 'participando', 'participando'],
+        'particípio': ['participado','participado','participado','participados','participadas','participados'],
+        'infinitivo': ['participar'],
+        'infinitivo-pessoal': ['participar','participares','participar','participarmos','participardes','participarem']
+    },
+    'perder': {
+        'presente': ['perco','perdes','perde','perdemos','perdeis','perdem'],
+        'preterito-perfeito': ['perdi','perdeste','perdeu','perdemos','perdestes','perderam'],
+        'preterito-imperfeito': ['perdia','perdias','perdia','perdíamos','perdíeis','perdiam'],
+        'preterito-mais-que-perfeito': ['perdera','perderas','perdera','perdêramos','perdêreis','perderam'],
+        'futuro-do-indicativo': ['perderei','perderás','perderá','perderemos','perdereis','perderão'],
+        'futuro-perfeito': ['terei perdido','terás perdido','terá perdido','teremos perdido','tereis perdido','terão perdido'],
+        'futuro-do-preterito (condicional)': ['perderia','perderias','perderia','perderíamos','perderíeis','perderiam'],
+        'condicional-perfeito': ['teria perdido','terias perdido','teria perdido','teríamos perdido','teríeis perdido','teriam perdido'],
+        'presente-perfeito': ['tenho perdido','tens perdido','tem perdido','temos perdido','tendes perdido','têm perdido'],
+        'mais-que-perfeito-composto': ['tinha perdido','tinhas perdido','tinha perdido','tínhamos perdido','tínheis perdido','tinham perdido'],
+        'presente-do-subjuntivo': ['perca','percas','perca','percamos','percais','percam'],
+        'preterito-perfeito-do-subjuntivo': ['tenha perdido','tenhas perdido','tenha perdido','tenhamos perdido','tenhais perdido','tenham perdido'],
+        'preterito-imperfeito-do-subjuntivo': ['perdesse','perdesses','perdesse','perdêssemos','perdêsseis','perdessem'],
+        'futuro-do-subjuntivo': ['perder','perderes','perder','perdermos','perderdes','perderem'],
+        'imperativo': ['-','perde','perca','percamos','perdei','percam'],
+        'gerundio': ['perdendo', 'perdendo', 'perdendo', 'perdendo', 'perdendo', 'perdendo'],
+        'particípio': ['perdido','perdido','perdido','perdidos','perdidas','perdidos'],
+        'infinitivo': ['perder'],
+        'infinitivo-pessoal': ['perder','perderes','perder','perdermos','perderdes','perderem']
+    },
+    'pensar': {
+        'presente': ['penso', 'pensas', 'pensa', 'pensamos', 'pensais', 'pensam'],
+        'preterito-perfeito': ['pensei', 'pensaste', 'pensou', 'pensámos', 'pensastes', 'pensaram'],
+        'preterito-imperfeito': ['pensava', 'pensavas', 'pensava', 'pensávamos', 'pensáveis', 'pensavam'],
+        'preterito-mais-que-perfeito': ['pensara', 'pensaras', 'pensara', 'pensáramos', 'pensáreis', 'pensaram'],
+        'futuro-do-indicativo': ['pensarei', 'pensarás', 'pensará', 'pensaremos', 'pensareis', 'pensarão'],
+        'futuro-perfeito': ['terei pensado', 'terás pensado', 'terá pensado', 'teremos pensado', 'tereis pensado', 'terão pensado'],
+        'condicional': ['pensaria', 'pensarias', 'pensaria', 'pensaríamos', 'pensaríeis', 'pensariam'],
+        'condicional-perfeito': ['teria pensado', 'terias pensado', 'teria pensado', 'teríamos pensado', 'teríeis pensado', 'teriam pensado'],
+        'presente-perfeito': ['tenho pensado', 'tens pensado', 'tem pensado', 'temos pensado', 'tendes pensado', 'têm pensado'],
+        'mais-que-perfeito-composto': ['tinha pensado', 'tinhas pensado', 'tinha pensado', 'tínhamos pensado', 'tínheis pensado', 'tinham pensado'],
+        'presente-do-subjuntivo': ['pense', 'penses', 'pense', 'pensemos', 'penseis', 'pensem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha pensado', 'tenhas pensado', 'tenha pensado', 'tenhamos pensado', 'tenhais pensado', 'tenham pensado'],
+        'preterito-imperfeito-do-subjuntivo': ['pensasse', 'pensasses', 'pensasse', 'pensássemos', 'pensásseis', 'pensassem'],
+        'futuro-do-subjuntivo': ['pensar', 'pensares', 'pensar', 'pensarmos', 'pensardes', 'pensarem'],
+        'imperativo': ['-', 'pensa', 'pense', 'pensemos', 'pensai', 'pensem'],
+        'gerundio': ['pensando', 'pensando', 'pensando', 'pensando', 'pensando', 'pensando'],
+        'particípio': ['pensado', 'pensado', 'pensado', 'pensados', 'pensadas', 'pensados'],
+        'infinitivo': ['pensar'],
+        'infinitivo-pessoal': ['pensar', 'pensares', 'pensar', 'pensarmos', 'pensardes', 'pensarem']
+    },
+    'preparar': {
+        'presente': ['preparo', 'preparas', 'prepara', 'preparamos', 'preparais', 'preparam'],
+        'preterito-perfeito': ['preparei', 'preparaste', 'preparou', 'preparamos', 'preparastes', 'prepararam'],
+        'preterito-imperfeito': ['preparava', 'preparavas', 'preparava', 'preparávamos', 'preparáveis', 'preparavam'],
+        'preterito-mais-que-perfeito': ['preparara', 'prepararas', 'preparara', 'preparáramos', 'preparáreis', 'prepararam'],
+        'futuro-do-indicativo': ['prepararei', 'prepararás', 'preparará', 'prepararemos', 'preparareis', 'prepararão'],
+        'futuro-perfeito': ['terei preparado', 'terás preparado', 'terá preparado', 'teremos preparado', 'tereis preparado', 'terão preparado'],
+        'condicional': ['prepararia', 'prepararias', 'prepararia', 'prepararíamos', 'prepararíeis', 'preparariam'],
+        'condicional-perfeito': ['teria preparado', 'terias preparado', 'teria preparado', 'teríamos preparado', 'teríeis preparado', 'teriam preparado'],
+        'presente-perfeito': ['tenho preparado', 'tens preparado', 'tem preparado', 'temos preparado', 'tendes preparado', 'têm preparado'],
+        'mais-que-perfeito-composto': ['tinha preparado', 'tinhas preparado', 'tinha preparado', 'tínhamos preparado', 'tínheis preparado', 'tinham preparado'],
+        'presente-do-subjuntivo': ['prepare', 'prepares', 'prepare', 'preparemos', 'prepareis', 'preparem'],
+        'preterito-imperfeito-do-subjuntivo': ['preparasse', 'preparasses', 'preparasse', 'preparássemos', 'preparásseis', 'preparassem'],
+        'futuro-do-subjuntivo': ['preparar', 'preparares', 'preparar', 'prepararmos', 'preparardes', 'prepararem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha preparado', 'tenhas preparado', 'tenha preparado', 'tenhamos preparado', 'tenhais preparado', 'tenham preparado'],
+        'imperativo': ['-', 'prepara', 'prepare', 'preparemos', 'preparem', 'preparem'],
+        'gerundio': ['preparando', 'preparando', 'preparando', 'preparando', 'preparando', 'preparando'],
+        'particípio': ['preparado', 'preparado', 'preparado', 'preparados', 'preparadas', 'preparados'],
+        'infinitivo': ['preparar'],
+        'infinitivo-pessoal': ['preparar', 'preparares', 'preparar', 'prepararmos', 'preparardes', 'prepararem']
+    },
+    'prestar': {
+        'presente': ['presto', 'prestas', 'presta', 'prestamos', 'prestais', 'prestam'],
+        'preterito-perfeito': ['prestei', 'prestaste', 'prestou', 'prestámos', 'prestastes', 'prestaram'],
+        'preterito-imperfeito': ['prestava', 'prestavas', 'prestava', 'prestávamos', 'prestáveis', 'prestavam'],
+        'preterito-mais-que-perfeito': ['prestara', 'prestaras', 'prestara', 'prestáramos', 'prestáreis', 'prestaram'],
+        'futuro-do-indicativo': ['prestarei', 'prestarás', 'prestará', 'prestaremos', 'prestareis', 'prestarão'],
+        'condicional': ['prestaria', 'prestarías', 'prestaria', 'prestaríamos', 'prestaríeis', 'prestariam'],
+        'presente-perfeito': ['tenho prestado', 'tens prestado', 'tem prestado', 'temos prestado', 'tendes prestado', 'têm prestado'],
+        'mais-que-perfeito-composto': ['tinha prestado', 'tinhas prestado', 'tinha prestado', 'tínhamos prestado', 'tínheis prestado', 'tinham prestado'],
+        'presente-do-subjuntivo': ['preste', 'prestes', 'preste', 'prestemos', 'presteis', 'prestem'],
+        'preterito-imperfeito-do-subjuntivo': ['prestasse', 'prestasses', 'prestasse', 'prestássemos', 'prestásseis', 'prestassem'],
+        'futuro-do-subjuntivo': ['prestar', 'prestares', 'prestar', 'prestarmos', 'prestardes', 'prestarem'],
+        'imperativo': ['-', 'presta', 'preste', 'prestemos', 'prestem', 'prestem'],
+        'gerundio': ['prestando', 'prestando', 'prestando', 'prestando', 'prestando', 'prestando'],
+        'particípio': ['prestado', 'prestado', 'prestado', 'prestados', 'prestadas', 'prestados'],
+        'infinitivo': ['prestar'],
+        'infinitivo-pessoal': ['prestar', 'prestares', 'prestar', 'prestarmos', 'prestardes', 'prestarem']
+    },
+    'proteger': {
+        'presente': ['protejo', 'proteges', 'protege', 'protegemos', 'protegeis', 'protegem'],
+        'preterito-perfeito': ['protegi', 'protegeste', 'protegeu', 'protegemos', 'protegestes', 'protegeram'],
+        'preterito-imperfeito': ['protegía', 'protegies', 'protegia', 'protegíamos', 'protegíeis', 'protegiam'],
+        'preterito-mais-que-perfeito': ['protegera', 'protegeras', 'protegera', 'protegéramos', 'protegéreis', 'protegeram'],
+        'futuro-do-indicativo': ['protegerei', 'protegerás', 'protegerá', 'protegeremos', 'protergereis', 'protegerão'],
+        'futuro-perfeito': ['terei protegido', 'terás protegido', 'terá protegido', 'teremos protegido', 'tereis protegido', 'terão protegido'],
+        'condicional': ['protegeria', 'protegerias', 'protegeria', 'protegeríamos', 'protegeríeis', 'protegeriam'],
+        'condicional-perfeito': ['teria protegido', 'terias protegido', 'teria protegido', 'teríamos protegido', 'teríeis protegido', 'teriam protegido'],
+        'presente-perfeito': ['tenho protegido', 'tens protegido', 'tem protegido', 'temos protegido', 'tendes protegido', 'têm protegido'],
+        'mais-que-perfeito-composto': ['tinha protegido', 'tinhas protegido', 'tinha protegido', 'tínhamos protegido', 'tínheis protegido', 'tinham protegido'],
+        'presente-do-subjuntivo': ['proteja', 'protejas', 'proteja', 'protejamos', 'protejais', 'protejam'],
+        'preterito-perfeito-do-subjuntivo': ['tenha protegido', 'tenhas protegido', 'tenha protegido', 'tenhamos protegido', 'tenhais protegido', 'tenham protegido'],
+        'preterito-imperfeito-do-subjuntivo': ['protegesse', 'protegesses', 'protegesse', 'protegêssemos', 'protegêsseis', 'protegessem'],
+        'futuro-do-subjuntivo': ['proteger', 'protegeres', 'proteger', 'protegermos', 'protegerdes', 'protegerem'],
+        'imperativo': ['-', 'protege', 'proteja', 'protejamos', 'protegei', 'protejam'],
+        'gerundio': ['protegendo', 'protegendo', 'protegendo', 'protegendo', 'protegendo', 'protegendo'],
+        'particípio': ['protegido', 'protegido', 'protegido', 'protegidos', 'protegidas', 'protegidos'],
+        'infinitivo': ['proteger'],
+        'infinitivo-pessoal': ['proteger', 'protegeres', 'proteger', 'protegermos', 'protegerdes', 'protegerem']
+    },
+    'provar': {
+        'presente': ['provo', 'provas', 'prova', 'provamos', 'provais', 'provam'],
+        'preterito-perfeito': ['provei', 'provaste', 'provou', 'provámos', 'provastes', 'provaram'],  
+        'preterito-imperfeito': ['provava', 'provavas', 'provava', 'provávamos', 'prováveis', 'provavam'],  
+        'preterito-mais-que-perfeito': ['provara', 'provaras', 'provara', 'prováramos', 'prováreis', 'provaram'],  
+        'futuro-do-indicativo': ['provarei', 'provarás', 'provará', 'provaremos', 'provaréis', 'provarão'],  
+        'futuro-perfeito': ['terei provado', 'terás provado', 'terá provado', 'teremos provado', 'tereis provado', 'terão provado'],  
+        'condicional': ['provaria', 'provarias', 'provaria', 'provaríamos', 'provaríeis', 'provariam'],  
+        'condicional-perfeito': ['teria provado', 'terias provado', 'teria provado', 'teríamos provado', 'teríeis provado', 'teriam provado'],  
+        'presente-perfeito': ['tenho provado', 'tens provado', 'tem provado', 'temos provado', 'tendes provado', 'têm provado'],  
+        'mais-que-perfeito-composto': ['tinha provado', 'tinhas provado', 'tinha provado', 'tínhamos provado', 'tínheis provado', 'tinham provado'],  
+        'presente-do-subjuntivo': ['prove', 'proves', 'prove', 'provemos', 'proveis', 'provem'],  
+        'preterito-perfeito-do-subjuntivo': ['tenha provado', 'tenhas provado', 'tenha provado', 'tenhamos provado', 'tenhais provado', 'tenham provado'],  
+        'preterito-imperfeito-do-subjuntivo': ['provasse', 'provasses', 'provasse', 'provássemos', 'provásseis', 'provassem'],  
+        'futuro-do-subjuntivo': ['provar', 'provares', 'provar', 'provarmos', 'provardes', 'provarem'],
+        'imperativo': ['-', 'prova', 'prove', 'provemos', 'provem', 'provem'],  
+        'gerundio': ['provando', 'provando', 'provando', 'provando', 'provando', 'provando'],  
+        'particípio': ['provado', 'provado', 'provado', 'provados', 'provadas', 'provados'],  
+        'infinitivo': ['provar'],  
+        'infinitivo-pessoal': ['provar', 'provares', 'provar', 'provarmos', 'provardes', 'provarem']  
+    },
+    'quebrar': {
+        'presente': ['quebro', 'quebras', 'quebra', 'quebramos', 'quebrais', 'quebram'], 
+        'preterito-perfeito': ['quebrei', 'quebraste', 'quebrou', 'quebramos', 'quebrastes', 'quebraram'],
+        'preterito-imperfeito': ['quebrava', 'quebravas', 'quebrava', 'quebrávamos', 'quebráveis', 'quebravam'],
+        'preterito-mais-que-perfeito': ['quebrara', 'quebraras', 'quebrara', 'quebráramos', 'quebráreis', 'quebraram'], 
+        'futuro-do-indicativo': ['quebrarei', 'quebrarás', 'quebrará', 'quebraremos', 'quebrareis', 'quebrarão'], 
+        'futuro-perfeito': ['terei quebrado', 'terás quebrado', 'terá quebrado', 'teremos quebrado', 'tereis quebrado', 'terão quebrado'],
+        'condicional': ['quebraria', 'quebrarias', 'quebraria', 'quebraríamos', 'quebraríeis', 'quebrariam'], 
+        'condicional-perfeito': ['teria quebrado', 'terias quebrado', 'teria quebrado', 'teríamos quebrado', 'teríeis quebrado', 'teriam quebrado'],
+        'presente-perfeito': ['tenho quebrado', 'tens quebrado', 'tem quebrado', 'temos quebrado', 'tendes quebrado', 'têm quebrado'], 
+        'mais-que-perfeito-composto': ['tinha quebrado', 'tinhas quebrado', 'tinha quebrado', 'tínhamos quebrado', 'tínheis quebrado', 'tinham quebrado'], 
+        'presente-do-subjuntivo': ['quebre', 'quebres', 'quebre', 'quebremos', 'quebreis', 'quebrem'], 
+        'preterito-imperfeito-do-subjuntivo': ['quebrasse', 'quebrasses', 'quebrasse', 'quebrássemos', 'quebrásseis', 'quebrassem'], 
+        'preterito-perfeito-do-subjuntivo': ['tenha quebrado', 'tenhas quebrado', 'tenha quebrado', 'tenhamos quebrado', 'tenhais quebrado', 'tenham quebrado'],
+        'futuro-do-subjuntivo': ['quebrar', 'quebrares', 'quebrar', 'quebrarmos', 'quebrardes', 'quebrarem'], 
+        'imperativo': ['-', 'quebra', 'quebre', 'quebremos', 'quebrai', 'quebrem'], 
+        'gerundio': ['quebrando', 'quebrando', 'quebrando', 'quebrando', 'quebrando', 'quebrando'], 
+        'particípio': ['quebrado', 'quebrado', 'quebrado', 'quebrados', 'quebradas', 'quebrados'], 
+        'infinitivo': ['quebrar'], 
+        'infinitivo-pessoal': ['quebrar', 'quebrares', 'quebrar', 'quebrarmos', 'quebrardes', 'quebrarem'],
+
+    },
+    'recomendar': {
+        'presente': ['recomendo', 'recomendas', 'recomenda', 'recomendamos', 'recomendais', 'recomendam'],
+        'preterito-perfeito': ['recomendei', 'recomendaste', 'recomendou', 'recomendámos', 'recomendastes', 'recomendaram'],
+        'preterito-imperfeito': ['recomendava', 'recomendavas', 'recomendava', 'recomendávamos', 'recomendáveis', 'recomendavam'],
+        'preterito-mais-que-perfeito': ['recomendarara', 'recomendaras', 'recomendarara', 'recomendáramos', 'recomendáreis', 'recomendaram'],
+        'futuro-do-indicativo': ['recomendarei', 'recomendarás', 'recomendará', 'recomendaremos', 'recomendareis', 'recomendarão'],
+        'condicional': ['recomendaria', 'recomendarias', 'recomendaria', 'recomendaríamos', 'recomendaríeis', 'recomendariam'],
+        'presente-perfeito': ['tenho recomendado', 'tens recomendado', 'tem recomendado', 'temos recomendado', 'tendes recomendado', 'têm recomendado'],
+        'mais-que-perfeito-composto': ['tinha recomendado', 'tinhas recomendado', 'tinha recomendado', 'tínhamos recomendado', 'tínheis recomendado', 'tinham recomendado'],
+        'presente-do-subjuntivo': ['recomende', 'recomendes', 'recomende', 'recomendemos', 'recomendeis', 'recomendem'],
+        'preterito-imperfeito-do-subjuntivo': ['recomendasse', 'recomendasses', 'recomendasse', 'recomendássemos', 'recomendásseis', 'recomendassem'],
+        'futuro-do-subjuntivo': ['recomendar', 'recomendares', 'recomendar', 'recomendarmos', 'recomendardes', 'recomendarem'],
+        'imperativo': ['-', 'recomenda', 'recomende', 'recomendemos', 'recomendem', 'recomendem'],
+        'gerundio': ['recomendando', 'recomendando', 'recomendando', 'recomendando', 'recomendando', 'recomendando'],
+        'particípio': ['recomendado', 'recomendado', 'recomendado', 'recomendados', 'recomendadas', 'recomendados'],
+        'infinitivo': ['recomendar'],
+        'infinitivo-pessoal': ['recomendar', 'recomendares', 'recomendar', 'recomendarmos', 'recomendardes', 'recomendarem']
+    },
+    'recordar': {
+        'presente': ['recordo', 'recordas', 'recorda', 'recordamos', 'recordais', 'recordam'],
+        'preterito-perfeito': ['recordei', 'recordaste', 'recordou', 'recordámos', 'recordastes', 'recordaram'],
+        'preterito-imperfeito': ['recordava', 'recordavas', 'recordava', 'recordávamos', 'recordáveis', 'recordavam'],
+        'preterito-mais-que-perfeito': ['recordara', 'recordaras', 'recordara', 'recordáramos', 'recordáreis', 'recordaram'],
+        'futuro-do-indicativo': ['recordarei', 'recordarás', 'recordará', 'recordaremos', 'recordareis', 'recordarão'],
+        'condicional': ['recordaria', 'recordarias', 'recordaria', 'recordaríamos', 'recordaríeis', 'recordariam'],
+        'presente-perfeito': ['tenho recordado', 'tens recordado', 'tem recordado', 'temos recordado', 'tendes recordado', 'têm recordado'],
+        'mais-que-perfeito-composto': ['tinha recordado', 'tinhas recordado', 'tinha recordado', 'tínhamos recordado', 'tínheis recordado', 'tinham recordado'],
+        'subjuntivo-presente': ['recorde', 'recordes', 'recorde', 'recordemos', 'recordeis', 'recordem'],
+        'subjuntivo-imperfeito': ['recordasse', 'recordasses', 'recordasse', 'recordássemos', 'recordásseis', 'recordassem'],
+        'subjuntivo-futuro': ['recordar', 'recordares', 'recordar', 'recordarmos', 'recordardes', 'recordarem'],
+        'imperativo': ['-', 'recorda', 'recorde', 'recordemos', 'recordem', 'recordem'],
+        'gerundio': ['recordando', 'recordando', 'recordando', 'recordando', 'recordando', 'recordando'],
+        'particípio': ['recordado', 'recordado', 'recordado', 'recordados', 'recordadas', 'recordados'],
+        'infinitivo': ['recordar'],
+        'infinitivo-pessoal': ['recordar', 'recordares', 'recordar', 'recordarmos', 'recordardes', 'recordarem']
+    },
+    'regulamentar': {
+        'presente': ['regulamento', 'regulamentas', 'regulamenta', 'regulamentamos', 'regulamentais', 'regulamentam'],
+        'preterito-perfeito': ['regulamentei', 'regulamentaste', 'regulamentou', 'regulamentamos', 'regulamentastes', 'regulamentaram'],
+        'preterito-imperfeito': ['regulamentava', 'regulamentavas', 'regulamentava', 'regulamentávamos', 'regulamentáveis', 'regulamentavam'],
+        'preterito-mais-que-perfeito': ['regulamentara', 'regulamentaras', 'regulamentara', 'regulamentáramos', 'regulamentáreis', 'regulamentaram'],
+        'futuro-do-indicativo': ['regulamentarei', 'regulamentarás', 'regulamentará', 'regulamentaremos', 'regulamentareis', 'regulamentarão'],
+        'condicional': ['regulamentaria', 'regulamentarias', 'regulamentaria', 'regulamentaríamos', 'regulamentaríeis', 'regulamentariam'],
+        'presente-perfeito': ['tenho regulamentado', 'tens regulamentado', 'tem regulamentado', 'temos regulamentado', 'tendes regulamentado', 'têm regulamentado'],
+        'mais-que-perfeito-composto': ['tinha regulamentado', 'tinhas regulamentado', 'tinha regulamentado', 'tínhamos regulamentado', 'tínheis regulamentado', 'tinham regulamentado'],
+        'presente-do-subjuntivo': ['regulamente', 'regulamentes', 'regulamente', 'regulamentemos', 'regulamenteis', 'regulamentem'],
+        'subjuntivo-imperfeito': ['regulamentasse', 'regulamentasses', 'regulamentasse', 'regulamentássemos', 'regulamentásseis', 'regulamentassem'],
+        'futuro-do-subjuntivo': ['regulamentar', 'regulamentares', 'regulamentar', 'regulamentarmos', 'regulamentardes', 'regulamentarem'],
+        'imperativo': ['-', 'regulamenta', 'regulamente', 'regulamentemos', 'regulamentem', 'regulamentem'],
+        'gerundio': ['regulamentando', 'regulamentando', 'regulamentando', 'regulamentando', 'regulamentando', 'regulamentando'],
+        'particípio': ['regulamentado', 'regulamentado', 'regulamentado', 'regulamentados', 'regulamentadas', 'regulamentados'],
+        'infinitivo': ['regulamentar'],
+        'infinitivo-pessoal': ['regulamentar', 'regulamentares', 'regulamentar', 'regulamentarmos', 'regulamentardes', 'regulamentarem']
+    },
+    'reparar': {
+        'presente': ['reparo', 'reparas', 'repara', 'reparamos', 'reparais', 'reparam'],
+        'preterito-perfeito': ['reparei', 'reparaste', 'reparou', 'reparamos', 'reparastes', 'repararam'],
+        'preterito-imperfeito': ['reparava', 'reparavas', 'reparava', 'reparávamos', 'reparáveis', 'reparavam'],
+        'preterito-mais-que-perfeito': ['reparara', 'repararas', 'reparara', 'reparáramos', 'reparáreis', 'repararam'],
+        'futuro-do-indicativo': ['repararei', 'repararás', 'reparará', 'repararemos', 'reparareis', 'repararão'],
+        'condicional': ['repararia', 'repararias', 'repararia', 'repararíamos', 'repararíeis', 'reparariam'],
+        'presente-perfeito': ['tenho reparado', 'tens reparado', 'tem reparado', 'temos reparado', 'tendes reparado', 'têm reparado'],
+        'mais-que-perfeito-composto': ['tinha reparado', 'tinhas reparado', 'tinha reparado', 'tínhamos reparado', 'tínheis reparado', 'tinham reparado'],
+        'presente-do-subjuntivo': ['repare', 'repares', 'repare', 'reparemos', 'repareis', 'reparem'],
+        'subjuntivo-imperfeito': ['reparasse', 'reparasses', 'reparasse', 'reparássemos', 'reparásseis', 'reparassem'],
+        'futuro-do-subjuntivo': ['reparar', 'reparares', 'reparar', 'repararmos', 'reparardes', 'repararem'],
+        'imperativo': ['-', 'repara', 'repare', 'reparemos', 'reparem', 'reparem'],
+        'gerundio': ['reparando', 'reparando', 'reparando', 'reparando', 'reparando', 'reparando'],
+        'particípio': ['reparado', 'reparado', 'reparado', 'reparados', 'reparadas', 'reparados'],
+        'infinitivo': ['reparar'],
+        'infinitivo-pessoal': ['reparar', 'reparares', 'reparar', 'repararmos', 'reparardes', 'repararem']
+    },
+    'resolver': {
+        'presente': ['resolver', 'resolves', 'resolve', 'resolvemos', 'resolveis', 'resolvem'],
+        'preterito-perfeito': ['resolvi', 'resolveste', 'resolveu', 'resolvemos', 'resolvestes', 'resolveram'],
+        'preterito-imperfeito': ['resolvía', 'resolvías', 'resolvía', 'resolvíamos', 'resolvíeis', 'resolvian'],
+        'preterito-mais-que-perfeito': ['resolvera', 'resolveras', 'resolvera', 'resolvéremos', 'resolvéreis', 'resolveram'],
+        'futuro-do-indicativo': ['resolvêrei', 'resolverás', 'resolverá', 'resolveremos', 'resolveis', 'resolverão'],
+        'futuro-perfeito': ['terei resolvido', 'terás resolvido', 'terá resolvido', 'teremos resolvido', 'tereis resolvido', 'terão resolvido'],
+        'condicional': ['resolveria', 'resolverias', 'resolveria', 'resolveríamos', 'resolveríeis', 'resolveriam'],
+        'condicional-perfeito': ['teria resolvido', 'terias resolvido', 'teria resolvido', 'teríamos resolvido', 'teríeis resolvido', 'teriam resolvido'],
+        'presente-perfeito': ['tenho resolvido', 'tens resolvido', 'tem resolvido', 'temos resolvido', 'tendes resolvido', 'têm resolvido'],
+        'mais-que-perfeito-composto': ['tinha resolvido', 'tinhas resolvido', 'tinha resolvido', 'tínhamos resolvido', 'tínheis resolvido', 'tinham resolvido'],
+        'presente-do-subjuntivo': ['resolva', 'resolvas', 'resolva', 'resolvamos', 'resolvais', 'resolvam'],
+        'preterito-imperfeito-do-subjuntivo': ['resolvesse', 'resolvesses', 'resolvesse', 'resolvêssemos', 'resolvêsseis', 'resolvessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha resolvido', 'tenhas resolvido', 'tenha resolvido', 'tenhamos resolvido', 'tenhais resolvido', 'tenham resolvido'],
+        'futuro-do-subjuntivo': ['resolver', 'resolvares', 'resolver', 'resolvermos', 'resolverdes', 'resolverem'],
+        'imperativo': ['-', 'resolve', 'resolva', 'resolvamos', 'resolvam', 'resolvam'],
+        'gerundio': ['resolvendo', 'resolvendo', 'resolvendo', 'resolvendo', 'resolvendo', 'resolvendo'],
+        'particípio': ['resolvido', 'resolvido', 'resolvido', 'resolvidos', 'resolvidas', 'resolvidos'],
+        'infinitivo': ['resolver'],
+        'infinitivo-pessoal': ['resolver', 'resolvares', 'resolver', 'resolvermos', 'resolverdes', 'resolverem']
+    },
+    'responder': {
+        'presente': ['respondo', 'respondes', 'responde', 'respondemos', 'respondeis', 'respondem'],
+        'preterito-perfeito': ['respondi', 'respondeste', 'respondeu', 'respondemos', 'respondestes', 'responderam'],
+        'preterito-imperfeito': ['respondia', 'respondias', 'respondia', 'respondíamos', 'respondíeis', 'respondiam'],
+        'preterito-mais-que-perfeito': ['respondera', 'responderas', 'respondera', 'respondêramos', 'respondêreis', 'responderam'],
+        'futuro-do-indicativo': ['responderei', 'responderás', 'responderá', 'responderemos', 'respondereis', 'responderão'],
+        'futuro-perfeito': ['terei respondido', 'terás respondido', 'terá respondido', 'teremos respondido', 'tereis respondido', 'terão respondido'],
+        'condicional': ['responderia', 'responderias', 'responderia', 'responderíamos', 'responderíeis', 'responderiam'], 
+        'condicional-perfeito': ['teria respondido', 'terias respondido', 'teria respondido', 'teríamos respondido', 'teríeis respondido', 'teriam respondido'],
+        'presente-perfeito': ['tenho respondido', 'tens respondido', 'tem respondido', 'temos respondido', 'tendes respondido', 'têm respondido'],
+        'mais-que-perfeito-composto': ['tinha respondido', 'tinhas respondido', 'tinha respondido', 'tínhamos respondido', 'tínheis respondido', 'tinham respondido'],
+        'presente-do-subjuntivo': ['responda', 'respondas', 'responda', 'respondamos', 'respondais', 'respondam'],
+        'preterito-imperfeito-do-subjuntivo': ['respondesse', 'respondesses', 'respondesse', 'respondêssemos', 'respondêsseis', 'respondessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha respondido', 'tenhas respondido', 'tenha respondido', 'tenhamos respondido', 'tenhais respondido', 'tenham respondido'],
+        'futuro-do-subjuntivo': ['responder', 'responderes', 'responder', 'respondermos', 'responderdes', 'responderem'],
+        'imperativo': ['-', 'responde', 'responda', 'respondamos', 'respondam', 'respondam'],
+        'gerundio': ['respondendo', 'respondendo', 'respondendo', 'respondendo', 'respondendo', 'respondendo'],
+        'particípio': ['respondido', 'respondido', 'respondido', 'respondidos', 'respondidas', 'respondidos'],
+        'infinitivo': ['responder'],
+        'infinitivo-pessoal': ['responder', 'responderes', 'responder', 'respondermos', 'responderdes', 'responderem']
+    },
+    'retirar': {
+        'presente': ['retiro', 'retiras', 'retira', 'retiramos', 'retirais', 'retiram'],
+        'preterito-perfeito': ['retirei', 'retiraste', 'retirou', 'retiramos', 'retirastes', 'retiraram'],
+        'preterito-imperfeito': ['retirava', 'retiravas', 'retirava', 'retirávamos', 'retiráveis', 'retiravam'],
+        'preterito-mais-que-perfeito': ['retirara', 'retiraras', 'retirara', 'retiráramos', 'retiráreis', 'retiraram'],
+        'futuro-do-indicativo': ['retirarei', 'retirarás', 'retirará', 'retiraremos', 'retirareis', 'retirarão'],
+        'condicional': ['retiraria', 'retirarias', 'retiraria', 'retiraríamos', 'retiraríeis', 'retirariam'],
+        'presente-perfeito': ['tenho retirado', 'tens retirado', 'tem retirado', 'temos retirado', 'tendes retirado', 'têm retirado'],
+        'mais-que-perfeito-composto': ['tinha retirado', 'tinhas retirado', 'tinha retirado', 'tínhamos retirado', 'tínheis retirado', 'tinham retirado'],
+        'presente-do-subjuntivo': ['retire', 'retires', 'retire', 'retiremos', 'retireis', 'retirem'],
+        'subjuntivo-imperfeito': ['retirasse', 'retirasses', 'retirasse', 'retirássemos', 'retirásseis', 'retirassem'],
+        'futuro-do-subjuntivo': ['retirar', 'retirares', 'retirar', 'retirarmos', 'retirardes', 'retirarem'],
+        'imperativo': ['-', 'retira', 'retire', 'retiremos', 'retirem', 'retirem'],
+        'gerundio': ['retirando', 'retirando', 'retirando', 'retirando', 'retirando', 'retirando'],
+        'particípio': ['retirado', 'retirado', 'retirado', 'retirados', 'retiradas', 'retirados'],
+        'infinitivo': ['retirar'],
+        'infinitivo-pessoal': ['retirar', 'retirares', 'retirar', 'retirarmos', 'retirardes', 'retirarem']
+    },
+    'reunir': {
+        'presente': ['reúno', 'reúnes', 'reúne', 'reunimos', 'reunis', 'reúnem'],
+        'preterito-perfeito': ['reuni', 'reuniste', 'reuniu', 'reunimos', 'reunistes', 'reuniram'],
+        'preterito-imperfeito': ['reunia', 'reunias', 'reunia', 'reuníamos', 'reuníeis', 'reuniam'],
+        'preterito-mais-que-perfeito': ['reunira', 'reuniras', 'reunira', 'reuníramos', 'reuníreis', 'reuniram'],
+        'futuro-do-indicativo': ['reunirei', 'reunirás', 'reunirá', 'reuniremos', 'reunireis', 'reunirão'],
+        'futuro-perfeito': ['terei reunido', 'terás reunido', 'terá reunido', 'teremos reunido', 'tereis reunido', 'terão reunido'],
+        'condicional': ['reuniria', 'reunirias', 'reuniria', 'reuniríamos', 'reuniríeis', 'reuniriam'],
+        'condicional-perfeito': ['teria reunido', 'terias reunido', 'teria reunido', 'teríamos reunido', 'teríeis reunido', 'teriam reunido'],
+        'presente-perfeito': ['tenho reunido', 'tens reunido', 'tem reunido', 'temos reunido', 'tendes reunido', 'têm reunido'],
+        'mais-que-perfeito-composto': ['tinha reunido', 'tinhas reunido', 'tinha reunido', 'tínhamos reunido', 'tínheis reunido', 'tinham reunido'],
+        'presente-do-subjuntivo': ['reuna', 'reunas', 'reuna', 'reunamos', 'reunais', 'reunam'],
+        'preterito-imperfeito-do-subjuntivo': ['reunisse', 'reunisses', 'reunisse', 'reuníssemos', 'reunísseis', 'reunissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha reunido', 'tenhas reunido', 'tenha reunido', 'tenhamos reunido', 'tenhais reunido', 'tenham reunido'],
+        'futuro-do-subjuntivo': ['reunir', 'reunires', 'reunir', 'reunirmos', 'reunirdes', 'reunirem'],
+        'imperativo': ['-', 'reune', 'reuna', 'reunamos', 'reunam', 'reunam'],
+        'gerundio': ['reunindo', 'reunindo', 'reunindo', 'reunindo', 'reunindo', 'reunindo'],
+        'particípio': ['reunido', 'reunido', 'reunido', 'reunidos', 'reunidas', 'reunidos'],
+        'infinitivo': ['reunir'],
+        'infinitivo-pessoal': ['reunir', 'reunires', 'reunir', 'reunirmos', 'reunirdes', 'reunirem']
+    },    'revelar': {
+        'presente': ['revelo', 'revelas', 'revela', 'revelamos', 'revelais', 'revelam'],
+        'preterito-perfeito': ['revelei', 'revelaste', 'revelou', 'revelamos', 'revelastes', 'revelaram'],
+        'preterito-imperfeito': ['revelava', 'revelavas', 'revelava', 'revelávamos', 'reveláveis', 'revelavam'],
+        'preterito-mais-que-perfeito': ['revelara', 'revelaras', 'revelara', 'reveláramos', 'reveláreis', 'revelaram'],
+        'futuro-do-indicativo': ['revelarei', 'revelarás', 'revelará', 'revelaremos', 'revelareis', 'revelarão'],
+        'futuro-perfeito': ['terei revelado', 'terás revelado', 'terá revelado', 'teremos revelado', 'tereis revelado', 'terão revelado'],
+        'condicional': ['revelaria', 'revelarias', 'revelaria', 'revelaríamos', 'revelaríeis', 'revelariam'],
+        'condicional-perfeito': ['teria revelado', 'terias revelado', 'teria revelado', 'teríamos revelado', 'teríeis revelado', 'teriam revelado'],
+        'presente-perfeito': ['tenho revelado', 'tens revelado', 'tem revelado', 'temos revelado', 'tendes revelado', 'têm revelado'],
+        'mais-que-perfeito-composto': ['tinha revelado', 'tinhas revelado', 'tinha revelado', 'tínhamos revelado', 'tínheis revelado', 'tinham revelado'],
+        'presente-do-subjuntivo': ['revele', 'reveles', 'revele', 'revelemos', 'reveleis', 'revelem'],
+        'preterito-imperfeito-do-subjuntivo': ['revelasse', 'revelasses', 'revelasse', 'revelássemos', 'revelásseis', 'revelassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha revelado', 'tenhas revelado', 'tenha revelado', 'tenhamos revelado', 'tenhais revelado', 'tenham revelado'],
+        'futuro-do-subjuntivo': ['revelar', 'revelares', 'revelar', 'revelarmos', 'revelardes', 'revelarem'],
+        'imperativo': ['-', 'revela', 'revele', 'revelemos', 'revelem', 'revelem'],
+        'gerundio': ['revelando', 'revelando', 'revelando', 'revelando', 'revelando', 'revelando'],
+        'particípio': ['revelado', 'revelado', 'revelado', 'revelados', 'reveladas', 'revelados'],
+        'infinitivo': ['revelar'],
+        'infinitivo-pessoal': ['revelar', 'revelares', 'revelar', 'revelarmos', 'revelardes', 'revelarem']
+    },
+    'rodar': {
+        'presente': ['rodo', 'rodas', 'roda', 'rodamos', 'rodais', 'rodam'],
+        'preterito-perfeito': ['rodei', 'rodaste', 'rodou', 'rodamos', 'rodastes', 'rodaram'],
+        'preterito-imperfeito': ['rodava', 'rodavas', 'rodava', 'rodávamos', 'rodáveis', 'rodavam'],
+        'preterito-mais-que-perfeito': ['rodara', 'rodaras', 'rodara', 'rodáramos', 'rodáreis', 'rodaram'],
+        'futuro-do-indicativo': ['rodarei', 'rodarás', 'rodará', 'rodaremos', 'rodareis', 'rodarão'],
+        'condicional': ['rodaria', 'rodarias', 'rodaria', 'rodaríamos', 'rodaríeis', 'rodariam'],
+        'presente-perfeito': ['tenho rodado', 'tens rodado', 'tem rodado', 'temos rodado', 'tendes rodado', 'têm rodado'],
+        'mais-que-perfeito-composto': ['tinha rodado', 'tinhas rodado', 'tinha rodado', 'tínhamos rodado', 'tínheis rodado', 'tinham rodado'],
+        'presente-do-subjuntivo': ['rode', 'rodes', 'rode', 'rodemos', 'rodeis', 'rodem'],
+        'subjuntivo-imperfeito': ['rodasse', 'rodasses', 'rodasse', 'rodássemos', 'rodásseis', 'rodassem'],
+        'futuro-do-subjuntivo': ['rodar', 'rodarás', 'rodar', 'rodarmos', 'rodardes', 'rodarem'],
+        'imperativo': ['-', 'roda', 'rode', 'rodemos', 'rodem', 'rodem'],
+        'gerundio': ['rodando', 'rodando', 'rodando', 'rodando', 'rodando', 'rodando'],
+        'particípio': ['rodado', 'rodado', 'rodado', 'rodados', 'rodadas', 'rodados'],
+        'infinitivo': ['rodar'],
+        'infinitivo-pessoal': ['rodar', 'rodarás', 'rodar', 'rodarmos', 'rodardes', 'rodarem']
+    },
+    'saber': {
+        'presente': ['sei', 'sabes', 'sabe', 'sabemos', 'sabeis', 'sabem'],
+        'preterito-perfeito': ['soube', 'soubeste', 'soube', 'soubemos', 'soubestes', 'souberam'],
+        'preterito-imperfeito': ['sabia', 'sabias', 'sabia', 'sabíamos', 'sabíeis', 'sabiam'],
+        'preterito-mais-que-perfeito': ['soubesse', 'soubesses', 'soubesse', 'soubéssemos', 'soubésseis', 'soubessem'],
+        'futuro-do-indicativo': ['saberei', 'saberás', 'saberá', 'saberemos', 'sabereis', 'saberão'],
+        'futuro-perfeito': ['terei sabido', 'terás sabido', 'terá sabido', 'teremos sabido', 'tereis sabido', 'terão sabido'],
+        'condicional': ['saberia', 'saberias', 'saberia', 'saberíamos', 'saberíeis', 'saberiam'],
+        'condicional-perfeito': ['teria sabido', 'terias sabido', 'teria sabido', 'teríamos sabido', 'teríeis sabido', 'teriam sabido'],
+        'presente-perfeito': ['tenho sabido', 'tens sabido', 'tem sabido', 'temos sabido', 'tendes sabido', 'têm sabido'],
+        'mais-que-perfeito-composto': ['tinha sabido', 'tinhas sabido', 'tinha sabido', 'tínhamos sabido', 'tínheis sabido', 'tinham sabido'],
+        'presente-do-subjuntivo': ['saiba', 'saibas', 'saiba', 'saibamos', 'saibais', 'saibam'],
+        'preterito-imperfeito-do-subjuntivo': ['soubesse', 'soubesses', 'soubesse', 'soubéssemos', 'soubésseis', 'soubessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha sabido', 'tenhas sabido', 'tenha sabido', 'tenhamos sabido', 'tenhais sabido', 'tenham sabido'],
+        'futuro-do-subjuntivo': ['saber', 'saberes', 'saber', 'sabermos', 'sabereis', 'saberem'],
+        'imperativo': ['-', 'sabe', 'saiba', 'sabamos', 'saibam', 'saibam'],
+        'gerundio': ['sabendo', 'sabendo', 'sabendo', 'sabendo', 'sabendo', 'sabendo'],
+        'particípio': ['sabido', 'sabido', 'sabido', 'sabidos', 'sabidas', 'sabidos'],
+        'infinitivo': ['saber'],
+        'infinitivo-pessoal': ['saber', 'saberes', 'saber', 'sabermos', 'sabereis', 'saberem']
+    },
+    'sentar': {
+        'presente': ['sento', 'sentas', 'senta', 'sentamos', 'sentais', 'sentam'],
+        'preterito-perfeito': ['sentei', 'sentaste', 'sentou', 'sentamos', 'sentastes', 'sentaram'],
+        'preterito-imperfeito': ['sentava', 'sentavas', 'sentava', 'sentávamos', 'sentáveis', 'sentavam'],
+        'preterito-mais-que-perfeito': ['sentara', 'sentaras', 'sentara', 'sentáramos', 'sentáreis', 'sentaram'],
+        'futuro-do-indicativo': ['sentarei', 'sentarás', 'sentará', 'sentaremos', 'sentareis', 'sentarão'],
+        'condicional': ['sentaria', 'sentarias', 'sentaria', 'sentaríamos', 'sentaríeis', 'sentariam'],
+        'presente-perfeito': ['tenho sentado', 'tens sentado', 'tem sentado', 'temos sentado', 'tendes sentado', 'têm sentado'],
+        'mais-que-perfeito-composto': ['tinha sentado', 'tinhas sentado', 'tinha sentado', 'tínhamos sentado', 'tínheis sentado', 'tinham sentado'],
+        'presente-do-subjuntivo': ['sente', 'sentes', 'sente', 'sentemos', 'senteis', 'sentem'],
+        'subjuntivo-imperfeito': ['sentasse', 'sentasses', 'sentasse', 'sentássemos', 'sentásseis', 'sentassem'],
+        'futuro-do-subjuntivo': ['sentar', 'sentares', 'sentar', 'sentarmos', 'sentardes', 'sentarem'],
+        'imperativo': ['-', 'senta', 'sente', 'sentemos', 'sentem', 'sentem'],
+        'gerundio': ['sentando', 'sentando', 'sentando', 'sentando', 'sentando', 'sentando'],
+        'particípio': ['sentado', 'sentado', 'sentado', 'sentados', 'sentadas', 'sentados'],
+        'infinitivo': ['sentar'],
+        'infinitivo-pessoal': ['sentar', 'sentares', 'sentar', 'sentarmos', 'sentardes', 'sentarem']
+    },    'ser': {
+        'presente': ['sou', 'és', 'é', 'somos', 'sois', 'são'],
+        'preterito-perfeito': ['fui', 'foste', 'foi', 'fomos', 'fostes', 'foram'],
+        'preterito-imperfeito': ['era', 'eras', 'era', 'éramos', 'éreis', 'eram'],
+        'preterito-mais-que-perfeito': ['fora', 'foras', 'fora', 'fôramos', 'fôreis', 'foram'],
+        'futuro-do-indicativo': ['serei', 'serás', 'será', 'seremos', 'sereis', 'serão'],
+        'futuro-perfeito': ['terei sido', 'terás sido', 'terá sido', 'teremos sido', 'tereis sido', 'terão sido'],
+        'condicional': ['seria', 'serias', 'seria', 'seríamos', 'seríeis', 'seriam'],
+        'condicional-perfeito': ['teria sido', 'terias sido', 'teria sido', 'teríamos sido', 'teríeis sido', 'teriam sido'],
+        'presente-perfeito': ['tenho sido', 'tens sido', 'tem sido', 'temos sido', 'tendes sido', 'têm sido'],
+        'mais-que-perfeito-composto': ['tinha sido', 'tinhas sido', 'tinha sido', 'tínhamos sido', 'tínheis sido', 'tinham sido'],
+        'presente-do-subjuntivo': ['seja', 'sejas', 'seja', 'sejamos', 'sejais', 'sejam'],
+        'preterito-imperfeito-do-subjuntivo': ['fosse', 'fosses', 'fosse', 'fôssemos', 'fôsseis', 'fossem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha sido', 'tenhas sido', 'tenha sido', 'tenhamos sido', 'tenhais sido', 'tenham sido'],
+        'futuro-do-subjuntivo': ['for', 'fores', 'for', 'formos', 'fordes', 'forem'],
+        'imperativo': ['-', 'sê', 'seja', 'sejamos', 'sejam', 'sejam'],
+        'gerundio': ['sendo', 'sendo', 'sendo', 'sendo', 'sendo', 'sendo'],
+        'particípio': ['sido', 'sido', 'sido', 'sidos', 'sidas', 'sidos'],
+        'infinitivo': ['ser'],
+        'infinitivo-pessoal': ['ser', 'seres', 'ser', 'sermos', 'serdes', 'serem']
+    },
+    'estar': {
+        'presente': ['estou', 'estás', 'está', 'estamos', 'estais', 'estão'],
+        'preterito-perfeito': ['estive', 'estiveste', 'esteve', 'estivemos', 'estivestes', 'estiveram'],
+        'preterito-imperfeito': ['estava', 'estavas', 'estava', 'estávamos', 'estáveis', 'estavam'],
+        'preterito-mais-que-perfeito': ['estivera', 'estiveras', 'estivera', 'estivéramos', 'estivéreis', 'estiveram'],
+        'futuro-do-indicativo': ['estarei', 'estarás', 'estará', 'estaremos', 'estareis', 'estarão'],
+        'futuro-perfeito': ['terei estado', 'terás estado', 'terá estado', 'teremos estado', 'tereis estado', 'terão estado'],
+        'condicional': ['estaria', 'estarias', 'estaria', 'estaríamos', 'estaríeis', 'estariam'],
+        'condicional-perfeito': ['teria estado', 'terias estado', 'teria estado', 'teríamos estado', 'teríeis estado', 'teriam estado'],
+        'presente-perfeito': ['tenho estado', 'tens estado', 'tem estado', 'temos estado', 'tendes estado', 'têm estado'],
+        'mais-que-perfeito-composto': ['tinha estado', 'tinhas estado', 'tinha estado', 'tínhamos estado', 'tínheis estado', 'tinham estado'],
+        'presente-do-subjuntivo': ['esteja', 'estejas', 'esteja', 'estejamos', 'estejais', 'estejam'],
+        'preterito-imperfeito-do-subjuntivo': ['estivesse', 'estivesses', 'estivesse', 'estivéssemos', 'estivésseis', 'estivessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha estado', 'tenhas estado', 'tenha estado', 'tenhamos estado', 'tenhais estado', 'tenham estado'],
+        'futuro-do-subjuntivo': ['estiver', 'estiveres', 'estiver', 'estivermos', 'estiverdes', 'estiverem'],
+        'imperativo': ['-', 'está', 'esteja', 'estejamos', 'estejam', 'estejam'],
+        'gerundio': ['estando', 'estando', 'estando', 'estando', 'estando', 'estando'],
+        'particípio': ['estado', 'estado', 'estado', 'estados', 'estadas', 'estados'],
+        'infinitivo': ['estar'],
+        'infinitivo-pessoal': ['estar', 'estares', 'estar', 'estarmos', 'estardes', 'estarem']
+    },
+    'ler': {
+        'presente': ['leio', 'lês', 'lê', 'lemos', 'ledes', 'leem'],
+        'preterito-perfeito': ['li', 'leste', 'leu', 'lemos', 'lestes', 'leram'],
+        'preterito-imperfeito': ['lia', 'lias', 'lia', 'líamos', 'líeis', 'liam'],
+        'preterito-mais-que-perfeito': ['léra', 'léras', 'léra', 'léramos', 'léreis', 'leram'],
+        'futuro-do-indicativo': ['lerei', 'lerás', 'lerá', 'leremos', 'lereis', 'lerão'],
+        'futuro-perfeito': ['terei lido', 'terás lido', 'terá lido', 'teremos lido', 'tereis lido', 'terão lido'],
+        'condicional': ['leria', 'lerias', 'leria', 'leríamos', 'leríeis', 'leriam'],
+        'condicional-perfeito': ['teria lido', 'terias lido', 'teria lido', 'teríamos lido', 'teríeis lido', 'teriam lido'],
+        'presente-perfeito': ['tenho lido', 'tens lido', 'tem lido', 'temos lido', 'tendes lido', 'têm lido'],
+        'mais-que-perfeito-composto': ['tinha lido', 'tinhas lido', 'tinha lido', 'tínhamos lido', 'tínheis lido', 'tinham lido'],
+        'presente-do-subjuntivo': ['leia', 'leias', 'leia', 'leiamos', 'leiais', 'leiam'],
+        'preterito-imperfeito-do-subjuntivo': ['lesse', 'lesses', 'lesse', 'léssemos', 'lésseis', 'lessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha lido', 'tenhas lido', 'tenha lido', 'tenhamos lido', 'tenhais lido', 'tenham lido'],
+        'futuro-do-subjuntivo': ['ler', 'leres', 'ler', 'lermos', 'lerdes', 'lerem'],
+        'imperativo': ['-', 'lê', 'leia', 'leiamos', 'leiam', 'leiam'],
+        'gerundio': ['lendo', 'lendo', 'lendo', 'lendo', 'lendo', 'lendo'],
+        'particípio': ['lido', 'lido', 'lido', 'lidos', 'lidas', 'lidos'],
+        'infinitivo': ['ler'],
+        'infinitivo-pessoal': ['ler', 'leres', 'ler', 'lermos', 'lerdes', 'lerem']
+    },
+    'dar': {
+        'presente': ['dou', 'dás', 'dá', 'damos', 'dais', 'dão'],
+        'preterito-perfeito': ['dei', 'deste', 'deu', 'demos', 'destes', 'deram'],
+        'preterito-imperfeito': ['dava', 'davas', 'dava', 'dávamos', 'dáveis', 'davam'],
+        'preterito-mais-que-perfeito': ['dera', 'deras', 'dera', 'déramos', 'déreis', 'deram'],
+        'futuro-do-indicativo': ['darei', 'darás', 'dará', 'daremos', 'dareis', 'darão'],
+        'futuro-perfeito': ['terei dado', 'terás dado', 'terá dado', 'teremos dado', 'tereis dado', 'terão dado'],
+        'condicional': ['daria', 'darias', 'daria', 'daríamos', 'daríeis', 'dariam'],
+        'condicional-perfeito': ['teria dado', 'terias dado', 'teria dado', 'teríamos dado', 'teríeis dado', 'teriam dado'],
+        'presente-perfeito': ['tenho dado', 'tens dado', 'tem dado', 'temos dado', 'tendes dado', 'têm dado'],
+        'mais-que-perfeito-composto': ['tinha dado', 'tinhas dado', 'tinha dado', 'tínhamos dado', 'tínheis dado', 'tinham dado'],
+        'presente-do-subjuntivo': ['dê', 'dês', 'dê', 'demos', 'deis', 'deem'],
+        'preterito-imperfeito-do-subjuntivo': ['desse', 'desses', 'desse', 'déssemos', 'désseis', 'dessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha dado', 'tenhas dado', 'tenha dado', 'tenhamos dado', 'tenhais dado', 'tenham dado'],
+        'futuro-do-subjuntivo': ['der', 'deres', 'der', 'dermos', 'derdes', 'derem'],
+        'imperativo': ['-', 'dá', 'dê', 'demos', 'deem', 'deem'],
+        'gerundio': ['dando', 'dando', 'dando', 'dando', 'dando', 'dando'],
+        'particípio': ['dado', 'dado', 'dado', 'dados', 'dadas', 'dados'],
+        'infinitivo': ['dar'],
+        'infinitivo-pessoal': ['dar', 'dares', 'dar', 'darmos', 'dardes', 'darem']
+    },
+    'ver': {
+        'presente': ['vejo', 'vês', 'vê', 'vemos', 'vedes', 'veem'],
+        'preterito-perfeito': ['vi', 'viste', 'viu', 'vimos', 'vistes', 'viram'],
+        'preterito-imperfeito': ['via', 'vias', 'via', 'víamos', 'víeis', 'viam'],
+        'preterito-mais-que-perfeito': ['vira', 'viras', 'vira', 'víramos', 'víreis', 'viram'],
+        'futuro-do-indicativo': ['verei', 'verás', 'verá', 'veremos', 'vereis', 'verão'],
+        'futuro-perfeito': ['terei visto', 'terás visto', 'terá visto', 'teremos visto', 'tereis visto', 'terão visto'],
+        'condicional': ['veria', 'verias', 'veria', 'veríamos', 'veríeis', 'veriam'],
+        'condicional-perfeito': ['teria visto', 'terias visto', 'teria visto', 'teríamos visto', 'teríeis visto', 'teriam visto'],
+        'presente-perfeito': ['tenho visto', 'tens visto', 'tem visto', 'temos visto', 'tendes visto', 'têm visto'],
+        'mais-que-perfeito-composto': ['tinha visto', 'tinhas visto', 'tinha visto', 'tínhamos visto', 'tínheis visto', 'tinham visto'],
+        'presente-do-subjuntivo': ['veja', 'vejas', 'veja', 'vejamos', 'vejais', 'vejam'],
+        'preterito-imperfeito-do-subjuntivo': ['visse', 'visses', 'visse', 'víssemos', 'vísseis', 'vissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha visto', 'tenhas visto', 'tenha visto', 'tenhamos visto', 'tenhais visto', 'tenham visto'],
+        'futuro-do-subjuntivo': ['vir', 'vires', 'vir', 'virmos', 'virdes', 'virem'],
+        'imperativo': ['-', 'vê', 'veja', 'vejamos', 'vejam', 'vejam'],
+        'gerundio': ['vendo', 'vendo', 'vendo', 'vendo', 'vendo', 'vendo'],
+        'particípio': ['visto', 'visto', 'visto', 'vistos', 'vistas', 'vistos'],
+        'infinitivo': ['ver'],
+        'infinitivo-pessoal': ['ver', 'veres', 'ver', 'vermos', 'verdes', 'verem']
+    },
+    'poder': {
+        'presente': ['posso', 'podes', 'pode', 'podemos', 'podeis', 'podem'],
+        'preterito-perfeito': ['pude', 'pudeste', 'pôde', 'pudemos', 'pudestes', 'puderam'],
+        'preterito-imperfeito': ['podia', 'podias', 'podia', 'podíamos', 'podíeis', 'podiam'],
+        'preterito-mais-que-perfeito': ['pudera', 'puderas', 'pudera', 'pudéramos', 'pudéreis', 'puderam'],
+        'futuro-do-indicativo': ['poderei', 'poderás', 'poderá', 'poderemos', 'podereis', 'poderão'],
+        'futuro-perfeito': ['terei podido', 'terás podido', 'terá podido', 'teremos podido', 'tereis podido', 'terão podido'],
+        'condicional': ['poderia', 'poderias', 'poderia', 'poderíamos', 'poderíeis', 'poderiam'],
+        'condicional-perfeito': ['teria podido', 'terias podido', 'teria podido', 'teríamos podido', 'teríeis podido', 'teriam podido'],
+        'presente-perfeito': ['tenho podido', 'tens podido', 'tem podido', 'temos podido', 'tendes podido', 'têm podido'],
+        'mais-que-perfeito-composto': ['tinha podido', 'tinhas podido', 'tinha podido', 'tínhamos podido', 'tínheis podido', 'tinham podido'],
+        'presente-do-subjuntivo': ['possa', 'possas', 'possa', 'possamos', 'possais', 'possam'],
+        'preterito-imperfeito-do-subjuntivo': ['pudesse', 'pudesses', 'pudesse', 'pudéssemos', 'pudésseis', 'pudessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha podido', 'tenhas podido', 'tenha podido', 'tenhamos podido', 'tenhais podido', 'tenham podido'],
+        'futuro-do-subjuntivo': ['puder', 'puderes', 'puder', 'pudermos', 'puderdes', 'puderem'],
+        'imperativo': ['-', 'pode', 'possa', 'possamos', 'possam', 'possam'],
+        'gerundio': ['podendo', 'podendo', 'podendo', 'podendo', 'podendo', 'podendo'],
+        'particípio': ['podido', 'podido', 'podido', 'podidos', 'podidas', 'podidos'],
+        'infinitivo': ['poder'],
+        'infinitivo-pessoal': ['poder', 'poderes', 'poder', 'podermos', 'poderdes', 'poderem']
+    },
+    'estudar': {
+        'presente': ['estudo', 'estudas', 'estuda', 'estudamos', 'estudais', 'estudam'],
+        'preterito-perfeito': ['estudei', 'estudaste', 'estudou', 'estudamos', 'estudastes', 'estudaram'],
+        'preterito-imperfeito': ['estudava', 'estudavas', 'estudava', 'estudávamos', 'estudáveis', 'estudavam'],
+        'preterito-mais-que-perfeito': ['estudara', 'estudaras', 'estudara', 'estudáramos', 'estudáreis', 'estudaram'],
+        'futuro-do-indicativo': ['estudarei', 'estudarás', 'estudará', 'estudaremos', 'estudareis', 'estudarão'],
+        'futuro-perfeito': ['terei estudado', 'terás estudado', 'terá estudado', 'teremos estudado', 'tereis estudado', 'terão estudado'],
+        'condicional': ['estudaria', 'estudarias', 'estudaria', 'estudaríamos', 'estudaríeis', 'estudariam'],
+        'condicional-perfeito': ['teria estudado', 'terias estudado', 'teria estudado', 'teríamos estudado', 'teríeis estudado', 'teriam estudado'],
+        'presente-perfeito': ['tenho estudado', 'tens estudado', 'tem estudado', 'temos estudado', 'tendes estudado', 'têm estudado'],
+        'mais-que-perfeito-composto': ['tinha estudado', 'tinhas estudado', 'tinha estudado', 'tínhamos estudado', 'tínheis estudado', 'tinham estudado'],
+        'presente-do-subjuntivo': ['estude', 'estudes', 'estude', 'estudemos', 'estudeis', 'estudem'],
+        'preterito-imperfeito-do-subjuntivo': ['estudasse', 'estudasses', 'estudasse', 'estudássemos', 'estudásseis', 'estudassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha estudado', 'tenhas estudado', 'tenha estudado', 'tenhamos estudado', 'tenhais estudado', 'tenham estudado'],
+        'futuro-do-subjuntivo': ['estudar', 'estudares', 'estudar', 'estudarmos', 'estudardes', 'estudarem'],
+        'imperativo': ['-', 'estuda', 'estude', 'estudemos', 'estudem', 'estudem'],
+        'gerundio': ['estudando', 'estudando', 'estudando', 'estudando', 'estudando', 'estudando'],
+        'particípio': ['estudado', 'estudado', 'estudado', 'estudados', 'estudadas', 'estudados'],
+        'infinitivo': ['estudar'],
+        'infinitivo-pessoal': ['estudar', 'estudares', 'estudar', 'estudarmos', 'estudardes', 'estudarem']
+    },
+    'gostar': {
+        'presente': ['gosto', 'gostas', 'gosta', 'gostamos', 'gostais', 'gostam'],
+        'preterito-perfeito': ['gostei', 'gostaste', 'gostou', 'gostamos', 'gostastes', 'gostaram'],
+        'preterito-imperfeito': ['gostava', 'gostavas', 'gostava', 'gostávamos', 'gostáveis', 'gostavam'],
+        'preterito-mais-que-perfeito': ['gostara', 'gostaras', 'gostara', 'gostáramos', 'gostáreis', 'gostaram'],
+        'futuro-do-indicativo': ['gostarei', 'gostarás', 'gostará', 'gostaremos', 'gostareis', 'gostarão'],
+        'futuro-perfeito': ['terei gostado', 'terás gostado', 'terá gostado', 'teremos gostado', 'tereis gostado', 'terão gostado'],
+        'condicional': ['gostaria', 'gostarias', 'gostaria', 'gostaríamos', 'gostaríeis', 'gostariam'],
+        'condicional-perfeito': ['teria gostado', 'terias gostado', 'teria gostado', 'teríamos gostado', 'teríeis gostado', 'teriam gostado'],
+        'presente-perfeito': ['tenho gostado', 'tens gostado', 'tem gostado', 'temos gostado', 'tendes gostado', 'têm gostado'],
+        'mais-que-perfeito-composto': ['tinha gostado', 'tinhas gostado', 'tinha gostado', 'tínhamos gostado', 'tínheis gostado', 'tinham gostado'],
+        'presente-do-subjuntivo': ['goste', 'gostes', 'goste', 'gostemos', 'gosteis', 'gostem'],
+        'preterito-imperfeito-do-subjuntivo': ['gostasse', 'gostasses', 'gostasse', 'gostássemos', 'gostásseis', 'gostassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha gostado', 'tenhas gostado', 'tenha gostado', 'tenhamos gostado', 'tenhais gostado', 'tenham gostado'],
+        'futuro-do-subjuntivo': ['gostar', 'gostares', 'gostar', 'gostarmos', 'gostardes', 'gostarem'],
+        'imperativo': ['-', 'gosta', 'goste', 'gostemos', 'gostem', 'gostem'],
+        'gerundio': ['gostando', 'gostando', 'gostando', 'gostando', 'gostando', 'gostando'],
+        'particípio': ['gostado', 'gostado', 'gostado', 'gostados', 'gostadas', 'gostados'],
+        'infinitivo': ['gostar'],
+        'infinitivo-pessoal': ['gostar', 'gostares', 'gostar', 'gostarmos', 'gostardes', 'gostarem']
+    },
+    'querer': {
+        'presente': ['quero', 'queres', 'quer', 'queremos', 'quereis', 'querem'],
+        'preterito-perfeito': ['quis', 'quiseste', 'quis', 'quisemos', 'quisestes', 'quiseram'],
+        'preterito-imperfeito': ['queria', 'querias', 'queria', 'queríamos', 'queríeis', 'queriam'],
+        'preterito-mais-que-perfeito': ['quisera', 'quiseras', 'quisera', 'quiséramos', 'quiséreis', 'quiseram'],
+        'futuro-do-indicativo': ['quererei', 'quererás', 'quererá', 'quereremos', 'querereis', 'quererão'],
+        'futuro-perfeito': ['terei querido', 'terás querido', 'terá querido', 'teremos querido', 'tereis querido', 'terão querido'],
+        'condicional': ['quereria', 'quererias', 'quereria', 'quereríamos', 'quereríeis', 'quereriam'],
+        'condicional-perfeito': ['teria querido', 'terias querido', 'teria querido', 'teríamos querido', 'teríeis querido', 'teriam querido'],
+        'presente-perfeito': ['tenho querido', 'tens querido', 'tem querido', 'temos querido', 'tendes querido', 'têm querido'],
+        'mais-que-perfeito-composto': ['tinha querido', 'tinhas querido', 'tinha querido', 'tínhamos querido', 'tínheis querido', 'tinham querido'],
+        'presente-do-subjuntivo': ['queira', 'queiras', 'queira', 'queiramos', 'queirais', 'queiram'],
+        'preterito-perfeito-do-subjuntivo': ['tenha querido', 'tenhas querido', 'tenha querido', 'tenhamos querido', 'tenhais querido', 'tenham querido'],
+        'preterito-imperfeito-do-subjuntivo': ['quisesse', 'quisesses', 'quisesse', 'quiséssemos', 'quisésseis', 'quisessem'],
+        'futuro-do-subjuntivo': ['querer', 'quereres', 'querer', 'querermos', 'quererdes', 'quererem'],
+        'imperativo': ['-', 'quer', 'queira', 'queiramos', 'queiram', 'queiram'],
+        'gerundio': ['querendo', 'querendo', 'querendo', 'querendo', 'querendo', 'querendo'],
+        'particípio': ['querido', 'querido', 'querido', 'queridos', 'queridas', 'queridos'],
+        'infinitivo': ['querer'],
+        'infinitivo-pessoal': ['querer', 'quereres', 'querer', 'querermos', 'quererdes', 'quererem']
+    },
+    'pensar': {
+        'presente': ['penso', 'pensas', 'pensa', 'pensamos', 'pensais', 'pensam'],
+        'preterito-perfeito': ['pensei', 'pensaste', 'pensou', 'pensamos', 'pensastes', 'pensaram'],
+        'preterito-imperfeito': ['pensava', 'pensavas', 'pensava', 'pensávamos', 'pensáveis', 'pensavam'],
+        'preterito-mais-que-perfeito': ['pensara', 'pensaras', 'pensara', 'pensáramos', 'pensáreis', 'pensaram'],
+        'futuro-do-indicativo': ['pensarei', 'pensarás', 'pensará', 'pensaremos', 'pensareis', 'pensarão'],
+        'futuro-perfeito': ['terei pensado', 'terás pensado', 'terá pensado', 'teremos pensado', 'tereis pensado', 'terão pensado'],
+        'condicional': ['pensaria', 'pensarias', 'pensaria', 'pensaríamos', 'pensaríeis', 'pensariam'],
+        'condicional-perfeito': ['teria pensado', 'terias pensado', 'teria pensado', 'teríamos pensado', 'teríeis pensado', 'teriam pensado'],
+        'presente-perfeito': ['tenho pensado', 'tens pensado', 'tem pensado', 'temos pensado', 'tendes pensado', 'têm pensado'],
+        'mais-que-perfeito-composto': ['tinha pensado', 'tinhas pensado', 'tinha pensado', 'tínhamos pensado', 'tínheis pensado', 'tinham pensado'],
+        'presente-do-subjuntivo': ['pense', 'penses', 'pense', 'pensemos', 'penseis', 'pensem'],
+        'preterito-imperfeito-do-subjuntivo': ['pensasse', 'pensasses', 'pensasse', 'pensássemos', 'pensásseis', 'pensassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha pensado', 'tenhas pensado', 'tenha pensado', 'tenhamos pensado', 'tenhais pensado', 'tenham pensado'],
+        'futuro-do-subjuntivo': ['pensar', 'pensares', 'pensar', 'pensarmos', 'pensardes', 'pensarem'],
+        'imperativo': ['-', 'pensa', 'pense', 'pensemos', 'pensem', 'pensem'],
+        'gerundio': ['pensando', 'pensando', 'pensando', 'pensando', 'pensando', 'pensando'],
+        'particípio': ['pensado', 'pensado', 'pensado', 'pensados', 'pensadas', 'pensados'],
+        'infinitivo': ['pensar'],
+        'infinitivo-pessoal': ['pensar', 'pensares', 'pensar', 'pensarmos', 'pensardes', 'pensarem']
+    },
+    'voltar': {
+        'presente': ['volto', 'voltas', 'volta', 'voltamos', 'voltais', 'voltam'],
+        'preterito-perfeito': ['voltei', 'voltaste', 'voltou', 'voltamos', 'voltastes', 'voltaram'],
+        'preterito-imperfeito': ['voltava', 'voltavas', 'voltava', 'voltávamos', 'voltáveis', 'voltavam'],
+        'preterito-mais-que-perfeito': ['voltára', 'voltaras', 'voltára', 'voltáramos', 'voltáreis', 'voltaram'],
+        'futuro-do-indicativo': ['voltarei', 'voltarás', 'voltará', 'voltaremos', 'voltareis', 'voltarão'],
+        'futuro-perfeito': ['terei voltado', 'terás voltado', 'terá voltado', 'teremos voltado', 'tereis voltado', 'terão voltado'],
+        'condicional': ['voltaria', 'voltarias', 'voltaria', 'voltaríamos', 'voltaríeis', 'voltariam'],
+        'condicional-perfeito': ['teria voltado', 'terias voltado', 'teria voltado', 'teríamos voltado', 'teríeis voltado', 'teriam voltado'],
+        'presente-perfeito': ['tenho voltado', 'tens voltado', 'tem voltado', 'temos voltado', 'tendes voltado', 'têm voltado'],
+        'mais-que-perfeito-composto': ['tinha voltado', 'tinhas voltado', 'tinha voltado', 'tínhamos voltado', 'tínheis voltado', 'tinham voltado'],
+        'presente-do-subjuntivo': ['volte', 'voltes', 'volte', 'voltemos', 'volteis', 'voltem'],
+        'preterito-imperfeito-do-subjuntivo': ['voltasse', 'voltasses', 'voltasse', 'voltássemos', 'voltásseis', 'voltassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha voltado', 'tenhas voltado', 'tenha voltado', 'tenhamos voltado', 'tenhais voltado', 'tenham voltado'],
+        'futuro-do-subjuntivo': ['voltar', 'voltares', 'voltar', 'voltarmos', 'voltardes', 'voltarem'],
+        'imperativo': ['-', 'volta', 'volte', 'voltemos', 'voltem', 'voltem'],
+        'gerundio': ['voltando', 'voltando', 'voltando', 'voltando', 'voltando', 'voltando'],
+        'particípio': ['voltado', 'voltado', 'voltado', 'voltados', 'voltadas', 'voltados'],
+        'infinitivo': ['voltar'],
+        'infinitivo-pessoal': ['voltar', 'voltares', 'voltar', 'voltarmos', 'voltardes', 'voltarem']
+    },
+    'vir': {
+        'presente': ['venho', 'vens', 'vem', 'vimos', 'vindes', 'vêm'],
+        'preterito-perfeito': ['vim', 'vieste', 'veio', 'viemos', 'viestes', 'vieram'],
+        'preterito-imperfeito': ['vinha', 'vinhas', 'vinha', 'vínhamos', 'vínheis', 'vinham'],
+        'preterito-mais-que-perfeito': ['viera', 'vieras', 'viera', 'viéramos', 'viéreis', 'vieram'],
+        'futuro-do-indicativo': ['virei', 'virás', 'virá', 'viremos', 'vireis', 'virão'],
+        'futuro-perfeito': ['terei vindo', 'terás vindo', 'terá vindo', 'teremos vindo', 'tereis vindo', 'terão vindo'],
+        'condicional': ['viria', 'virias', 'viria', 'viríamos', 'viríeis', 'viriam'],
+        'condicional-perfeito': ['teria vindo', 'terias vindo', 'teria vindo', 'teríamos vindo', 'teríeis vindo', 'teriam vindo'],
+        'presente-perfeito': ['tenho vindo', 'tens vindo', 'tem vindo', 'temos vindo', 'tendes vindo', 'têm vindo'],
+        'mais-que-perfeito-composto': ['tinha vindo', 'tinhas vindo', 'tinha vindo', 'tínhamos vindo', 'tínheis vindo', 'tinham vindo'],
+        'presente-do-subjuntivo': ['venha', 'venhas', 'venha', 'venhamos', 'venhais', 'venham'],
+        'preterito-imperfeito-do-subjuntivo': ['viesse', 'viesses', 'viesse', 'viéssemos', 'viésseis', 'viessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha vindo', 'tenhas vindo', 'tenha vindo', 'tenhamos vindo', 'tenhais vindo', 'tenham vindo'],
+        'futuro-do-subjuntivo': ['vier', 'vieres', 'vier', 'viermos', 'vierdes', 'vierem'],
+        'imperativo': ['-', 'vem', 'venha', 'venhamos', 'venham', 'venham'],
+        'gerundio': ['vindo', 'vindo', 'vindo', 'vindo', 'vindo', 'vindo'],
+        'particípio': ['vindo', 'vindo', 'vindo', 'vindos', 'vindas', 'vindos'],
+        'infinitivo': ['vir'],
+        'infinitivo-pessoal': ['vir', 'vires', 'vir', 'virmos', 'virdes', 'virem']
+    },
+    'ficar': {
+        'presente': ['fico', 'ficas', 'fica', 'ficamos', 'ficais', 'ficam'],
+        'preterito-perfeito': ['fiquei', 'ficaste', 'ficou', 'ficamos', 'ficastes', 'ficaram'],
+        'preterito-imperfeito': ['ficava', 'ficavas', 'ficava', 'ficávamos', 'ficáveis', 'ficavam'],
+        'preterito-mais-que-perfeito': ['ficara', 'ficaras', 'ficara', 'ficáramos', 'ficáreis', 'ficaram'],
+        'futuro-do-indicativo': ['ficarei', 'ficarás', 'ficará', 'ficaremos', 'ficareis', 'ficarão'],
+        'futuro-perfeito': ['terei ficado', 'terás ficado', 'terá ficado', 'teremos ficado', 'tereis ficado', 'terão ficado'],
+        'condicional': ['ficaria', 'ficarias', 'ficaria', 'ficaríamos', 'ficaríeis', 'ficariam'],
+        'condicional-perfeito': ['teria ficado', 'terias ficado', 'teria ficado', 'teríamos ficado', 'teríeis ficado', 'teriam ficado'],
+        'presente-perfeito': ['tenho ficado', 'tens ficado', 'tem ficado', 'temos ficado', 'tendes ficado', 'têm ficado'],
+        'mais-que-perfeito-composto': ['tinha ficado', 'tinhas ficado', 'tinha ficado', 'tínhamos ficado', 'tínheis ficado', 'tinham ficado'],
+        'presente-do-subjuntivo': ['fique', 'fiques', 'fique', 'fiquemos', 'fiqueis', 'fiquem'],
+        'preterito-imperfeito-do-subjuntivo': ['ficasse', 'ficasses', 'ficasse', 'ficássemos', 'ficásseis', 'ficassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha ficado', 'tenhas ficado', 'tenha ficado', 'tenhamos ficado', 'tenhais ficado', 'tenham ficado'],
+        'futuro-do-subjuntivo': ['ficar', 'ficares', 'ficar', 'ficarmos', 'ficardes', 'ficarem'],
+        'imperativo': ['-', 'fica', 'fique', 'fiquemos', 'fiquem', 'fiquem'],
+        'gerundio': ['ficando', 'ficando', 'ficando', 'ficando', 'ficando', 'ficando'],
+        'particípio': ['ficado', 'ficado', 'ficado', 'ficados', 'ficadas', 'ficados'],
+        'infinitivo': ['ficar'],
+        'infinitivo-pessoal': ['ficar', 'ficares', 'ficar', 'ficarmos', 'ficardes', 'ficarem']
+    },
+    'colocar': {
+        'presente': ['coloco', 'colocas', 'coloca', 'colocamos', 'colocais', 'colocam'],
+        'preterito-perfeito': ['coloquei', 'colocaste', 'colocou', 'colocamos', 'colocastes', 'colocaram'],
+        'preterito-imperfeito': ['colocava', 'colocavas', 'colocava', 'colocávamos', 'colocáveis', 'colocavam'],
+        'preterito-mais-que-perfeito': ['colocara', 'colocaras', 'colocara', 'colocáramos', 'colocáreis', 'colocaram'],
+        'futuro-do-indicativo': ['colocarei', 'colocarás', 'colocará', 'colocaremos', 'colocareis', 'colocarão'],
+        'futuro-perfeito': ['terei colocado', 'terás colocado', 'terá colocado', 'teremos colocado', 'tereis colocado', 'terão colocado'],
+        'condicional': ['colocaria', 'colocarias', 'colocaria', 'colocaríamos', 'colocaríeis', 'colocariam'],
+        'condicional-perfeito': ['teria colocado', 'terias colocado', 'teria colocado', 'teríamos colocado', 'teríeis colocado', 'teriam colocado'],
+        'presente-perfeito': ['tenho colocado', 'tens colocado', 'tem colocado', 'temos colocado', 'tendes colocado', 'têm colocado'],
+        'mais-que-perfeito-composto': ['tinha colocado', 'tinhas colocado', 'tinha colocado', 'tínhamos colocado', 'tínheis colocado', 'tinham colocado'],
+        'presente-do-subjuntivo': ['coloque', 'coloques', 'coloque', 'coloquemos', 'coloqueis', 'coloquem'],
+        'preterito-imperfeito-do-subjuntivo': ['colocasse', 'colocasses', 'colocasse', 'colocássemos', 'colocásseis', 'colocassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha colocado', 'tenhas colocado', 'tenha colocado', 'tenhamos colocado', 'tenhais colocado', 'tenham colocado'],
+        'futuro-do-subjuntivo': ['colocar', 'colocares', 'colocar', 'colocarmos', 'colocardes', 'colocarem'],
+        'imperativo': ['-', 'coloca', 'coloque', 'coloquemos', 'coloquem', 'coloquem'],
+        'gerundio': ['colocando', 'colocando', 'colocando', 'colocando', 'colocando', 'colocando'],
+        'particípio': ['colocado', 'colocado', 'colocado', 'colocados', 'colocadas', 'colocados'],
+        'infinitivo': ['colocar'],
+        'infinitivo-pessoal': ['colocar', 'colocares', 'colocar', 'colocarmos', 'colocardes', 'colocarem']
+    },
+    'conhecer': {
+        'presente': ['conheço', 'conheces', 'conhece', 'conhecemos', 'conheceis', 'conhecem'],
+        'preterito-perfeito': ['conheci', 'conheceste', 'conheceu', 'conhecemos', 'conhecestes', 'conheceram'],
+        'preterito-imperfeito': ['conhecia', 'conhecias', 'conhecia', 'conhecíamos', 'conhecíeis', 'conheciam'],
+        'preterito-mais-que-perfeito': ['conhecera', 'conheceras', 'conhecera', 'conhecêramos', 'conhecêreis', 'conheceram'],
+        'futuro-do-indicativo': ['conhecerei', 'conhecerás', 'conhecerá', 'conheceremos', 'conhecereis', 'conhecerão'],
+        'condicional': ['conheceria', 'conhecerias', 'conheceria', 'conheceríamos', 'conheceríeis', 'conheceriam'],
+        'presente-perfeito': ['tenho conhecido', 'tens conhecido', 'tem conhecido', 'temos conhecido', 'tendes conhecido', 'têm conhecido'],
+        'mais-que-perfeito-composto': ['tinha conhecido', 'tinhas conhecido', 'tinha conhecido', 'tínhamos conhecido', 'tínheis conhecido', 'tinham conhecido'],
+        'presente-do-subjuntivo': ['conheça', 'conheças', 'conheça', 'conheçamos', 'conheçais', 'conheçam'],
+        'preterito-imperfeito-do-subjuntivo': ['conhecesse', 'conhecesses', 'conhecesse', 'conhecêssemos', 'conhecêsseis', 'conhecessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha conhecido', 'tenhas conhecido', 'tenha conhecido', 'tenhamos conhecido', 'tenhais conhecido', 'tenham conhecido'],
+        'futuro-do-subjuntivo': ['conhecer', 'conheceres', 'conhecer', 'conhecermos', 'conhecerdes', 'conhecerem'],
+        'imperativo': ['-', 'conhece', 'conheça', 'conheçamos', 'conheçam', 'conheçam'],
+        'gerundio': ['conhecendo', 'conhecendo', 'conhecendo', 'conhecendo', 'conhecendo', 'conhecendo'],
+        'particípio': ['conhecido', 'conhecido', 'conhecido', 'conhecidos', 'conhecidas', 'conhecidos'],
+        'infinitivo': ['conhecer'],
+        'infinitivo-pessoal': ['conhecer', 'conheceres', 'conhecer', 'conhecermos', 'conhecerdes', 'conhecerem']
+    },
+    'deixar': {
+        'presente': ['deixo', 'deixas', 'deixa', 'deixamos', 'deixais', 'deixam'],
+        'preterito-perfeito': ['deixei', 'deixaste', 'deixou', 'deixamos', 'deixastes', 'deixaram'],
+        'preterito-imperfeito': ['deixava', 'deixavas', 'deixava', 'deixávamos', 'deixáveis', 'deixavam'],
+        'preterito-mais-que-perfeito': ['deixara', 'deixaras', 'deixara', 'deixáramos', 'deixáreis', 'deixaram'],
+        'futuro-do-indicativo': ['deixarei', 'deixarás', 'deixará', 'deixaremos', 'deixareis', 'deixarão'],
+        'condicional': ['deixaria', 'deixarias', 'deixaria', 'deixaríamos', 'deixaríeis', 'deixariam'],
+        'presente-perfeito': ['tenho deixado', 'tens deixado', 'tem deixado', 'temos deixado', 'tendes deixado', 'têm deixado'],
+        'mais-que-perfeito-composto': ['tinha deixado', 'tinhas deixado', 'tinha deixado', 'tínhamos deixado', 'tínheis deixado', 'tinham deixado'],
+        'presente-do-subjuntivo': ['deixe', 'deixes', 'deixe', 'deixemos', 'deixeis', 'deixem'],
+        'preterito-imperfeito-do-subjuntivo': ['deixasse', 'deixasses', 'deixasse', 'deixássemos', 'deixásseis', 'deixassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha deixado', 'tenhas deixado', 'tenha deixado', 'tenhamos deixado', 'tenhais deixado', 'tenham deixado'],
+        'futuro-do-subjuntivo': ['deixar', 'deixares', 'deixar', 'deixarmos', 'deixardes', 'deixarem'],
+        'imperativo': ['-', 'deixa', 'deixe', 'deixemos', 'deixem', 'deixem'],
+        'gerundio': ['deixando', 'deixando', 'deixando', 'deixando', 'deixando', 'deixando'],
+        'particípio': ['deixado', 'deixado', 'deixado', 'deixados', 'deixadas', 'deixados'],
+        'infinitivo': ['deixar'],
+        'infinitivo-pessoal': ['deixar', 'deixares', 'deixar', 'deixarmos', 'deixardes', 'deixarem']
+    },
+    'dizer': {
+        'presente': ['digo', 'dizes', 'diz', 'dizemos', 'dizeis', 'dizem'],
+        'preterito-perfeito': ['disse', 'disseste', 'disse', 'dissemos', 'dissestes', 'disseram'],
+        'preterito-imperfeito': ['dizia', 'dizias', 'dizia', 'dizíamos', 'dizíeis', 'diziam'],
+        'preterito-mais-que-perfeito': ['dissera', 'disseras', 'dissera', 'disséramos', 'disséreis', 'disseram'],
+        'futuro-do-indicativo': ['direi', 'dirás', 'dirá', 'diremos', 'direis', 'dirão'],
+        'condicional': ['diria', 'dirias', 'diria', 'diríamos', 'diríeis', 'diriam'],
+        'condicional-perfeito': ['teria dito', 'terias dito', 'teria dito', 'teríamos dito', 'teríeis dito', 'teriam dito'],
+        'presente-perfeito': ['tenho dito', 'tens dito', 'tem dito', 'temos dito', 'tendes dito', 'têm dito'],
+        'mais-que-perfeito-composto': ['tinha dito', 'tinhas dito', 'tinha dito', 'tínhamos dito', 'tínheis dito', 'tinham dito'],
+        'presente-do-subjuntivo': ['diga', 'digas', 'diga', 'digamos', 'digais', 'digam'],
+        'preterito-imperfeito-do-subjuntivo': ['dissesse', 'dissesses', 'dissesse', 'disséssemos', 'dissésseis', 'dissessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha dito', 'tenhas dito', 'tenha dito', 'tenhamos dito', 'tenhais dito', 'tenham dito'],
+        'futuro-do-subjuntivo': ['disser', 'disseres', 'disser', 'dissermos', 'disserdes', 'disserem'],
+        'imperativo': ['-', 'diz', 'diga', 'digamos', 'dizei', 'digam'],
+        'gerundio': ['dizendo', 'dizendo', 'dizendo', 'dizendo', 'dizendo', 'dizendo'],
+        'particípio': ['dito', 'dito', 'dito', 'ditos', 'ditas', 'ditos'],
+        'infinitivo': ['dizer'],
+        'infinitivo-pessoal': ['dizer', 'dizeres', 'dizer', 'dizermos', 'dizerdes', 'dizerem']
+    },
+    'entrar': {
+        'presente': ['entro', 'entras', 'entra', 'entramos', 'entrais', 'entram'],
+        'preterito-perfeito': ['entrei', 'entraste', 'entrou', 'entramos', 'entrastes', 'entraram'],
+        'preterito-imperfeito': ['entrava', 'entravas', 'entrava', 'entrávamos', 'entráveis', 'entravam'],
+        'preterito-mais-que-perfeito': ['entrara', 'entraras', 'entrara', 'entráramos', 'entráreis', 'entraram'],
+        'futuro-do-indicativo': ['entrarei', 'entrarás', 'entrará', 'entraremos', 'entrareis', 'entrarão'],
+        'futuro-perfeito': ['terei entrado', 'terás entrado', 'terá entrado', 'teremos entrado', 'tereis entrado', 'terão entrado'],
+        'condicional': ['entraria', 'entrarias', 'entraria', 'entraríamos', 'entraríeis', 'entrariam'],
+        'condicional-perfeito': ['teria entrado', 'terias entrado', 'teria entrado', 'teríamos entrado', 'teríeis entrado', 'teriam entrado'],
+        'presente-perfeito': ['tenho entrado', 'tens entrado', 'tem entrado', 'temos entrado', 'tendes entrado', 'têm entrado'],
+        'mais-que-perfeito-composto': ['tinha entrado', 'tinhas entrado', 'tinha entrado', 'tínhamos entrado', 'tínheis entrado', 'tinham entrado'],
+        'presente-do-subjuntivo': ['entre', 'entres', 'entre', 'entremos', 'entreis', 'entrem'],
+        'preterito-imperfeito-do-subjuntivo': ['entrasse', 'entrasses', 'entrasse', 'entrássemos', 'entrássemos', 'entrassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha entrado', 'tenhas entrado', 'tenha entrado', 'tenhamos entrado', 'tenhais entrado', 'tenham entrado'],
+        'futuro-do-subjuntivo': ['entrar', 'entrares', 'entrar', 'entrarmos', 'entrardes', 'entrarem'],
+        'imperativo': ['-', 'entra', 'entre', 'entremos', 'entrai', 'entrem'],
+        'gerundio': ['entrando', 'entrando', 'entrando', 'entrando', 'entrando', 'entrando'],
+        'particípio': ['entrado', 'entrado', 'entrado', 'entrados', 'entradas', 'entrados'],
+        'infinitivo': ['entrar'],
+        'infinitivo-pessoal': ['entrar', 'entrares', 'entrar', 'entrarmos', 'entrardes', 'entrarem']
+    },
+    'olhar': {
+        'presente': ['olho', 'olhas', 'olha', 'olhamos', 'olhais', 'olham'],
+        'preterito-perfeito': ['olhei', 'olhaste', 'olhou', 'olhamos', 'olhastes', 'olharam'],
+        'preterito-imperfeito': ['olhava', 'olhavas', 'olhava', 'olhávamos', 'olháveis', 'olhavam'],
+        'preterito-mais-que-perfeito': ['olhara', 'olharas', 'olhara', 'olháramos', 'olháreis', 'olharam'],
+        'futuro-do-indicativo': ['olharei', 'olharás', 'olhará', 'olharemos', 'olhareis', 'olharão'],
+        'futuro-perfeito': ['terei olhado', 'terás olhado', 'terá olhado', 'teremos olhado', 'tereis olhado', 'terão olhado'],
+        'condicional': ['olharia', 'olharias', 'olharia', 'olharíamos', 'olharíeis', 'olhariam'],
+        'condicional-perfeito': ['teria olhado', 'terias olhado', 'teria olhado', 'teríamos olhado', 'teríeis olhado', 'teriam olhado'],
+        'presente-perfeito': ['tenho olhado', 'tens olhado', 'tem olhado', 'temos olhado', 'tendes olhado', 'têm olhado'],
+        'mais-que-perfeito-composto': ['tinha olhado', 'tinhas olhado', 'tinha olhado', 'tínhamos olhado', 'tínheis olhado', 'tinham olhado'],
+        'presente-do-subjuntivo': ['olhe', 'olhes', 'olhe', 'olhemos', 'olheis', 'olhem'],
+        'preterito-imperfeito-do-subjuntivo': ['olhasse', 'olhasses', 'olhasse', 'olhássemos', 'olhásseis', 'olhassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha olhado', 'tenhas olhado', 'tenha olhado', 'tenhamos olhado', 'tenhais olhado', 'tenham olhado'],
+        'futuro-do-subjuntivo': ['olhar', 'olhares', 'olhar', 'olharmos', 'olhardes', 'olharem'],
+        'imperativo': ['-', 'olha', 'olhe', 'olhemos', 'olhai', 'olhem'],
+        'gerundio': ['olhando', 'olhando', 'olhando', 'olhando', 'olhando', 'olhando'],
+        'particípio': ['olhado', 'olhado', 'olhado', 'olhados', 'olhadas', 'olhados'],
+        'infinitivo': ['olhar'],
+        'infinitivo-pessoal': ['olhar', 'olhares', 'olhar', 'olharmos', 'olhardes', 'olharem']
+    },
+    'ouvir': {
+        'presente': ['ouço', 'ouves', 'ouve', 'ouvimos', 'ouvis', 'ouvem'],
+        'preterito-perfeito': ['ouvi', 'ouviste', 'ouviu', 'ouvimos', 'ouvistes', 'ouviram'],
+        'preterito-imperfeito': ['ouvia', 'ouvias', 'ouvia', 'ouvíamos', 'ouvíeis', 'ouviam'],
+        'preterito-mais-que-perfeito': ['ouvira', 'ouviras', 'ouvira', 'ouvíramos', 'ouvíreis', 'ouviram'],
+        'futuro-do-indicativo': ['ouvirei', 'ouvirás', 'ouvirá', 'ouviremos', 'ouvireis', 'ouvirão'],
+        'futuro-perfeito': ['terei ouvido', 'terás ouvido', 'terá ouvido', 'teremos ouvido', 'tereis ouvido', 'terão ouvido'],
+        'condicional': ['ouviria', 'ouvirias', 'ouviria', 'ouviríamos', 'ouviríeis', 'ouviriam'],
+        'condicional-perfeito': ['teria ouvido', 'terias ouvido', 'teria ouvido', 'teríamos ouvido', 'teríeis ouvido', 'teriam ouvido'],
+        'presente-perfeito': ['tenho ouvido', 'tens ouvido', 'tem ouvido', 'temos ouvido', 'tendes ouvido', 'têm ouvido'],
+        'mais-que-perfeito-composto': ['tinha ouvido', 'tinhas ouvido', 'tinha ouvido', 'tínhamos ouvido', 'tínheis ouvido', 'tinham ouvido'],
+        'presente-do-subjuntivo': ['ouça', 'ouças', 'ouça', 'ouçamos', 'ouçais', 'ouçam'],
+        'preterito-imperfeito-do-subjuntivo': ['ouvisse', 'ouvisses', 'ouvisse', 'ouvíssemos', 'ouvísseis', 'ouvissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha ouvido', 'tenhas ouvido', 'tenha ouvido', 'tenhamos ouvido', 'tenhais ouvido', 'tenham ouvido'],
+        'futuro-do-subjuntivo': ['ouvir', 'ouvires', 'ouvir', 'ouvirmos', 'ouvirdes', 'ouvirem'],
+        'imperativo': ['-', 'ouve', 'ouça', 'ouçamos', 'ouvi', 'ouçam'],
+        'gerundio': ['ouvindo', 'ouvindo', 'ouvindo', 'ouvindo', 'ouvindo', 'ouvindo'],
+        'particípio': ['ouvido', 'ouvido', 'ouvido', 'ouvidos', 'ouvidas', 'ouvidos'],
+        'infinitivo': ['ouvir'],
+        'infinitivo-pessoal': ['ouvir', 'ouvires', 'ouvir', 'ouvirmos', 'ouvirdes', 'ouvirem']
+    },
+    'parar': {
+        'presente': ['paro', 'paras', 'para', 'paramos', 'parais', 'param'],
+        'preterito-perfeito': ['parei', 'paraste', 'parou', 'paramos', 'parastes', 'pararam'],
+        'preterito-imperfeito': ['parava', 'paravas', 'parava', 'parávamos', 'paráveis', 'paravam'],
+        'preterito-mais-que-perfeito': ['parara', 'pararas', 'parara', 'paráramos', 'paráreis', 'pararam'],
+        'futuro-do-indicativo': ['pararei', 'pararás', 'parará', 'pararemos', 'parareis', 'pararão'],
+        'futuro-perfeito': ['terei parado', 'terás parado', 'terá parado', 'teremos parado', 'tereis parado', 'terão parado'],
+        'condicional': ['pararia', 'pararias', 'pararia', 'pararíamos', 'pararíeis', 'parariam'], 
+        'condicional-perfeito': ['teria parado', 'terias parado', 'teria parado', 'teríamos parado', 'teríeis parado', 'teriam parado'],
+        'presente-perfeito': ['tenho parado', 'tens parado', 'tem parado', 'temos parado', 'tendes parado', 'têm parado'],
+        'mais-que-perfeito-composto': ['tinha parado', 'tinhas parado', 'tinha parado', 'tínhamos parado', 'tínheis parado', 'tinham parado'],
+        'presente-do-subjuntivo': ['pare', 'pares', 'pare', 'paremos', 'pareis', 'parem'],
+        'preterito-imperfeito-do-subjuntivo': ['parasse', 'parasses', 'parasse', 'parássemos', 'parásseis', 'parassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha parado', 'tenhas parado', 'tenha parado', 'tenhamos parado', 'tenhais parado', 'tenham parado'],
+        'futuro-do-subjuntivo': ['parar', 'parares', 'parar', 'pararmos', 'parardes', 'pararem'],
+        'imperativo': ['-', 'para', 'pare', 'paremos', 'parai', 'parem'],
+        'gerundio': ['parando', 'parando', 'parando', 'parando', 'parando', 'parando'],
+        'particípio': ['parado', 'parado', 'parado', 'parados', 'paradas', 'parados'],
+        'infinitivo': ['parar'],
+        'infinitivo-pessoal': ['parar', 'parares', 'parar', 'pararmos', 'parardes', 'pararem']
+    },
+    'pedir': {
+        'presente': ['peço', 'pedes', 'pede', 'pedimos', 'pedis', 'pedem'],
+        'preterito-perfeito': ['pedi', 'pediste', 'pediu', 'pedimos', 'pedistes', 'pediram'],
+        'preterito-imperfeito': ['pedia', 'pedias', 'pedia', 'pedíamos', 'pedíeis', 'pediam'],
+        'preterito-mais-que-perfeito': ['pedira', 'pediras', 'pedira', 'pedíramos', 'pedíreis', 'pediram'],
+        'futuro-do-indicativo': ['pedirei', 'pedirás', 'pedirá', 'pediremos', 'pedireis', 'pedirão'],
+        'futuro-perfeito': ['terei pedido', 'terás pedido', 'terá pedido', 'teremos pedido', 'tereis pedido', 'terão pedido'],
+        'condicional': ['pediria', 'pedirias', 'pediria', 'pediríamos', 'pediríeis', 'pediriam'], 
+        'condicional-perfeito': ['teria pedido', 'terias pedido', 'teria pedido', 'teríamos pedido', 'teríeis pedido', 'teriam pedido'],
+        'presente-perfeito': ['tenho pedido', 'tens pedido', 'tem pedido', 'temos pedido', 'tendes pedido', 'têm pedido'],
+        'mais-que-perfeito-composto': ['tinha pedido', 'tinhas pedido', 'tinha pedido', 'tínhamos pedido', 'tínheis pedido', 'tinham pedido'],
+        'presente-do-subjuntivo': ['peça', 'peças', 'peça', 'peçamos', 'peçais', 'peçam'],
+        'preterito-imperfeito-do-subjuntivo': ['pedisse', 'pedisses', 'pedisse', 'pedíssemos', 'pedísseis', 'pedissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha pedido', 'tenhas pedido', 'tenha pedido', 'tenhamos pedido', 'tenhais pedido', 'tenham pedido'],
+        'futuro-do-subjuntivo': ['pedir', 'pedires', 'pedir', 'pedirmos', 'pedirdes', 'pedirem'],
+        'imperativo': ['-', 'pede', 'peça', 'peçamos', 'pedi', 'peçam'],
+        'gerundio': ['pedindo', 'pedindo', 'pedindo', 'pedindo', 'pedindo', 'pedindo'],
+        'particípio': ['pedido', 'pedido', 'pedido', 'pedidos', 'pedidas', 'pedidos'],
+        'infinitivo': ['pedir'],
+        'infinitivo-pessoal': ['pedir', 'pedires', 'pedir', 'pedirmos', 'pedirdes', 'pedirem']
+    },
+    'perguntar': {
+        'presente': ['pergunto', 'perguntas', 'pergunta', 'perguntamos', 'perguntais', 'perguntam'],
+        'preterito-perfeito': ['perguntei', 'perguntaste', 'perguntou', 'perguntamos', 'perguntastes', 'perguntaram'],
+        'preterito-imperfeito': ['perguntava', 'perguntavas', 'perguntava', 'perguntávamos', 'perguntáveis', 'perguntavam'],
+        'preterito-mais-que-perfeito': ['perguntara', 'perguntaras', 'perguntara', 'perguntáramos', 'perguntáreis', 'perguntaram'],
+        'futuro-do-indicativo': ['perguntarei', 'perguntarás', 'perguntará', 'perguntaremos', 'perguntareis', 'perguntarão'],
+        'futuro-perfeito': ['terei perguntado', 'terás perguntado', 'terá perguntado', 'teremos perguntado', 'tereis perguntado', 'terão perguntado'],
+        'condicional': ['perguntaria', 'perguntarias', 'perguntaria', 'perguntaríamos', 'perguntaríeis', 'perguntariam'], 
+        'condicional-perfeito': ['teria perguntado', 'terias perguntado', 'teria perguntado', 'teríamos perguntado', 'teríeis perguntado', 'teriam perguntado'],
+        'presente-perfeito': ['tenho perguntado', 'tens perguntado', 'tem perguntado', 'temos perguntado', 'tendes perguntado', 'têm perguntado'],
+        'mais-que-perfeito-composto': ['tinha perguntado', 'tinhas perguntado', 'tinha perguntado', 'tínhamos perguntado', 'tínheis perguntado', 'tinham perguntado'],
+        'presente-do-subjuntivo': ['pergunte', 'perguntes', 'pergunte', 'perguntemos', 'pergunteis', 'perguntem'],
+        'preterito-imperfeito-do-subjuntivo': ['perguntasse', 'perguntasses', 'perguntasse', 'perguntássemos', 'perguntásseis', 'perguntassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha perguntado', 'tenhas perguntado', 'tenha perguntado', 'tenhamos perguntado', 'tenhais perguntado', 'tenham perguntado'],
+        'futuro-do-subjuntivo': ['perguntar', 'perguntares', 'perguntar', 'perguntarmos', 'perguntardes', 'perguntarem'],
+        'imperativo': ['-', 'pergunta', 'pergunte', 'perguntemos', 'perguntai', 'perguntem'],
+        'gerundio': ['perguntando', 'perguntando', 'perguntando', 'perguntando', 'perguntando', 'perguntando'],
+        'particípio': ['perguntado', 'perguntado', 'perguntado', 'perguntados', 'perguntadas', 'perguntados'],
+        'infinitivo': ['perguntar'],
+        'infinitivo-pessoal': ['perguntar', 'perguntares', 'perguntar', 'perguntarmos', 'perguntardes', 'perguntarem']
+    },
+    'responder': {
+        'presente': ['respondo', 'respondes', 'responde', 'respondemos', 'respondeis', 'respondem'],
+        'preterito-perfeito': ['respondi', 'respondeste', 'respondeu', 'respondemos', 'respondestes', 'responderam'],
+        'preterito-imperfeito': ['respondia', 'respondias', 'respondia', 'respondíamos', 'respondíeis', 'respondiam'],
+        'preterito-mais-que-perfeito': ['respondera', 'responderas', 'respondera', 'respondêramos', 'respondêreis', 'responderam'],
+        'futuro-do-indicativo': ['responderei', 'responderás', 'responderá', 'responderemos', 'respondereis', 'responderão'],
+        'condicional': ['responderia', 'responderias', 'responderia', 'responderíamos', 'responderíeis', 'responderiam'], 
+        'condicional-perfeito': ['teria respondido', 'terias respondido', 'teria respondido', 'teríamos respondido', 'teríeis respondido', 'teriam respondido'],
+        'presente-perfeito': ['tenho respondido', 'tens respondido', 'tem respondido', 'temos respondido', 'tendes respondido', 'têm respondido'],
+        'mais-que-perfeito-composto': ['tinha respondido', 'tinhas respondido', 'tinha respondido', 'tínhamos respondido', 'tínheis respondido', 'tinham respondido'],
+        'presente-do-subjuntivo': ['responda', 'respondas', 'responda', 'respondamos', 'respondais', 'respondam'],
+        'preterito-imperfeito-do-subjuntivo': ['respondesse', 'respondesses', 'respondesse', 'respondêssemos', 'respondêsseis', 'respondessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha respondido', 'tenhas respondido', 'tenha respondido', 'tenhamos respondido', 'tenhais respondido', 'tenham respondido'],
+        'futuro-do-subjuntivo': ['responder', 'responderes', 'responder', 'respondermos', 'responderdes', 'responderem'],
+        'imperativo': ['-', 'responde', 'responda', 'respondamos', 'respondei', 'respondam'],
+        'gerundio': ['respondendo', 'respondendo', 'respondendo', 'respondendo', 'respondendo', 'respondendo'],
+        'particípio': ['respondido', 'respondido', 'respondido', 'respondidos', 'respondidas', 'respondidos'],
+        'infinitivo': ['responder'],
+        'infinitivo-pessoal': ['responder', 'responderes', 'responder', 'respondermos', 'responderdes', 'responderem']
+    },
+    'sair': {
+        'presente': ['saio', 'sais', 'sai', 'saímos', 'saís', 'saem'],
+        'preterito-perfeito': ['saí', 'saíste', 'saiu', 'saímos', 'saístes', 'saíram'],
+        'preterito-imperfeito': ['saía', 'saías', 'saía', 'saíamos', 'saíeis', 'saíam'],
+        'preterito-mais-que-perfeito': ['saíra', 'saíras', 'saíra', 'saíramos', 'saíreis', 'saíram'],
+        'futuro-do-indicativo': ['sairei', 'sairás', 'sairá', 'sairemos', 'saireis', 'sairão'],
+        'futuro-perfeito': ['terei saído', 'terás saído', 'terá saído', 'teremos saído', 'tereis saído', 'terão saído'],
+        'condicional': ['sairia', 'sairias', 'sairia', 'sairíamos', 'sairíeis', 'sairiam'],
+        'condicional-perfeito': ['teria saído', 'terias saído', 'teria saído', 'teríamos saído', 'teríeis saído', 'teriam saído'],
+        'presente-perfeito': ['tenho saído', 'tens saído', 'tem saído', 'temos saído', 'tendes saído', 'têm saído'],
+        'mais-que-perfeito-composto': ['tinha saído', 'tinhas saído', 'tinha saído', 'tínhamos saído', 'tínheis saído', 'tinham saído'],
+        'presente-do-subjuntivo': ['saia', 'saias', 'saia', 'saiamos', 'saiais', 'saiam'],
+        'preterito-imperfeito-do-subjuntivo': ['saísse', 'saísses', 'saísse', 'saíssemos', 'saísseis', 'saíssem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha saído', 'tenhas saído', 'tenha saído', 'tenhamos saído', 'tenhais saído', 'tenham saído'],
+        'futuro-do-subjuntivo': ['sair', 'saires', 'sair', 'sairmos', 'sairdes', 'saírem'],
+        'imperativo': ['-', 'sai', 'saia', 'saiamos', 'saí', 'saiam'],
+        'gerundio': ['saindo', 'saindo', 'saindo', 'saindo', 'saindo', 'saindo'],
+        'particípio': ['saído', 'saído', 'saído', 'saídos', 'saídas', 'saídos'],
+        'infinitivo': ['sair'],
+        'infinitivo-pessoal': ['sair', 'saires', 'sair', 'sairmos', 'saírdes', 'saírem']
+    },
+    'sentir': {
+        'presente': ['sinto', 'sentes', 'sente', 'sentimos', 'sentis', 'sentem'],
+        'preterito-perfeito': ['senti', 'sentiste', 'sentiu', 'sentimos', 'sentistes', 'sentiram'],
+        'preterito-imperfeito': ['sentia', 'sentias', 'sentia', 'sentíamos', 'sentíeis', 'sentiam'],
+        'preterito-mais-que-perfeito': ['sentira', 'sentiras', 'sentira', 'sentíramos', 'sentíreis', 'sentiram'],
+        'futuro-do-indicativo': ['sentirei', 'sentirás', 'sentirá', 'sentiremos', 'sentireis', 'sentirão'],
+        'futuro-perfeito': ['terei sentido', 'terás sentido', 'terá sentido', 'teremos sentido', 'tereis sentido', 'terão sentido'],
+        'condicional': ['sentiria', 'sentirias', 'sentiria', 'sentiríamos', 'sentiríeis', 'sentiriam'],
+        'condicional-perfeito': ['teria sentido', 'terias sentido', 'teria sentido', 'teríamos sentido', 'teríeis sentido', 'teriam sentido'],
+        'presente-perfeito': ['tenho sentido', 'tens sentido', 'tem sentido', 'temos sentido', 'tendes sentido', 'têm sentido'],
+        'mais-que-perfeito-composto': ['tinha sentido', 'tinhas sentido', 'tinha sentido', 'tínhamos sentido', 'tínheis sentido', 'tinham sentido'],
+        'presente-do-subjuntivo': ['sinta', 'sintas', 'sinta', 'sintamos', 'sintais', 'sintam'],
+        'preterito-imperfeito-do-subjuntivo': ['sentisse', 'sentisses', 'sentisse', 'sentíssemos', 'sentísseis', 'sentissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha sentido', 'tenhas sentido', 'tenha sentido', 'tenhamos sentido', 'tenhais sentido', 'tenham sentido'],
+        'futuro-do-subjuntivo': ['sentir', 'sentires', 'sentir', 'sentirmos', 'sentirdes', 'sentirem'],
+        'imperativo': ['-', 'sente', 'sinta', 'sintamos', 'senti', 'sintam'],
+        'gerundio': ['sentindo', 'sentindo', 'sentindo', 'sentindo', 'sentindo', 'sentindo'],
+        'particípio': ['sentido', 'sentido', 'sentido', 'sentidos', 'sentidas', 'sentidos'],
+        'infinitivo': ['sentir'],
+        'infinitivo-pessoal': ['sentir', 'sentires', 'sentir', 'sentirmos', 'sentirdes', 'sentirem']
+    },
+    'trocar': {
+        'presente': ['troco', 'trocas', 'troca', 'trocamos', 'trocais', 'trocam'],
+        'preterito-perfeito': ['troquei', 'trocaste', 'trocou', 'trocamos', 'trocastes', 'trocaram'],
+        'preterito-imperfeito': ['trocava', 'trocavas', 'trocava', 'trocávamos', 'trocáveis', 'trocavam'],
+        'preterito-mais-que-perfeito': ['trocara', 'trocaras', 'trocara', 'trocáramos', 'trocáreis', 'trocaram'],
+        'futuro-do-indicativo': ['trocarei', 'trocarás', 'trocará', 'trocaremos', 'trocareis', 'trocarão'],
+        'futuro-perfeito': ['terei trocado', 'terás trocado', 'terá trocado', 'teremos trocado', 'tereis trocado', 'terão trocado'],
+        'condicional': ['trocaria', 'trocarias', 'trocaria', 'trocaríamos', 'trocaríeis', 'trocaríam'], 
+        'condicional-perfeito': ['teria trocado', 'terias trocado', 'teria trocado', 'teríamos trocado', 'teríeis trocado', 'teriam trocado'],
+        'presente-perfeito': ['tenho trocado', 'tens trocado', 'tem trocado', 'temos trocado', 'tendes trocado', 'têm trocado'],
+        'mais-que-perfeito-composto': ['tinha trocado', 'tinhas trocado', 'tinha trocado', 'tínhamos trocado', 'tínheis trocado', 'tinham trocado'],
+        'presente-do-subjuntivo': ['troque', 'troques', 'troque', 'troquemos', 'troqueis', 'troquem'],
+        'preterito-imperfeito-do-subjuntivo': ['trocasse', 'trocasses', 'trocasse', 'trocássemos', 'trocásseis', 'trocassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha trocado', 'tenhas trocado', 'tenha trocado', 'tenhamos trocado', 'tenhais trocado', 'tenham trocado'],
+        'futuro-do-subjuntivo': ['trocar', 'trocares', 'trocar', 'trocarmos', 'trocardes', 'trocarem'],
+        'imperativo': ['-', 'troca', 'troque', 'troquemos', 'trocei', 'troquem'],
+        'gerundio': ['trocando', 'trocando', 'trocando', 'trocando', 'trocando', 'trocando'],
+        'particípio': ['trocado', 'trocado', 'trocado', 'trocados', 'trocadas', 'trocados'],
+        'infinitivo': ['trocar'],
+        'infinitivo-pessoal': ['trocar', 'trocares', 'trocar', 'trocarmos', 'trocardes', 'trocarem']
+    },
+    'caminhar': {
+        'presente': ['caminho', 'caminhas', 'caminha', 'caminhamos', 'caminhais', 'caminham'],
+        'preterito-perfeito': ['caminhei', 'caminhaste', 'caminhou', 'caminhamos', 'caminhastes', 'caminharam'],
+        'preterito-imperfeito': ['caminhava', 'caminhavas', 'caminhava', 'caminhávamos', 'caminháveis', 'caminhavam'],
+        'preterito-mais-que-perfeito': ['caminhara', 'caminharas', 'caminhara', 'caminháramos', 'caminháreis', 'caminharam'],
+        'futuro-do-indicativo': ['caminharei', 'caminharás', 'caminhará', 'caminharemos', 'caminhareis', 'caminharão'],
+        'futuro-perfeito': ['terei caminhado', 'terás caminhado', 'terá caminhado', 'teremos caminhado', 'tereis caminhado', 'terão caminhado'],
+        'condicional': ['caminharia', 'caminharias', 'caminharia', 'caminharíamos', 'caminharíeis', 'caminhariam'],
+        'condicional-perfeito': ['teria caminhado', 'terias caminhado', 'teria caminhado', 'teríamos caminhado', 'teríeis caminhado', 'teriam caminhado'],
+        'presente-perfeito': ['tenho caminhado', 'tens caminhado', 'tem caminhado', 'temos caminhado', 'tendes caminhado', 'têm caminhado'],
+        'mais-que-perfeito-composto': ['tinha caminhado', 'tinhas caminhado', 'tinha caminhado', 'tínhamos caminhado', 'tínheis caminhado', 'tinham caminhado'],
+        'presente-do-subjuntivo': ['caminhe', 'caminhes', 'caminhe', 'caminhemos', 'caminheis', 'caminhem'],
+        'preterito-imperfeito-do-subjuntivo': ['caminhasse', 'caminhasses', 'caminhasse', 'caminhássemos', 'caminhásseis', 'caminhassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha caminhado', 'tenhas caminhado', 'tenha caminhado', 'tenhamos caminhado', 'tenhais caminhado', 'tenham caminhado'],
+        'futuro-do-subjuntivo': ['caminhar', 'caminhares', 'caminhar', 'caminharmos', 'caminhardes', 'caminharem'],
+        'imperativo': ['-', 'caminha', 'caminhe', 'caminhemos', 'caminhai', 'caminhem'],
+        'gerundio': ['caminhando', 'caminhando', 'caminhando', 'caminhando', 'caminhando', 'caminhando'],
+        'particípio': ['caminhado', 'caminhado', 'caminhado', 'caminhados', 'caminhadas', 'caminhados'],
+        'infinitivo': ['caminhar'],
+        'infinitivo-pessoal': ['caminhar', 'caminhares', 'caminhar', 'caminharmos', 'caminhardes', 'caminharem']
+    },
+    'correr': {
+        'presente': ['corro', 'corres', 'corre', 'corremos', 'correis', 'correm'],
+        'preterito-perfeito': ['corri', 'correste', 'correu', 'corremos', 'correstes', 'correram'],
+        'preterito-imperfeito': ['corria', 'corrias', 'corria', 'corríamos', 'corríeis', 'corriam'],
+        'preterito-mais-que-perfeito': ['correra', 'correras', 'correra', 'corrêramos', 'corrêreis', 'correram'],
+        'futuro-do-indicativo': ['correrei', 'correrás', 'correrá', 'correremos', 'correreis', 'correrão'],
+        'futuro-perfeito': ['terei corrido', 'terás corrido', 'terá corrido', 'teremos corrido', 'tereis corrido', 'terão corrido'],
+        'condicional': ['correria', 'correrias', 'correria', 'correríamos', 'correríeis', 'correriam'],
+        'condicional-perfeito': ['teria corrido', 'terias corrido', 'teria corrido', 'teríamos corrido', 'teríeis corrido', 'teriam corrido'],
+        'presente-perfeito': ['tenho corrido', 'tens corrido', 'tem corrido', 'temos corrido', 'tendes corrido', 'têm corrido'],
+        'mais-que-perfeito-composto': ['tinha corrido', 'tinhas corrido', 'tinha corrido', 'tínhamos corrido', 'tínheis corrido', 'tinham corrido'],
+        'presente-do-subjuntivo': ['corra', 'corras', 'corra', 'corramos', 'corrais', 'corram'],
+        'preterito-imperfeito-do-subjuntivo': ['corresse', 'corresses', 'corresse', 'corrêssemos', 'corrêsseis', 'corressem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha corrido', 'tenhas corrido', 'tenha corrido', 'tenhamos corrido', 'tenhais corrido', 'tenham corrido'],
+        'futuro-do-subjuntivo': ['correr', 'correres', 'correr', 'corrermos', 'correrdes', 'correrem'],
+        'imperativo': ['-', 'corre', 'corra', 'corramos', 'correi', 'corram'],
+        'gerundio': ['correndo', 'correndo', 'correndo', 'correndo', 'correndo', 'correndo'],
+        'particípio': ['corrido', 'corrido', 'corrido', 'corridos', 'corridas', 'corridos'],
+        'infinitivo': ['correr'],
+        'infinitivo-pessoal': ['correr', 'correres', 'correr', 'corrermos', 'correrdes', 'correrem']
+    },
+    'dormir': {
+        'presente': ['durmo', 'dormes', 'dorme', 'dormimos', 'dormis', 'dormem'],
+        'preterito-perfeito': ['dormí', 'dormiste', 'dormiu', 'dormimos', 'dormistes', 'dormiram'],
+        'preterito-imperfeito': ['dormia', 'dormias', 'dormia', 'dormíamos', 'dormíeis', 'dormiam'],
+        'preterito-mais-que-perfeito': ['dormira', 'dormiras', 'dormira', 'dormíramos', 'dormíreis', 'dormiram'],
+        'futuro-do-indicativo': ['dormirei', 'dormirás', 'dormirá', 'dormiremos', 'dormireis', 'dormirão'],
+        'futuro-perfeito': ['terei dormido', 'terás dormido', 'terá dormido', 'teremos dormido', 'tereis dormido', 'terão dormido'],
+        'condicional': ['dormiria', 'dormirias', 'dormiria', 'dormiríamos', 'dormiríeis', 'dormiriam'],
+        'condicional-perfeito': ['teria dormido', 'terias dormido', 'teria dormido', 'teríamos dormido', 'teríeis dormido', 'teriam dormido'],
+        'presente-perfeito': ['tenho dormido', 'tens dormido', 'tem dormido', 'temos dormido', 'tendes dormido', 'têm dormido'],
+        'mais-que-perfeito-composto': ['tinha dormido', 'tinhas dormido', 'tinha dormido', 'tínhamos dormido', 'tínheis dormido', 'tinham dormido'],
+        'presente-do-subjuntivo': ['durma', 'durmas', 'durma', 'durmamos', 'durmais', 'durmam'],
+        'preterito-imperfeito-do-subjuntivo': ['dormisse', 'dormisses', 'dormisse', 'dormíssemos', 'dormísseis', 'dormissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha dormido', 'tenhas dormido', 'tenha dormido', 'tenhamos dormido', 'tenhais dormido', 'tenham dormido'],
+        'futuro-do-subjuntivo': ['dormir', 'dormires', 'dormir', 'dormirmos', 'dormirdes', 'dormirem'],
+        'imperativo': ['-', 'dorme', 'durma', 'durmamos', 'dormí', 'durmam'],
+        'gerundio': ['dormindo', 'dormindo', 'dormindo', 'dormindo', 'dormindo', 'dormindo'],
+        'particípio': ['dormido', 'dormido', 'dormido', 'dormidos', 'dormidas', 'dormidos'],
+        'infinitivo': ['dormir'],
+        'infinitivo-pessoal': ['dormir', 'dormires', 'dormir', 'dormirmos', 'dormirdes', 'dormirem']
+    },
+    'levantar': {
+        'presente': ['levanto', 'levantas', 'levanta', 'levantamos', 'levantais', 'levantam'],
+        'preterito-perfeito': ['levantei', 'levantaste', 'levantou', 'levantamos', 'levantastes', 'levantaram'],
+        'preterito-imperfeito': ['levantava', 'levantavas', 'levantava', 'levantávamos', 'levantáveis', 'levantavam'],
+        'preterito-mais-que-perfeito': ['levantara', 'levantaras', 'levantara', 'levantáramos', 'levantáreis', 'levantaram'],
+        'futuro-do-indicativo': ['levantarei', 'levantarás', 'levantará', 'levantaremos', 'levantareis', 'levantarão'],
+        'futuro-perfeito': ['terei levantado', 'terás levantado', 'terá levantado', 'teremos levantado', 'tereis levantado', 'terão levantado'],
+        'condicional': ['levantaria', 'levantarias', 'levantaria', 'levantaríamos', 'levantaríeis', 'levantariam'],
+        'condicional-perfeito': ['teria levantado', 'terias levantado', 'teria levantado', 'teríamos levantado', 'teríeis levantado', 'teriam levantado'],
+        'presente-perfeito': ['tenho levantado', 'tens levantado', 'tem levantado', 'temos levantado', 'tendes levantado', 'têm levantado'],
+        'mais-que-perfeito-composto': ['tinha levantado', 'tinhas levantado', 'tinha levantado', 'tínhamos levantado', 'tínheis levantado', 'tinham levantado'],
+        'presente-do-subjuntivo': ['levante', 'levantes', 'levante', 'levantemos', 'levanteis', 'levantem'],
+        'preterito-imperfeito-do-subjuntivo': ['levantasse', 'levantasses', 'levantasse', 'levantássemos', 'levantásseis', 'levantassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha levantado', 'tenhas levantado', 'tenha levantado', 'tenhamos levantado', 'tenhais levantado', 'tenham levantado'],
+        'futuro-do-subjuntivo': ['levantar', 'levantares', 'levantar', 'levantarmos', 'levantardes', 'levantarem'],
+        'imperativo': ['-', 'levanta', 'levante', 'levantemos', 'levantai', 'levantem'],
+        'gerundio': ['levantando', 'levantando', 'levantando', 'levantando', 'levantando', 'levantando'],
+        'particípio': ['levantado', 'levantado', 'levantado', 'levantados', 'levantadas', 'levantados'],
+        'infinitivo': ['levantar'],
+        'infinitivo-pessoal': ['levantar', 'levantares', 'levantar', 'levantarmos', 'levantardes', 'levantarem']
+    },
+    'comprar': {
+        'presente': ['compro', 'compras', 'compra', 'compramos', 'comprais', 'compram'],
+        'preterito-perfeito': ['comprei', 'compraste', 'comprou', 'compramos', 'comprastes', 'compraram'],
+        'preterito-imperfeito': ['comprava', 'compravas', 'comprava', 'comprávamos', 'compráveis', 'compravam'],
+        'preterito-mais-que-perfeito': ['comprara', 'compraras', 'comprara', 'compráramos', 'compráreis', 'compraram'],
+        'futuro-do-indicativo': ['comprarei', 'comprarás', 'comprará', 'compraremos', 'comprareis', 'comprarão'],
+        'futuro-perfeito': ['terei comprado', 'terás comprado', 'terá comprado', 'teremos comprado', 'tereis comprado', 'terão comprado'],
+        'condicional': ['compraria', 'comprarias', 'compraria', 'compraríamos', 'compraríeis', 'comprariam'],
+        'condicional-perfeito': ['teria comprado', 'terias comprado', 'teria comprado', 'teríamos comprado', 'teríeis comprado', 'teriam comprado'],
+        'presente-perfeito': ['tenho comprado', 'tens comprado', 'tem comprado', 'temos comprado', 'tendes comprado', 'têm comprado'],
+        'mais-que-perfeito-composto': ['tinha comprado', 'tinhas comprado', 'tinha comprado', 'tínhamos comprado', 'tínheis comprado', 'tinham comprado'],
+        'presente-do-subjuntivo': ['compre', 'compres', 'compre', 'compremos', 'compreis', 'comprem'],
+        'preterito-imperfeito-do-subjuntivo': ['comprasse', 'comprasses', 'comprasse', 'comprássemos', 'comprásseis', 'comprassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha comprado', 'tenhas comprado', 'tenha comprado', 'tenhamos comprado', 'tenhais comprado', 'tenham comprado'],
+        'futuro-do-subjuntivo': ['comprar', 'comprares', 'comprar', 'comprarmos', 'comprardes', 'comprarem'],
+        'imperativo': ['-', 'compra', 'compre', 'compremos', 'comprai', 'comprem'],
+        'gerundio': ['comprando', 'comprando', 'comprando', 'comprando', 'comprando', 'comprando'],
+        'particípio': ['comprado', 'comprado', 'comprado', 'comprados', 'compradas', 'comprados'],
+        'infinitivo': ['comprar'],
+        'infinitivo-pessoal': ['comprar', 'comprares', 'comprar', 'comprarmos', 'comprardes', 'comprarem']
+    },
+    'vender': {
+        'presente': ['vendo', 'vendes', 'vende', 'vendemos', 'vendeis', 'vendem'],
+        'preterito-perfeito': ['vendi', 'vendeste', 'vendeu', 'vendemos', 'vendestes', 'venderam'],
+        'preterito-imperfeito': ['vendia', 'vendias', 'vendia', 'vendíamos', 'vendíeis', 'vendiam'],
+        'preterito-mais-que-perfeito': ['vendera', 'venderas', 'vendera', 'vendêramos', 'vendêreis', 'venderam'],
+        'futuro-do-indicativo': ['venderei', 'venderás', 'venderá', 'venderemos', 'vendereis', 'venderão'],
+        'futuro-perfeito': ['terei vendido', 'terás vendido', 'terá vendido', 'teremos vendido', 'tereis vendido', 'terão vendido'],
+        'condicional': ['venderia', 'venderias', 'venderia', 'venderíamos', 'venderíeis', 'venderiam'],
+        'condicional-perfeito': ['teria vendido', 'terias vendido', 'teria vendido', 'teríamos vendido', 'teríeis vendido', 'teriam vendido'],
+        'presente-perfeito': ['tenho vendido', 'tens vendido', 'tem vendido', 'temos vendido', 'tendes vendido', 'têm vendido'],
+        'mais-que-perfeito-composto': ['tinha vendido', 'tinhas vendido', 'tinha vendido', 'tínhamos vendido', 'tínheis vendido', 'tinham vendido'],
+        'presente-do-subjuntivo': ['venda', 'vendas', 'venda', 'vendamos', 'vendais', 'vendam'],
+        'preterito-imperfeito-do-subjuntivo': ['vendesse', 'vendesses', 'vendesse', 'vendêssemos', 'vendêsseis', 'vendessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha vendido', 'tenhas vendido', 'tenha vendido', 'tenhamos vendido', 'tenhais vendido', 'tenham vendido'],
+        'futuro-do-subjuntivo': ['vender', 'venderes', 'vender', 'vendermos', 'venderdes', 'venderem'],
+        'imperativo': ['-', 'vende', 'venda', 'vendamos', 'vendei', 'vendam'],
+        'gerundio': ['vendendo', 'vendendo', 'vendendo', 'vendendo', 'vendendo', 'vendendo'],
+        'particípio': ['vendido', 'vendido', 'vendido', 'vendidos', 'vendidas', 'vendidos'],
+        'infinitivo': ['vender'],
+        'infinitivo-pessoal': ['vender', 'venderes', 'vender', 'vendermos', 'venderdes', 'venderem']
+    },
+    'abrir': {
+        'presente': ['abro', 'abres', 'abre', 'abrimos', 'abris', 'abrem'],
+        'preterito-perfeito': ['abri', 'abriste', 'abriu', 'abrimos', 'abristes', 'abriram'],
+        'preterito-imperfeito': ['abria', 'abrias', 'abria', 'abríamos', 'abríeis', 'abriam'],
+        'preterito-mais-que-perfeito': ['abrira', 'abriras', 'abrira', 'abríramos', 'abríreis', 'abriram'],
+        'futuro-do-indicativo': ['abrirei', 'abrirás', 'abrirá', 'abriremos', 'abrireis', 'abrirão'],
+        'futuro-perfeito': ['terei aberto', 'terás aberto', 'terá aberto', 'teremos aberto', 'tereis aberto', 'terão aberto'],
+        'condicional': ['abriria', 'abririas', 'abriria', 'abriríamos', 'abriríeis', 'abririam'],
+        'condicional-perfeito': ['teria aberto', 'terias aberto', 'teria aberto', 'teríamos aberto', 'teríeis aberto', 'teriam aberto'],
+        'presente-perfeito': ['tenho aberto', 'tens aberto', 'tem aberto', 'temos aberto', 'tendes aberto', 'têm aberto'],
+        'mais-que-perfeito-composto': ['tinha aberto', 'tinhas aberto', 'tinha aberto', 'tínhamos aberto', 'tínheis aberto', 'tinham aberto'],
+        'presente-do-subjuntivo': ['abra', 'abras', 'abra', 'abramos', 'abrais', 'abram'],
+        'preterito-imperfeito-do-subjuntivo': ['abrisse', 'abrisses', 'abrisse', 'abríssemos', 'abrísseis', 'abrissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha aberto', 'tenhas aberto', 'tenha aberto', 'tenhamos aberto', 'tenhais aberto', 'tenham aberto'],
+        'futuro-do-subjuntivo': ['abrir', 'abrires', 'abrir', 'abrirmos', 'abrirdes', 'abrirem'],
+        'imperativo': ['-', 'abre', 'abra', 'abramos', 'abri', 'abram'],
+        'gerundio': ['abrindo', 'abrindo', 'abrindo', 'abrindo', 'abrindo', 'abrindo'],
+        'particípio': ['aberto', 'aberto', 'aberto', 'abertos', 'abertas', 'abertos'],
+        'infinitivo': ['abrir'],
+        'infinitivo-pessoal': ['abrir', 'abrires', 'abrir', 'abrirmos', 'abrirdes', 'abrirem']
+    },
+    'fechar': {
+        'presente': ['fecho', 'fechas', 'fecha', 'fechamos', 'fechais', 'fecham'],
+        'preterito-perfeito': ['fechei', 'fechaste', 'fechou', 'fechamos', 'fechastes', 'fecharam'],
+        'preterito-imperfeito': ['fechava', 'fechavas', 'fechava', 'fechávamos', 'fecháveis', 'fechavam'],
+        'preterito-mais-que-perfeito': ['fechara', 'fecharas', 'fechara', 'fecháramos', 'fecháreis', 'fecharam'],
+        'futuro-do-indicativo': ['fecharei', 'fecharás', 'fechará', 'fecharemos', 'fechareis', 'fecharão'],
+        'futuro-perfeito': ['terei fechado', 'terás fechado', 'terá fechado', 'teremos fechado', 'tereis fechado', 'terão fechado'],
+        'condicional': ['fecharia', 'fecharias', 'fecharia', 'fecharíamos', 'fecharíeis', 'fechariam'],
+        'condicional-perfeito': ['teria fechado', 'terias fechado', 'teria fechado', 'teríamos fechado', 'teríeis fechado', 'teriam fechado'],
+        'presente-perfeito': ['tenho fechado', 'tens fechado', 'tem fechado', 'temos fechado', 'tendes fechado', 'têm fechado'],
+        'mais-que-perfeito-composto': ['tinha fechado', 'tinhas fechado', 'tinha fechado', 'tínhamos fechado', 'tínheis fechado', 'tinham fechado'],
+        'presente-do-subjuntivo': ['feche', 'feches', 'feche', 'fechemos', 'fecheis', 'fechem'],
+        'preterito-imperfeito-do-subjuntivo': ['fechasse', 'fechasses', 'fechasse', 'fechássemos', 'fechásseis', 'fechassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha fechado', 'tenhas fechado', 'tenha fechado', 'tenhamos fechado', 'tenhais fechado', 'tenham fechado'],
+        'futuro-do-subjuntivo': ['fechar', 'fechares', 'fechar', 'fecharmos', 'fechardes', 'fecharem'],
+        'imperativo': ['-', 'fecha', 'feche', 'fechemos', 'fechai', 'fechem'],
+        'gerundio': ['fechando', 'fechando', 'fechando', 'fechando', 'fechando', 'fechando'],
+        'particípio': ['fechado', 'fechado', 'fechado', 'fechados', 'fechadas', 'fechados'],
+        'infinitivo': ['fechar'],
+        'infinitivo-pessoal': ['fechar', 'fechares', 'fechar', 'fecharmos', 'fechardes', 'fecharem']
+    },
+    'olhar': {
+        'presente': ['olho', 'olhas', 'olha', 'olhamos', 'olhais', 'olham'],
+        'preterito-perfeito': ['olhei', 'olhaste', 'olhou', 'olhamos', 'olhastes', 'olharam'],
+        'preterito-imperfeito': ['olhava', 'olhavas', 'olhava', 'olhávamos', 'olháveis', 'olhavam'],
+        'preterito-mais-que-perfeito': ['olhara', 'olharas', 'olhara', 'olháramos', 'olháreis', 'olharam'],
+        'futuro-do-indicativo': ['olharei', 'olharás', 'olhará', 'olharemos', 'olhareis', 'olharão'],
+        'condicional': ['olharia', 'olharias', 'olharia', 'olharíamos', 'olharíeis', 'olhariam'],
+        'condicional-perfeito': ['teria olhado', 'terias olhado', 'teria olhado', 'teríamos olhado', 'teríeis olhado', 'teriam olhado'],
+        'presente-perfeito': ['tenho olhado', 'tens olhado', 'tem olhado', 'temos olhado', 'tendes olhado', 'têm olhado'],
+        'mais-que-perfeito-composto': ['tinha olhado', 'tinhas olhado', 'tinha olhado', 'tínhamos olhado', 'tínheis olhado', 'tinham olhado'],
+        'presente-do-subjuntivo': ['olhe', 'olhes', 'olhe', 'olhemos', 'olheis', 'olhem'],
+        'preterito-imperfeito-do-subjuntivo': ['olhasse', 'olhasses', 'olhasse', 'olhássemos', 'olhásseis', 'olhassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha olhado', 'tenhas olhado', 'tenha olhado', 'tenhamos olhado', 'tenhais olhado', 'tenham olhado'],
+        'futuro-do-subjuntivo': ['olhar', 'olhares', 'olhar', 'olharmos', 'olhardes', 'olharem'],
+        'imperativo': ['-', 'olha', 'olhe', 'olhemos', 'olhai', 'olhem'],
+        'gerundio': ['olhando', 'olhando', 'olhando', 'olhando', 'olhando', 'olhando'],
+        'particípio': ['olhado', 'olhado', 'olhado', 'olhados', 'olhadas', 'olhados'],
+        'infinitivo': ['olhar'],
+        'infinitivo-pessoal': ['olhar', 'olhares', 'olhar', 'olharmos', 'olhardes', 'olharem']
+    },
+    'ouvir': {
+        'presente': ['ouço', 'ouves', 'ouve', 'ouvimos', 'ouvis', 'ouvem'],
+        'preterito-perfeito': ['ouvi', 'ouviste', 'ouviu', 'ouvimos', 'ouvistes', 'ouviram'],
+        'preterito-imperfeito': ['ouvia', 'ouvias', 'ouvia', 'ouvíamos', 'ouvíeis', 'ouviam'],
+        'preterito-mais-que-perfeito': ['ouvira', 'ouviras', 'ouvira', 'ouvíramos', 'ouvíreis', 'ouviram'],
+        'futuro-do-indicativo': ['ouvirei', 'ouvirás', 'ouvirá', 'ouviremos', 'ouvireis', 'ouvirão'],
+        'condicional': ['ouviria', 'ouvirias', 'ouviria', 'ouviríamos', 'ouviríeis', 'ouviriam'],
+        'condicional-perfeito': ['teria ouvido', 'terias ouvido', 'teria ouvido', 'teríamos ouvido', 'teríeis ouvido', 'teriam ouvido'],
+        'presente-perfeito': ['tenho ouvido', 'tens ouvido', 'tem ouvido', 'temos ouvido', 'tendes ouvido', 'têm ouvido'],
+        'mais-que-perfeito-composto': ['tinha ouvido', 'tinhas ouvido', 'tinha ouvido', 'tínhamos ouvido', 'tínheis ouvido', 'tinham ouvido'],
+        'presente-do-subjuntivo': ['ouça', 'ouças', 'ouça', 'ouçamos', 'ouçais', 'ouçam'],
+        'preterito-imperfeito-do-subjuntivo': ['ouvisse', 'ouvisses', 'ouvisse', 'ouvíssemos', 'ouvísseis', 'ouvissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha ouvido', 'tenhas ouvido', 'tenha ouvido', 'tenhamos ouvido', 'tenhais ouvido', 'tenham ouvido'],
+        'futuro-do-subjuntivo': ['ouvir', 'ouvires', 'ouvir', 'ouvirmos', 'ouvirdes', 'ouvirem'],
+        'imperativo': ['-', 'ouve', 'ouça', 'ouçamos', 'ouvi', 'ouçam'],
+        'gerundio': ['ouvindo', 'ouvindo', 'ouvindo', 'ouvindo', 'ouvindo', 'ouvindo'],
+        'particípio': ['ouvido', 'ouvido', 'ouvido', 'ouvidos', 'ouvidas', 'ouvidos'],
+        'infinitivo': ['ouvir'],
+        'infinitivo-pessoal': ['ouvir', 'ouvires', 'ouvir', 'ouvirmos', 'ouvirdes', 'ouvirem']
+    },
+    'sentir': {
+        'presente': ['sinto', 'sentes', 'sente', 'sentimos', 'sentis', 'sentem'],
+        'preterito-perfeito': ['senti', 'sentiste', 'sentiu', 'sentimos', 'sentistes', 'sentiram'],
+        'preterito-imperfeito': ['sentia', 'sentias', 'sentia', 'sentíamos', 'sentíeis', 'senti'],
+        'preterito-mais-que-perfeito': ['sentira', 'sentiras', 'sentira', 'sentíramos', 'sentíreis', 'sentiram'],
+        'futuro-do-indicativo': ['sentirei', 'sentirás', 'sentirá', 'sentiremos', 'sentireis', 'sentirão'],
+        'condicional': ['sentiria', 'sentirias', 'sentiria', 'sentiríamos', 'sentiríeis', 'sentiriam'],
+        'condicional-perfeito': ['teria sentido', 'terias sentido', 'teria sentido', 'teríamos sentido', 'teríeis sentido', 'teriam sentido'],
+        'presente-perfeito': ['tenho sentido', 'tens sentido', 'tem sentido', 'temos sentido', 'tendes sentido', 'têm sentido'],
+        'mais-que-perfeito-composto': ['tinha sentido', 'tinhas sentido', 'tinha sentido', 'tínhamos sentido', 'tínheis sentido', 'tinham sentido'],
+        'presente-do-subjuntivo': ['sinta', 'sintas', 'sinta', 'sintamos', 'sintais', 'sintam'],
+        'preterito-imperfeito-do-subjuntivo': ['sentisse', 'sentisses', 'sentisse', 'sentíssemos', 'sentísseis', 'sentissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha sentido', 'tenhas sentido', 'tenha sentido', 'tenhamos sentido', 'tenhais sentido', 'tenham sentido'],
+        'futuro-do-subjuntivo': ['sentir', 'sentires', 'sentir', 'sentirmos', 'sentirdes', 'sentirem'],
+        'imperativo': ['-', 'sente', 'sinta', 'sintamos', 'senti', 'sintam'],
+        'gerundio': ['sentindo', 'sentindo', 'sentindo', 'sentindo', 'sentindo', 'sentindo'],
+        'particípio': ['sentido', 'sentido', 'sentido', 'sentidos', 'sentidas', 'sentidos'],
+        'infinitivo': ['sentir'],
+        'infinitivo-pessoal': ['sentir', 'sentires', 'sentir', 'sentirmos', 'sentirdes', 'sentirem']
+    },
+    'fumar': {
+        'presente': ['fumo', 'fumas', 'fuma', 'fumamos', 'fumais', 'fumam'],
+        'preterito-perfeito': ['fumei', 'fumaste', 'fumou', 'fumamos', 'fumastes', 'fumaram'],
+        'preterito-imperfeito': ['fumava', 'fumavas', 'fumava', 'fumávamos', 'fumáveis', 'fumavam'],
+        'preterito-mais-que-perfeito': ['fumara', 'fumaras', 'fumara', 'fumáramos', 'fumáreis', 'fumaram'],
+        'futuro-do-indicativo': ['fumarei', 'fumarás', 'fumará', 'fumaremos', 'fumareis', 'fumarão'],
+        'futuro-perfeito': ['terei fumado', 'terás fumado', 'terá fumado', 'teremos fumado', 'tereis fumado', 'terão fumado'],
+        'condicional': ['fumaria', 'fumarias', 'fumaria', 'fumaríamos', 'fumaríeis', 'fumariam'],
+        'presente-perfeito': ['tenho fumado', 'tens fumado', 'tem fumado', 'temos fumado', 'tendes fumado', 'têm fumado'],
+        'mais-que-perfeito-composto': ['tinha fumado', 'tinhas fumado', 'tinha fumado', 'tínhamos fumado', 'tínheis fumado', 'tinham fumado'],
+        'presente-do-subjuntivo': ['fume', 'fumes', 'fume', 'fumemos', 'fumeis', 'fumem'],
+        'preterito-imperfeito-do-subjuntivo': ['fumasse', 'fumasses', 'fumasse', 'fumássemos', 'fumásseis', 'fumassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha fumado', 'tenhas fumado', 'tenha fumado', 'tenhamos fumado', 'tenhais fumado', 'tenham fumado'],
+        'futuro-do-subjuntivo': ['fumar', 'fumares', 'fumar', 'fumarmos', 'fumardes', 'fumarem'],
+        'imperativo': ['-', 'fuma', 'fume', 'fumemos', 'fumai', 'fumem'],
+        'gerundio': ['fumando', 'fumando', 'fumando', 'fumando', 'fumando', 'fumando'],
+        'particípio': ['fumado', 'fumado', 'fumado', 'fumados', 'fumadas', 'fumados'],
+        'infinitivo': ['fumar'],
+        'infinitivo-pessoal': ['fumar', 'fumares', 'fumar', 'fumarmos', 'fumardes', 'fumarem']
+    },
+    'pagar': {
+        'presente': ['pago', 'pagas', 'paga', 'pagamos', 'pagais', 'pagam'],
+        'preterito-perfeito': ['paguei', 'pagaste', 'pagou', 'pagamos', 'pagastes', 'pagaram'],
+        'preterito-imperfeito': ['pagava', 'pagavas', 'pagava', 'pagávamos', 'pagáveis', 'pagavam'],
+        'preterito-mais-que-perfeito': ['pagara', 'pagaras', 'pagara', 'pagáramos', 'pagáreis', 'pagaram'],
+        'futuro-do-indicativo': ['pagarei', 'pagarás', 'pagará', 'pagaremos', 'pagareis', 'pagarão'],
+        'futuro-perfeito': ['terei pago', 'terás pago', 'terá pago', 'teremos pago', 'tereis pago', 'terão pago'],
+        'condicional': ['pagaria', 'pagarias', 'pagaria', 'pagaríamos', 'pagaríeis', 'pagariam'],
+        'condicional-perfeito': ['teria pago', 'terias pago', 'teria pago', 'teríamos pago', 'teríeis pago', 'teriam pago'],
+        'presente-perfeito': ['tenho pago', 'tens pago', 'tem pago', 'temos pago', 'tendes pago', 'têm pago'],
+        'mais-que-perfeito-composto': ['tinha pago', 'tinhas pago', 'tinha pago', 'tínhamos pago', 'tínheis pago', 'tinham pago'],
+        'presente-do-subjuntivo': ['pague', 'pagues', 'pague', 'paguemos', 'pagueis', 'paguem'],
+        'preterito-imperfeito-do-subjuntivo': ['pagasse', 'pagasses', 'pagasse', 'pagássemos', 'pagásseis', 'pagassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha pago', 'tenhas pago', 'tenha pago', 'tenhamos pago', 'tenhais pago', 'tenham pago'],
+        'futuro-do-subjuntivo': ['pagar', 'pagares', 'pagar', 'pagarmos', 'pagardes', 'pagarem'],
+        'imperativo': ['-', 'paga', 'pague', 'paguemos', 'pagai', 'paguem'],
+        'gerundio': ['pagando', 'pagando', 'pagando', 'pagando', 'pagando', 'pagando'],
+        'particípio': ['pago', 'pago', 'pago', 'pagos', 'pagas', 'pagos'],
+        'infinitivo': ['pagar'],
+        'infinitivo-pessoal': ['pagar', 'pagares', 'pagar', 'pagarmos', 'pagardes', 'pagarem']
+    },
+    'receber': {
+        'presente': ['recebo', 'recebes', 'recebe', 'recebemos', 'recebeis', 'recebem'],
+        'preterito-perfeito': ['recebi', 'recebeste', 'recebeu', 'recebemos', 'recebestes', 'receberam'],
+        'preterito-imperfeito': ['recebia', 'recebias', 'recebia', 'recebíamos', 'recebíeis', 'recebiam'],
+        'preterito-mais-que-perfeito': ['recebera', 'receberas', 'recebera', 'recebêramos', 'recebêreis', 'receberam'],
+        'futuro-do-indicativo': ['receberei', 'receberás', 'receberá', 'receberemos', 'recebereis', 'receberão'],
+        'futuro-perfeito': ['terei recebido', 'terás recebido', 'terá recebido', 'teremos recebido', 'tereis recebido', 'terão recebido'],
+        'condicional': ['receberia', 'receberias', 'receberia', 'receberíamos', 'receberíeis', 'receberiam'],
+        'presente-perfeito': ['tenho recebido', 'tens recebido', 'tem recebido', 'temos recebido', 'tendes recebido', 'têm recebido'],
+        'mais-que-perfeito-composto': ['tinha recebido', 'tinhas recebido', 'tinha recebido', 'tínhamos recebido', 'tínheis recebido', 'tinham recebido'],
+        'presente-do-subjuntivo': ['receba', 'recebas', 'receba', 'recebamos', 'recebais', 'recebam'],
+        'preterito-imperfeito-do-subjuntivo': ['recebesse', 'recebesses', 'recebesse', 'recebéssemos', 'recebésseis', 'recebessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha recebido', 'tenhas recebido', 'tenha recebido', 'tenhamos recebido', 'tenhais recebido', 'tenham recebido'],
+        'futuro-do-subjuntivo': ['receber', 'receberes', 'receber', 'recebermos', 'receberdes', 'receberem'],
+        'imperativo': ['-', 'recebe', 'receba', 'recebamos', 'recebei', 'recebam'],
+        'gerundio': ['recebendo', 'recebendo', 'recebendo', 'recebendo', 'recebendo', 'recebendo'],
+        'particípio': ['recebido', 'recebido', 'recebido', 'recebidos', 'recebidas', 'recebidos'],
+        'infinitivo': ['receber'],
+        'infinitivo-pessoal': ['receber', 'receberes', 'receber', 'recebermos', 'receberdes', 'receberem']
+    },
+    'dançar': {
+        'presente': ['danço', 'danças', 'dança', 'dançamos', 'dançais', 'dançam'],
+        'preterito-perfeito': ['dancei', 'dançaste', 'dançou', 'dançamos', 'dançastes', 'dançaram'],
+        'preterito-imperfeito': ['dançava', 'dançavas', 'dançava', 'dançávamos', 'dançáveis', 'dançavam'],
+        'preterito-mais-que-perfeito': ['dançara', 'dançaras', 'dançara', 'dançáramos', 'dançáreis', 'dançaram'],
+        'futuro-do-indicativo': ['dançarei', 'dançarás', 'dançará', 'dançaremos', 'dançareis', 'dançarão'],
+        'futuro-perfeito': ['terei dançado', 'terás dançado', 'terá dançado', 'teremos dançado', 'tereis dançado', 'terão dançado'],
+        'condicional': ['dançaria', 'dançarias', 'dançaria', 'dançaríamos', 'dançaríeis', 'dançariam'], 
+        'condicional-perfeito': ['teria dançado', 'terias dançado', 'teria dançado', 'teríamos dançado', 'teríeis dançado', 'teriam dançado'],
+        'presente-perfeito': ['tenho dançado', 'tens dançado', 'tem dançado', 'temos dançado', 'tendes dançado', 'têm dançado'],
+        'mais-que-perfeito-composto': ['tinha dançado', 'tinhas dançado', 'tinha dançado', 'tínhamos dançado', 'tínheis dançado', 'tinham dançado'],
+        'presente-do-subjuntivo': ['dance', 'dances', 'dance', 'dancemos', 'danceis', 'dancem'],
+        'preterito-imperfeito-do-subjuntivo': ['dançasse', 'dançasses', 'dançasse', 'dançássemos', 'dançásseis', 'dançassem'],
+        'futuro-do-subjuntivo': ['dançar', 'dançares', 'dançar', 'dançarmos', 'dançardes', 'dançarem'],
+        'imperativo': ['-', 'dança', 'dance', 'dancemos', 'dançai', 'dancem'],
+        'gerundio': ['dançando', 'dançando', 'dançando', 'dançando', 'dançando', 'dançando'],
+        'particípio': ['dançado', 'dançado', 'dançado', 'dançados', 'dançadas', 'dançados'],
+        'infinitivo': ['dançar'],
+        'infinitivo-pessoal': ['dançar', 'dançares', 'dançar', 'dançarmos', 'dançardes', 'dançarem']
+    },
+    'decidir': {
+        'presente': ['decido', 'decides', 'decide', 'decidimos', 'decidis', 'decidem'],
+        'preterito-perfeito': ['decidi', 'decidiste', 'decidiu', 'decidimos', 'decidistes', 'decidiram'],
+        'preterito-imperfeito': ['decidia', 'decidias', 'decidia', 'decidíamos', 'decidíeis', 'decidiam'],
+        'preterito-mais-que-perfeito': ['decidira', 'decidiras', 'decidira', 'decidíramos', 'decidíreis', 'decidiram'],
+        'futuro-do-indicativo': ['decidirei', 'decidirás', 'decidirá', 'decidiremos', 'decidireis', 'decidirão'],
+        'condicional': ['decidiria', 'decidirias', 'decidiria', 'decidiríamos', 'decidiríeis', 'decidiriam'], 
+        'condicional-perfeito': ['teria decidido', 'terias decidido', 'teria decidido', 'teríamos decidido', 'teríeis decidido', 'teriam decidido'],
+        'presente-perfeito': ['tenho decidido', 'tens decidido', 'tem decidido', 'temos decidido', 'tendes decidido', 'têm decidido'],
+        'mais-que-perfeito-composto': ['tinha decidido', 'tinhas decidido', 'tinha decidido', 'tínhamos decidido', 'tínheis decidido', 'tinham decidido'],
+        'presente-do-subjuntivo': ['decida', 'decidas', 'decida', 'decidamos', 'decidais', 'decidam'],
+        'preterito-imperfeito-do-subjuntivo': ['decidisse', 'decidisses', 'decidisse', 'decidíssemos', 'decidísseis', 'decidissem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha decidido', 'tenhas decidido', 'tenha decidido', 'tenhamos decidido', 'tenhais decidido', 'tenham decidido'],
+        'futuro-do-subjuntivo': ['decidir', 'decidires', 'decidir', 'decidirmos', 'decidirdes', 'decidirem'],
+        'imperativo': ['-', 'decide', 'decida', 'decidamos', 'decidi', 'decidam'],
+        'gerundio': ['decidindo', 'decidindo', 'decidindo', 'decidindo', 'decidindo', 'decidindo'],
+        'particípio': ['decidido', 'decidido', 'decidido', 'decididos', 'decididas', 'decididos'],
+        'infinitivo': ['decidir'],
+        'infinitivo-pessoal': ['decidir', 'decidires', 'decidir', 'decidirmos', 'decidirdes', 'decidirem']
+    },
+    'desenhar': {
+        'presente': ['desenho', 'desenhas', 'desenha', 'desenhamos', 'desenhais', 'desenham'],
+        'preterito-perfeito': ['desenhei', 'desenhastes', 'desenhou', 'desenhamos', 'desenhastes', 'desenharam'],
+        'preterito-imperfeito': ['desenhava', 'desenhavas', 'desenhava', 'desenhávamos', 'desenháveis', 'desenhavam'],
+        'preterito-mais-que-perfeito': ['desenhara', 'desenharas', 'desenhara', 'desenháramos', 'desenháreis', 'desenharam'],
+        'futuro-do-indicativo': ['desenharei', 'desenharás', 'desenhara', 'desenharemos', 'desenhareis', 'desenharão'],
+        'condicional': ['desenharia', 'desenharías', 'desenharía', 'desenharíamos', 'desenharíeis', 'desenharían'], 
+        'condicional-perfeito': ['teria desenhado', 'terias desenhado', 'teria desenhado', 'teríamos desenhado', 'teríeis desenhado', 'teriam desenhado'],
+        'presente-perfeito': ['tenho desenhado', 'tens desenhado', 'tem desenhado', 'temos desenhado', 'tendes desenhado', 'têm desenhado'],
+        'mais-que-perfeito-composto': ['tinha desenhado', 'tinhas desenhado', 'tinha desenhado', 'tínhamos desenhado', 'tínheis desenhado', 'tinham desenhado'],
+        'presente-do-subjuntivo': ['desenhe', 'desenhes', 'desenhe', 'desenhamos', 'desenheis', 'desenhem'],
+        'preterito-imperfeito-do-subjuntivo': ['desenhassse', 'desenhasses', 'desenhassse', 'desenhássemos', 'desenhásseis', 'desenhassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha desenhado', 'tenhas desenhado', 'tenha desenhado', 'tenhamos desenhado', 'tenhais desenhado', 'tenham desenhado'],
+        'futuro-do-subjuntivo': ['desenhar', 'desenhares', 'desenhar', 'desenharmos', 'desenhardes', 'desenharem'],
+        'imperativo': ['-', 'desenha', 'desenhe', 'desenhamos', 'desenhai', 'desenhem'],
+        'gerundio': ['desenhando', 'desenhando', 'desenhando', 'desenhando', 'desenhando', 'desenhando'],
+        'particípio': ['desenhado', 'desenhado', 'desenhado', 'desenhados', 'desenhadas', 'desenhados'],
+        'infinitivo': ['desenhar'],
+        'infinitivo-pessoal': ['desenhar', 'desenhares', 'desenhar', 'desenharmos', 'desenhardes', 'desenharem']
+    },
+    'entender': {
+        'presente': ['entendo', 'entendes', 'entende', 'entendemos', 'entendeis', 'entendem'],
+        'preterito-perfeito': ['entendi', 'entendeste', 'entendeu', 'entendemos', 'entendestes', 'entenderam'],
+        'preterito-imperfeito': ['entendia', 'entendias', 'entendia', 'entendíamos', 'entendíeis', 'entendiam'],
+        'preterito-mais-que-perfeito': ['entendera', 'entenderas', 'entendera', 'entendêramos', 'entendêreis', 'entenderam'],
+        'futuro-do-indicativo': ['entenderei', 'entenderás', 'entenderá', 'entenderemos', 'entendereis', 'entenderão'],
+        'condicional': ['entenderia', 'entenderias', 'entenderia', 'entenderíamos', 'entenderíeis', 'entenderiam'], 
+        'condicional-perfeito': ['teria entendido', 'terias entendido', 'teria entendido', 'teríamos entendido', 'teríeis entendido', 'teriam entendido'],
+        'presente-perfeito': ['tenho entendido', 'tens entendido', 'tem entendido', 'temos entendido', 'tendes entendido', 'têm entendido'],
+        'mais-que-perfeito-composto': ['tinha entendido', 'tinhas entendido', 'tinha entendido', 'tínhamos entendido', 'tínheis entendido', 'tinham entendido'],
+        'presente-do-subjuntivo': ['entenda', 'entendas', 'entenda', 'entendamos', 'entendais', 'entendam'],
+        'preterito-imperfeito-do-subjuntivo': ['entendesse', 'entendesses', 'entendesse', 'entendêssemos', 'entendêsseis', 'entendessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha entendido', 'tenhas entendido', 'tenha entendido', 'tenhamos entendido', 'tenhais entendido', 'tenham entendido'],
+        'futuro-do-subjuntivo': ['entender', 'entenderes', 'entender', 'entendermos', 'entenderdes', 'entenderem'],
+        'imperativo': ['-', 'entende', 'entenda', 'entendamos', 'entendei', 'entendam'],
+        'gerundio': ['entendendo', 'entendendo', 'entendendo', 'entendendo', 'entendendo', 'entendendo'],
+        'particípio': ['entendido', 'entendido', 'entendido', 'entendidos', 'entendidas', 'entendidos'],
+        'infinitivo': ['entender'],
+        'infinitivo-pessoal': ['entender', 'entenderes', 'entender', 'entendermos', 'entenderdes', 'entenderem']
+    },
+    'abordar': {
+        'presente': ['abordo', 'abordas', 'aborda', 'abordamos', 'abordais', 'abordam'],
+        'preterito-perfeito': ['abordei', 'abordaste', 'abordou', 'abordamos', 'abordastes', 'abordaram'],
+        'preterito-imperfeito': ['abordava', 'abordavas', 'abordava', 'abordávamos', 'abordáveis', 'abordavam'],
+        'preterito-mais-que-perfeito': ['abordara', 'abordaras', 'abordara', 'abordáramos', 'abordáreis', 'abordaram'],
+        'futuro-do-indicativo': ['abordarei', 'abordarás', 'abordará', 'abordaremos', 'abordareis', 'abordarão'],
+        'futuro-perfeito': ['terei abordado', 'terás abordado', 'terá abordado', 'teremos abordado', 'tereis abordado', 'terão abordado'],
+        'condicional': ['abordaria', 'abordarias', 'abordaria', 'abordaríamos', 'abordaríeis', 'abordariam'],
+        'condicional-perfeito': ['teria abordado', 'terias abordado', 'teria abordado', 'teríamos abordado', 'teríeis abordado', 'teriam abordado'],
+        'presente-perfeito': ['tenho abordado', 'tens abordado', 'tem abordado', 'temos abordado', 'tendes abordado', 'têm abordado'],
+        'mais-que-perfeito-composto': ['tinha abordado', 'tinhas abordado', 'tinha abordado', 'tínhamos abordado', 'tínheis abordado', 'tinham abordado'],
+        'presente-do-subjuntivo': ['aborde', 'abordes', 'aborde', 'abordemos', 'abordeis', 'abordem'],
+        'preterito-imperfeito-do-subjuntivo': ['abordasse', 'abordasses', 'abordasse', 'abordássemos', 'abordásseis', 'abordassem'],
+        'futuro-do-subjuntivo': ['abordar', 'abordares', 'abordar', 'abordarmos', 'abordardes', 'abordarem'],
+        'imperativo': ['-', 'aborda', 'aborde', 'abordemos', 'abordai', 'abordem'],
+        'gerundio': ['abordando', 'abordando', 'abordando', 'abordando', 'abordando', 'abordando'],
+        'particípio': ['abordado', 'abordado', 'abordado', 'abordados', 'abordadas', 'abordados'],
+        'infinitivo': ['abordar'],
+        'infinitivo-pessoal': ['abordar', 'abordares', 'abordar', 'abordarmos', 'abordardes', 'abordarem']
+    },
+    'adequar': {
+        'presente': ['adequo', 'adequas', 'adequa', 'adequamos', 'adequais', 'adequam'],
+        'preterito-perfeito': ['adequei', 'adequaste', 'adequou', 'adequamos', 'adequastes', 'adequaram'],
+        'preterito-imperfeito': ['adequava', 'adequavas', 'adequava', 'adequávamos', 'adequáveis', 'adequavam'],
+        'preterito-mais-que-perfeito': ['adequara', 'adequaras', 'adequara', 'adequáramos', 'adequáreis', 'adequaram'],
+        'futuro-do-indicativo': ['adequarei', 'adequarás', 'adequará', 'adequaremos', 'adequareis', 'adequarão'],
+        'futuro-perfeito': ['terei adequado', 'terás adequado', 'terá adequado', 'teremos adequado', 'tereis adequado', 'terão adequado'],
+        'condicional': ['adequaria', 'adequarias', 'adequaria', 'adequaríamos', 'adequaríeis', 'adequariam'],
+        'condicional-perfeito': ['teria adequado', 'terias adequado', 'teria adequado', 'teríamos adequado', 'teríeis adequado', 'teriam adequado'],
+        'presente-perfeito': ['tenho adequado', 'tens adequado', 'tem adequado', 'temos adequado', 'tendes adequado', 'têm adequado'],
+        'mais-que-perfeito-composto': ['tinha adequado', 'tinhas adequado', 'tinha adequado', 'tínhamos adequado', 'tínheis adequado', 'tinham adequado'],
+        'presente-do-subjuntivo': ['adeque', 'adeques', 'adeque', 'adequemos', 'adequeis', 'adequem'],
+        'preterito-imperfeito-do-subjuntivo': ['adequasse', 'adequasses', 'adequasse', 'adequássemos', 'adequásseis', 'adequassem'],
+        'futuro-do-subjuntivo': ['adequar', 'adquares', 'adequar', 'adequarmos', 'adequardes', 'adequarem'],
+        'imperativo': ['-', 'adequar', 'adeque', 'adequemos', 'adequai', 'adequem'],
+        'gerundio': ['adequando', 'adequando', 'adequando', 'adequando', 'adequando', 'adequando'],
+        'particípio': ['adequado', 'adequado', 'adequado', 'adequados', 'adequadas', 'adequados'],
+        'infinitivo': ['adequar'],
+        'infinitivo-pessoal': ['adequar', 'adquares', 'adequar', 'adequarmos', 'adequardes', 'adequarem']
+    },
+    'adquirir': {
+        'presente': ['adquiro', 'adquires', 'adquire', 'adquirimos', 'adquiris', 'adquirem'],
+        'preterito-perfeito': ['adquiri', 'adquiriste', 'adquiriu', 'adquirimos', 'adquiristes', 'adquiriram'],
+        'preterito-imperfeito': ['adquiria', 'adquirias', 'adquiria', 'adquiríamos', 'adquiríeis', 'adquiriam'],
+        'preterito-mais-que-perfeito': ['adquirira', 'adquiriras', 'adquirira', 'adquiríramos', 'adquiríreis', 'adquiriram'],
+        'futuro-do-indicativo': ['adquirirei', 'adquirirás', 'adquirirá', 'adquiriremos', 'adquirireis', 'adquirirão'],
+        'futuro-perfeito': ['terei adquirido', 'terás adquirido', 'terá adquirido', 'teremos adquirido', 'tereis adquirido', 'terão adquirido'],
+        'condicional': ['adquiriria', 'adquiririas', 'adquiriria', 'adquiriríamos', 'adquiriríeis', 'adquiririam'],
+        'condicional-perfeito': ['teria adquirido', 'terias adquirido', 'teria adquirido', 'teríamos adquirido', 'teríeis adquirido', 'teriam adquirido'],
+        'presente-perfeito': ['tenho adquirido', 'tens adquirido', 'tem adquirido', 'temos adquirido', 'tendes adquirido', 'têm adquirido'],
+        'mais-que-perfeito-composto': ['tinha adquirido', 'tinhas adquirido', 'tinha adquirido', 'tínhamos adquirido', 'tínheis adquirido', 'tinham adquirido'],
+        'presente-do-subjuntivo': ['adquira', 'adquiras', 'adquira', 'adquiramos', 'adquirais', 'adquiram'],
+        'preterito-imperfeito-do-subjuntivo': ['adquirisse', 'adquirisses', 'adquirisse', 'adquiríssemos', 'adquirísseis', 'adquirissem'],
+        'futuro-do-subjuntivo': ['adquirir', 'adquirires', 'adquirir', 'adquirirmos', 'adquirirdes', 'adquirirem'],
+        'imperativo': ['-', 'adquire', 'adquira', 'adquiramos', 'adquiri', 'adquiram'],
+        'gerundio': ['adquirindo', 'adquirindo', 'adquirindo', 'adquirindo', 'adquirindo', 'adquirindo'],
+        'particípio': ['adquirido', 'adquirido', 'adquirido', 'adquiridos', 'adquiridas', 'adquiridos'],
+        'infinitivo': ['adquirir'],
+        'infinitivo-pessoal': ['adquirir', 'adquirires', 'adquirir', 'adquirirmos', 'adquirirdes', 'adquirirem']
+    },
+    'analisar': {
+        'presente': ['analiso', 'analisas', 'analisa', 'analisamos', 'analisais', 'analisam'],
+        'preterito-perfeito': ['analisei', 'analisaste', 'analisou', 'analisamos', 'analisastes', 'analisaram'],
+        'preterito-imperfeito': ['analisava', 'analisavas', 'analisava', 'analisávamos', 'analisáveis', 'analisavam'],
+        'preterito-mais-que-perfeito': ['analisara', 'analisaras', 'analisara', 'analisáramos', 'analisáreis', 'analisaram'],
+        'futuro-do-indicativo': ['analisarei', 'analisarás', 'analisará', 'analisaremos', 'analisareis', 'analisarão'],
+        'futuro-perfeito': ['terei analisado', 'terás analisado', 'terá analisado', 'teremos analisado', 'tereis analisado', 'terão analisado'],
+        'condicional': ['analisaria', 'analisarias', 'analisaria', 'analisaríamos', 'analisaríeis', 'analisariam'],
+        'condicional-perfeito': ['teria analisado', 'terias analisado', 'teria analisado', 'teríamos analisado', 'teríeis analisado', 'teriam analisado'],
+        'presente-perfeito': ['tenho analisado', 'tens analisado', 'tem analisado', 'temos analisado', 'tendes analisado', 'têm analisado'],
+        'mais-que-perfeito-composto': ['tinha analisado', 'tinhas analisado', 'tinha analisado', 'tínhamos analisado', 'tínheis analisado', 'tinham analisado'],
+        'presente-do-subjuntivo': ['analise', 'analises', 'analise', 'analicemos', 'analiseis', 'analisem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha analisado', 'tenhas analisado', 'tenha analisado', 'tenhamos analisado', 'tenhais analisado', 'tenham analisado'],
+        'preterito-imperfeito-do-subjuntivo': ['analisasse', 'analisasses', 'analisasse', 'analisássemos', 'analisásseis', 'analisassem'],
+        'futuro-do-subjuntivo': ['analisar', 'analisares', 'analisar', 'analisarmos', 'analisardes', 'analisarem'],
+        'imperativo': ['-', 'analisa', 'analise', 'analicemos', 'analisai', 'analisem'],
+        'gerundio': ['analisando', 'analisando', 'analisando', 'analisando', 'analisando', 'analisando'],
+        'particípio': ['analisado', 'analisado', 'analisado', 'analisados', 'analisadas', 'analisados'],
+        'infinitivo': ['analisar'],
+        'infinitivo-pessoal': ['analisar', 'analisares', 'analisar', 'analisarmos', 'analisardes', 'analisarem']
+    },
+    'escrever': {
+        'presente': ['escrevo', 'escreves', 'escreve', 'escrevemos', 'escreveis', 'escrevem'],
+        'preterito-perfeito': ['escrevi', 'escreveste', 'escreveu', 'escrevemos', 'escrevestes', 'escreveram'],
+        'preterito-imperfeito': ['escrevia', 'escrevias', 'escrevia', 'escrevíamos', 'escrevíeis', 'escreviam'],
+        'preterito-mais-que-perfeito': ['escrevera', 'escreveras', 'escrevera', 'escrevêramos', 'escrevêreis', 'escreveram'],
+        'futuro-do-indicativo': ['escreverei', 'escreverás', 'escreverá', 'escreveremos', 'escrevereis', 'escreverão'],
+        'futuro-perfeito': ['terei escrito', 'terás escrito', 'terá escrito', 'teremos escrito', 'tereis escrito', 'terão escrito'],
+        'condicional': ['escreveria', 'escreverias', 'escreveria', 'escreveríamos', 'escreveríeis', 'escreveriam'],
+        'condicional-perfeito': ['teria escrito', 'terias escrito', 'teria escrito', 'teríamos escrito', 'teríeis escrito', 'teriam escrito'],
+        'presente-perfeito': ['tenho escrito', 'tens escrito', 'tem escrito', 'temos escrito', 'tendes escrito', 'têm escrito'],
+        'mais-que-perfeito-composto': ['tinha escrito', 'tinhas escrito', 'tinha escrito', 'tínhamos escrito', 'tínheis escrito', 'tinham escrito'],
+        'presente-do-subjuntivo': ['escreva', 'escrevas', 'escreva', 'escrevamos', 'escrevais', 'escrevam'],
+        'preterito-imperfeito-do-subjuntivo': ['escrevesse', 'escrevesses', 'escrevesse', 'escrevêssemos', 'escrevêsseis', 'escrevessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha escrito', 'tenhas escrito', 'tenha escrito', 'tenhamos escrito', 'tenhais escrito', 'tenham escrito'],
+        'futuro-do-subjuntivo': ['escrever', 'escreveres', 'escrever', 'escrevermos', 'escreverdes', 'escreverem'],
+        'imperativo': ['-', 'escreve', 'escreva', 'escrevamos', 'escrevei', 'escrevam'],
+        'gerundio': ['escrevendo', 'escrevendo', 'escrevendo', 'escrevendo', 'escrevendo', 'escrevendo'],
+        'particípio': ['escrito', 'escrito', 'escrito', 'escritos', 'escritas', 'escritos'],
+        'infinitivo': ['escrever'],
+        'infinitivo-pessoal': ['escrever', 'escreveres', 'escrever', 'escrevermos', 'escreverdes', 'escreverem']
+    },
+    'aprender': {
+        'presente': ['aprendo', 'aprendes', 'aprende', 'aprendemos', 'aprendeis', 'aprendem'],
+        'preterito-perfeito': ['aprendi', 'aprendeste', 'aprendeu', 'aprendemos', 'aprendestes', 'aprenderam'],
+        'preterito-imperfeito': ['aprendia', 'aprendias', 'aprendia', 'aprendíamos', 'aprendíeis', 'aprendiam'],
+        'preterito-mais-que-perfeito': ['aprendera', 'aprenderas', 'aprendera', 'aprendêramos', 'aprendêreis', 'aprenderam'],
+        'futuro-do-indicativo': ['aprenderei', 'aprenderás', 'aprenderá', 'aprenderemos', 'aprendereis', 'aprenderão'],
+        'futuro-perfeito': ['terei aprendido', 'terás aprendido', 'terá aprendido', 'teremos aprendido', 'tereis aprendido', 'terão aprendido'],
+        'condicional': ['aprenderia', 'aprenderias', 'aprenderia', 'aprenderíamos', 'aprenderíeis', 'aprenderiam'],
+        'presente-perfeito': ['tenho aprendido', 'tens aprendido', 'tem aprendido', 'temos aprendido', 'tendes aprendido', 'têm aprendido'],
+        'mais-que-perfeito-composto': ['tinha aprendido', 'tinhas aprendido', 'tinha aprendido', 'tínhamos aprendido', 'tínheis aprendido', 'tinham aprendido'],
+        'presente-do-subjuntivo': ['aprenda', 'aprendas', 'aprenda', 'aprendamos', 'aprendais', 'aprendam'],
+        'preterito-imperfeito-do-subjuntivo': ['aprendesse', 'aprendesses', 'aprendesse', 'aprendêssemos', 'aprendêsseis', 'aprendessem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha aprendido', 'tenhas aprendido', 'tenha aprendido', 'tenhamos aprendido', 'tenhais aprendido', 'tenham aprendido'],
+        'futuro-do-subjuntivo': ['aprender', 'aprenderes', 'aprender', 'aprendermos', 'aprenderdes', 'aprenderem'],
+        'imperativo': ['-', 'aprende', 'aprenda', 'aprendamos', 'aprendei', 'aprendam'],
+        'gerundio': ['aprendendo', 'aprendendo', 'aprendendo', 'aprendendo', 'aprendendo', 'aprendendo'],
+        'particípio': ['aprendido', 'aprendido', 'aprendido', 'aprendidos', 'aprendidas', 'aprendidos'],
+        'infinitivo': ['aprender'],
+        'infinitivo-pessoal': ['aprender', 'aprenderes', 'aprender', 'aprendermos', 'aprenderdes', 'aprenderem']
+    },
+    'trabalhar': {
+        'presente': ['trabalho', 'trabalhas', 'trabalha', 'trabalhamos', 'trabalhais', 'trabalham'],
+        'preterito-perfeito': ['trabalhei', 'trabalhaste', 'trabalhou', 'trabalhamos', 'trabalhastes', 'trabalharam'],
+        'preterito-imperfeito': ['trabalhava', 'trabalhavas', 'trabalhava', 'trabalhávamos', 'trabalháveis', 'trabalhavam'],
+        'preterito-mais-que-perfeito': ['trabalhara', 'trabalharas', 'trabalhara', 'trabalháramos', 'trabalháreis', 'trabalharam'],
+        'futuro-do-indicativo': ['trabalharei', 'trabalharás', 'trabalhará', 'trabalharemos', 'trabalhareis', 'trabalharão'],
+        'futuro-perfeito': ['terei trabalhado', 'terás trabalhado', 'terá trabalhado', 'teremos trabalhado', 'tereis trabalhado', 'terão trabalhado'],
+        'condicional': ['trabalharia', 'trabalharias', 'trabalharia', 'trabalharíamos', 'trabalharíeis', 'trabalhariam'],
+        'condicional-perfeito': ['teria trabalhado', 'terias trabalhado', 'teria trabalhado', 'teríamos trabalhado', 'teríeis trabalhado', 'teriam trabalhado'],
+        'presente-perfeito': ['tenho trabalhado', 'tens trabalhado', 'tem trabalhado', 'temos trabalhado', 'tendes trabalhado', 'têm trabalhado'],
+        'mais-que-perfeito-composto': ['tinha trabalhado', 'tinhas trabalhado', 'tinha trabalhado', 'tínhamos trabalhado', 'tínheis trabalhado', 'tinham trabalhado'],
+        'presente-do-subjuntivo': ['trabalhe', 'trabalhes', 'trabalhe', 'trabalhemos', 'trabalheis', 'trabalhem'],
+        'preterito-imperfeito-do-subjuntivo': ['trabalhasse', 'trabalhasses', 'trabalhasse', 'trabalhássemos', 'trabalhásseis', 'trabalhassem'],
+        'preterito-perfeito-do-subjuntivo': ['tenha trabalhado', 'tenhas trabalhado', 'tenha trabalhado', 'tenhamos trabalhado', 'tenhais trabalhado', 'tenham trabalhado'],
+        'futuro-do-subjuntivo': ['trabalhar', 'trabalhares', 'trabalhar', 'trabalharmos', 'trabalhardes', 'trabalharem'],
+        'imperativo': ['-', 'trabalha', 'trabalhe', 'trabalhemos', 'trabalhai', 'trabalhem'],
+        'gerundio': ['trabalhando', 'trabalhando', 'trabalhando', 'trabalhando', 'trabalhando', 'trabalhando'],
+        'particípio': ['trabalhado', 'trabalhado', 'trabalhado', 'trabalhados', 'trabalhadas', 'trabalhados'],
+        'infinitivo': ['trabalhar'],
+        'infinitivo-pessoal': ['trabalhar', 'trabalhares', 'trabalhar', 'trabalharmos', 'trabalhardes', 'trabalharem']
+    },
+};
+
+// 获取DOM元素
+let difficultySelect = document.getElementById('difficulty');
+let verbSelect = document.getElementById('verb');
+let tenseSelect = document.getElementById('tense');
+let generateBtn = document.getElementById('generate');
+let conjugationResult = document.getElementById('conjugation-result');
+let resultTitle = document.getElementById('result-title');
+let conjugationList = document.getElementById('conjugation-list');
+let practiceBtn = document.getElementById('practice');
+let nextBtn = document.getElementById('next');
+
+// 根据难度筛选动词
+function filterVerbsByDifficulty() {
+    console.log('filterVerbsByDifficulty called');
+    const selectedDifficulty = difficultySelect.value;
+    console.log('Selected difficulty:', selectedDifficulty);
+    const allVerbs = Object.keys(verbConjugations);
+    console.log('All verbs count:', allVerbs.length);
+
+    // 清空当前动词选项
+    verbSelect.innerHTML = '';
+
+    // 添加符合难度的动词
+    let filteredCount = 0;
+    allVerbs.forEach(verb => {
+        if (verbDifficulty[verb] === selectedDifficulty) {
+            filteredCount++;
+            console.log('Adding verb:', verb, 'with difficulty:', verbDifficulty[verb]);
+            const option = document.createElement('option');
+            option.value = verb;
+            
+            // 设置动词显示名称和含义
+            const verbMeanings = {
+                // 初级动词含义 (53个)
+                'ser': 'ser (是)',
+                'estar': 'estar (是)',
+                'ter': 'ter (有)',
+                'ir': 'ir (去)',
+                'fazer': 'fazer (做)',
+                'comer': 'comer (吃)',
+                'beber': 'beber (喝)',
+                'falar': 'falar (说)',
+                'ler': 'ler (读)',
+                'andar': 'andar (走路)',
+                'caminhar': 'caminhar (步行)',
+                'correr': 'correr (跑)',
+                'dormir': 'dormir (睡觉)',
+                'levantar': 'levantar (起床)',
+                'comprar': 'comprar (买)',
+                'vender': 'vender (卖)',
+                'abrir': 'abrir (打开)',
+                'fechar': 'fechar (关闭)',
+                'olhar': 'olhar (看)',
+                'ouvir': 'ouvir (听)',
+                'sentir': 'sentir (感觉)',
+                'fumar': 'fumar (吸烟)',
+                'pagar': 'pagar (支付)',
+                'receber': 'receber (接收)',
+                'chegar': 'chegar (到达)',
+                'sair': 'sair (出去，离开)',
+                'lavar': 'lavar (洗)',
+                'cozinhar': 'cozinhar (烹饪)',
+                'limpar': 'limpar (清洁)',
+                'brincar': 'brincar (玩耍)',
+                'morar': 'morar (居住)',
+                'chamar': 'chamar (叫)',
+                'colocar': 'colocar (放置)',
+                'deitar': 'deitar (躺)',
+                'abracar': 'abracar (拥抱)',
+                'abrir-se': 'abrir-se (打开)',
+                'fechar-se': 'fechar-se (关闭)',
+                'trazer': 'trazer (带来)',
+                'levar': 'levar (带走)',
+                'entrar': 'entrar (进入)',
+                'voltar': 'voltar (返回)',
+                'vir': 'vir (来)',
+                'ficar': 'ficar (停留)',
+                'dar': 'dar (给)',
+                'ver': 'ver (看)',
+                'saber': 'saber (知道)',
+                'poder': 'poder (能够)',
+                'escrever': 'escrever (写)',
+                'aprender': 'aprender (学习)',
+                'trabalhar': 'trabalhar (工作)',
+                'estudar': 'estudar (学习)',
+
+                // 中级动词含义 (53个)
+                'usar': 'usar (使用)',
+                'seguir': 'seguir (跟随)',
+                'pedir': 'pedir (请求)',
+                'esperar': 'esperar (等待)',
+                'perder': 'perder (失去)',
+                'perguntar': 'perguntar (询问)',
+                'servir': 'servir (服务)',
+                'encontrar': 'encontrar (找到)',
+                'deixar': 'deixar (让，留下)',
+                'entender': 'entender (理解)',
+                'responder': 'responder (回答)',
+                'aceitar': 'aceitar (接受)',
+                'ligar': 'ligar (打电话)',
+                'ganhar': 'ganhar (赢得)',
+                'cuidar': 'cuidar (照顾)',
+                'esquecer': 'esquecer (忘记)',
+                'odiar': 'odiar (讨厌)',
+                'jogar': 'jogar (玩)',
+                'proteger': 'proteger (保护)',
+                'decidir': 'decidir (决定)',
+                'beijar': 'beijar (亲吻)',
+                'trocar': 'trocar (交换)',
+                'prometer': 'prometer (承诺)',
+                'chorar': 'chorar (哭)',
+                'sorrir': 'sorrir (微笑)',
+                'ajudar': 'ajudar (帮助)',
+                'avisar': 'avisar (通知)',
+                'buscar': 'buscar (寻找)',
+                'telefonar': 'telefonar (打电话)',
+                'visitar': 'visitar (拜访)',
+                'agradecer': 'agradecer (感谢)',
+                'descrever': 'descrever (描述)',
+                'assistir': 'assistir (观看)',
+                'gritar': 'gritar (喊叫)',
+                'dançar': 'dançar (跳舞)',
+                'queixar': 'queixar (抱怨)',
+                'fugir': 'fugir (逃跑)',
+                'rir': 'rir (笑)',
+                'ensinar': 'ensinar (教)',
+                'gravar': 'gravar (录制)',
+                'amare': 'amar (爱)',
+                'desenhar': 'desenhar (画)',
+                'inventar': 'inventar (发明)',
+                'decorar': 'decorar (装饰)',
+                'festejar': 'festejar (庆祝)',
+                'salvar': 'salvar (拯救)',
+                'quebrar': 'quebrar (打破)',
+                'discuter': 'discuter (讨论)',
+                'nadar': 'nadar (游泳)',
+                'explicar': 'explicar (解释)',
+                'pular': 'pular (跳)',
+                'cantar': 'cantar (唱歌)',
+                'dizer': 'dizer (说)',
+                'parar': 'parar (停止)',
+                'conhecer': 'conhecer (认识)',
+                'explorar': 'explorar (探索)',
+                'guiar': 'guiar (引导)',
+                'tentar': 'tentar (尝试)',
+                'preparar': 'preparar (准备)',
+                'escolher': 'escolher (选择)',
+
+                // 高级动词含义 (88个)
+                'viver': 'viver (生活)',
+                'manter': 'manter (保持)',
+                'mudar': 'mudar (改变)',
+                'acontecer': 'acontecer (发生)',
+                'precisar': 'precisar (需要)',
+                'terminar': 'terminar (完成)',
+                'valer': 'valer (价值)',
+                'produzir': 'produzir (生产)',
+                'resolver': 'resolver (解决)',
+                'ocorrer': 'ocorrer (发生)',
+                'participar': 'participar (参与)',
+                'descobrir': 'descobrir (发现)',
+                'considerar': 'considerar (考虑)',
+                'oferecer': 'oferecer (提供)',
+                'procurar': 'procurar (寻找)',
+                'defender': 'defender (保卫)',
+                'representar': 'representar (代表)',
+                'existir': 'existir (存在)',
+                'criar': 'criar (创造)',
+                'sugerir': 'sugerir (建议)',
+                'compreender': 'compreender (理解)',
+                'aparecer': 'aparecer (出现)',
+                'controlar': 'controlar (控制)',
+                'construir': 'construir (建造)',
+                'investir': 'investir (投资)',
+                'desenvolver': 'desenvolver (发展)',
+                'avaliar': 'avaliar (评估)',
+                'relatar': 'relatar (报告)',
+                'funcionar': 'funcionar (运行)',
+                'superar': 'superar (克服)',
+                'propor': 'propor (提出)',
+                'diminuir': 'diminuir (减少)',
+                'tratar': 'tratar (对待)',
+                'gerar': 'gerar (产生)',
+                'assumir': 'assumir (承担)',
+                'retornar': 'retornar (返回)',
+                'avançar': 'avançar (前进)',
+                'revelar': 'revelar (揭示)',
+                'recusar': 'recusar (拒绝)',
+                'planejar': 'planejar (计划)',
+                'abordar': 'abordar (接近)',
+                'convencer': 'convencer (说服)',
+                'transferir': 'transferir (转移)',
+                'regressar': 'regressar (回归)',
+                'definir': 'definir (定义)',
+                'articular': 'articular (表达)',
+                'apreciar': 'apreciar (欣赏)',
+                'cooperar': 'cooperar (合作)',
+                'corresponder': 'corresponder (回应)',
+                'suspeitar': 'suspeitar (怀疑)',
+                'transportar': 'transportar (运输)',
+                'seleccionar': 'seleccionar (选择)',
+                'adequar': 'adequar (适应)',
+                'duvidar': 'duvidar (怀疑)',
+                'distinguir': 'distinguir (区分)',
+                'provar': 'provar (证明)',
+                'insistir': 'insistir (坚持)',
+                'separar': 'separar (分开)',
+                'testar': 'testar (测试)',
+                'argumentar': 'argumentar (争论)',
+                'dominar': 'dominar (掌握)',
+                'durar': 'durar (持续)',
+                'reunir': 'reunir (集合)',
+                'dividir': 'dividir (分开)',
+                'transmitir': 'transmitir (传递)',
+                'gostar': 'gostar (喜欢)',
+                'querer': 'querer (想要)',
+                'pensar': 'pensar (想)',
+                'adquirir': 'adquirir (获得)',
+                'analisar': 'analisar (分析)',
+                'elegir': 'elegir (选择)',
+                'eliminar': 'eliminar (消除)',
+                'envolver': 'envolver (涉及)',
+                'esconder': 'esconder (隐藏)',
+                'esforçar': 'esforçar (努力)',
+                'estabelecer': 'estabelecer (建立)',
+                'estimar': 'estimar (估计)',
+                'expressar': 'expressar (表达)',
+                'facilitar': 'facilitar (促进)',
+                'fomentar': 'fomentar (促进)',
+                'formar': 'formar (形成)',
+                'frequentar': 'frequentar (经常去)',
+                'gozar': 'gozar (享受)',
+                'guardar': 'guardar (保存)',
+                'conversar': 'conversar (交谈)',
+                'contribuir': 'contribuir (贡献)'
+            };
+            
+            option.textContent = verbMeanings[verb] || verb;
+            verbSelect.appendChild(option);
+        }
+    });
+    
+    // 等待DOM加载完成后再初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        // 如果有动词，则选中第一个
+        if (verbSelect.options.length > 0) {
+            verbSelect.selectedIndex = 0;
+            generateConjugation();
+        }
+    });
+    console.log('Filtered verbs count:', verbSelect.options.length);
+}
+
+// 随机选择下一个动词（考虑难度）
+function nextVerb() {
+    // 重置练习模式状态
+    if (practiceBtn.textContent === '检查答案') {
+        practiceBtn.textContent = '练习这个动词';
+        practiceBtn.onclick = startPractice;
+    }
+    
+    const selectedDifficulty = difficultySelect.value;
+    let verbs = Object.keys(verbConjugations);
+    
+    // 根据难度筛选动词
+    verbs = verbs.filter(verb => verbDifficulty[verb] === selectedDifficulty);
+    
+    // 随机选择一个动词
+    if (verbs.length > 0) {
+        const randomVerbIndex = Math.floor(Math.random() * verbs.length);
+        verbSelect.value = verbs[randomVerbIndex];
+        
+        // 重新生成变位
+        generateConjugation();
+    }
+}
+
+// 生成变位结果
+function generateConjugation() {
+    // 记录函数调用时间
+    console.log('[' + new Date().toLocaleTimeString() + '] generateConjugation function called');
+
+    // 检查DOM元素是否正确获取
+    console.log('检查DOM元素:');
+    // 详细检查DOM元素是否存在
+    console.log('verbSelect元素:', { exists: !!verbSelect, value: verbSelect ? verbSelect.value : 'null' });
+    if (!verbSelect) {
+        console.error('❌ verbSelect不存在');
+        verbSelect = document.getElementById('verb');
+        console.log('🔄 尝试重新获取verbSelect:', { exists: !!verbSelect });
+    } else {
+        console.log('✅ verbSelect存在，值为:', verbSelect.value);
+    }
+
+    console.log('tenseSelect元素:', { exists: !!tenseSelect, value: tenseSelect ? tenseSelect.value : 'null' });
+    if (!tenseSelect) {
+        console.error('❌ tenseSelect不存在');
+        tenseSelect = document.getElementById('tense');
+        console.log('🔄 尝试重新获取tenseSelect:', { exists: !!tenseSelect });
+    } else {
+        console.log('✅ tenseSelect存在，值为:', tenseSelect.value);
+    }
+
+    console.log('conjugationList元素:', { exists: !!conjugationList });
+    if (!conjugationList) {
+        console.error('❌ conjugationList不存在');
+        conjugationList = document.getElementById('conjugation-list');
+        console.log('🔄 尝试重新获取conjugationList:', { exists: !!conjugationList });
+    }
+
+    console.log('resultTitle元素:', { exists: !!resultTitle });
+    if (!resultTitle) {
+        console.error('❌ resultTitle不存在');
+        resultTitle = document.getElementById('result-title');
+        console.log('🔄 尝试重新获取resultTitle:', { exists: !!resultTitle });
+    }
+
+    console.log('conjugationResult元素:', { exists: !!conjugationResult });
+    if (conjugationResult) {
+        console.log('✅ conjugationResult存在，当前类:', conjugationResult.classList.toString());
+        console.log('✅ conjugationResult显示状态:', {
+            display: window.getComputedStyle(conjugationResult).display,
+            visibility: window.getComputedStyle(conjugationResult).visibility,
+            opacity: window.getComputedStyle(conjugationResult).opacity
+        });
+    } else {
+        console.error('❌ conjugationResult不存在');
+        conjugationResult = document.getElementById('conjugation-result');
+        console.log('🔄 尝试重新获取conjugationResult:', { exists: !!conjugationResult });
+        if (conjugationResult) {
+            console.log('✅ 重新获取成功，当前类:', conjugationResult.classList.toString());
+            console.log('✅ 显示状态:', {
+                display: window.getComputedStyle(conjugationResult).display,
+                visibility: window.getComputedStyle(conjugationResult).visibility,
+                opacity: window.getComputedStyle(conjugationResult).opacity
+            });
+        }
+    }
+    if (!tenseSelect) {
+        console.error('tenseSelect is null');
+        tenseSelect = document.getElementById('tense');
+        console.log('尝试重新获取tenseSelect:', tenseSelect);
+    }
+    if (!conjugationList) {
+        console.error('conjugationList is null');
+        conjugationList = document.getElementById('conjugation-list');
+        console.log('尝试重新获取conjugationList:', conjugationList);
+    }
+    if (!resultTitle) {
+        console.error('resultTitle is null');
+        resultTitle = document.getElementById('result-title');
+        console.log('尝试重新获取resultTitle:', resultTitle);
+    }
+    if (!conjugationResult) {
+        console.error('conjugationResult is null');
+        conjugationResult = document.getElementById('conjugation-result');
+        console.log('尝试重新获取conjugationResult:', conjugationResult);
+    }
+    
+    const verb = verbSelect ? verbSelect.value : 'ser';
+    const tense = tenseSelect ? tenseSelect.value : 'presente';
+    
+    console.log('Selected verb:', verb);
+    console.log('Selected tense:', tense);
+    
+    // 检查verbConjugations是否定义
+    if (!verbConjugations) {
+        console.error('verbConjugations is not defined');
+        alert('系统错误：未找到动词变位数据');
+        return;
+    }
+    
+    // 检查verbConjugations是否包含该动词
+    if (!verbConjugations[verb]) {
+        console.error('Verb not found in verbConjugations:', verb);
+        alert('未找到该动词的变位数据: ' + verb);
+        return;
+    }
+    
+    // 检查该动词是否包含该时态
+    if (!verbConjugations[verb][tense]) {
+        console.error('Tense not found for verb:', verb, 'tense:', tense);
+        alert('未找到该动词的' + tense + '时态数据');
+        return;
+    }
+    
+    // 检查变位数据是否为数组
+    const conjugations = verbConjugations[verb][tense];
+    if (!Array.isArray(conjugations)) {
+        console.error('Conjugations data is not an array for verb:', verb, 'tense:', tense);
+        alert('动词变位数据格式错误');
+        return;
+    }
+    
+    if (conjugations.length === 0) {
+        console.error('Conjugations array is empty for verb:', verb, 'tense:', tense);
+        alert('该动词的' + tense + '时态没有可用的变位数据');
+        return;
+    }
+
+    // 更新标题
+    const verbName = verbSelect.options[verbSelect.selectedIndex].text;
+    const tenseName = tenseSelect.options[tenseSelect.selectedIndex].text;
+    resultTitle.textContent = `${verbName} - ${tenseName}`;
+
+    // 清空之前的结果
+    conjugationList.innerHTML = '';
+
+    // 添加新的变位结果
+    conjugations.forEach((conj, index) => {
+        const li = document.createElement('li');
+        li.className = 'conjugation-item';
+        li.textContent = conj;
+        conjugationList.appendChild(li);
+    });
+
+    // 强制显示结果
+    console.log('🔍 尝试显示conjugationResult');
+    console.log('当前时间戳:', Date.now());
+    // 写入日志文件
+    try {
+        const logEntry = '[' + new Date().toISOString() + '] 尝试显示conjugationResult\n';
+        fetch('write_log.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'text/plain'},
+            body: logEntry
+        }).catch(e => console.error('写入日志失败:', e));
+    } catch(e) {
+        console.error('日志写入异常:', e);
+    }
+    if (conjugationResult) {
+        // 记录当前状态
+        console.log('🔍 显示前状态 - 类:', conjugationResult.classList.toString());
+        console.log('🔍 显示前状态 - 样式:', {
+            display: window.getComputedStyle(conjugationResult).display,
+            visibility: window.getComputedStyle(conjugationResult).visibility,
+            opacity: window.getComputedStyle(conjugationResult).opacity
+        });
+
+        // 移除所有可能隐藏元素的类
+        const removedClasses = [];
+        if (conjugationResult.classList.contains('hidden')) { conjugationResult.classList.remove('hidden'); removedClasses.push('hidden'); }
+        if (conjugationResult.classList.contains('d-none')) { conjugationResult.classList.remove('d-none'); removedClasses.push('d-none'); }
+        if (conjugationResult.classList.contains('invisible')) { conjugationResult.classList.remove('invisible'); removedClasses.push('invisible'); }
+        if (removedClasses.length > 0) {
+            console.log('✅ 移除隐藏类:', removedClasses.join(', '));
+        } else {
+            console.log('ℹ️ 没有需要移除的隐藏类');
+        }
+
+        // 强制设置显示样式
+        conjugationResult.style.display = 'block';
+        conjugationResult.style.visibility = 'visible';
+        conjugationResult.style.opacity = '1';
+        console.log('✅ 强制设置显示样式: display=block, visibility=visible, opacity=1');
+        // 立即检查样式
+        console.log('🔍 立即检查样式:', {
+            display: conjugationResult.style.display,
+            visibility: conjugationResult.style.visibility,
+            opacity: conjugationResult.style.opacity
+        });
+
+        // 记录修改后状态
+        setTimeout(() => {
+            console.log('🔍 显示后状态 - 类:', conjugationResult.classList.toString());
+            console.log('🔍 显示后状态 - 样式:', {
+                display: window.getComputedStyle(conjugationResult).display,
+                visibility: window.getComputedStyle(conjugationResult).visibility,
+                opacity: window.getComputedStyle(conjugationResult).opacity
+            });
+
+            // 检查元素是否在视口中
+            const rect = conjugationResult.getBoundingClientRect();
+            console.log('🔍 元素位置与尺寸:', {
+                top: rect.top,
+                left: rect.left,
+                width: rect.width,
+                height: rect.height,
+                isInViewport: rect.top < window.innerHeight && rect.bottom >= 0
+            });
+        }, 100);
+    } else {
+        console.error('❌ conjugationResult仍然为null，无法显示');
+        // 尝试重新获取元素
+        conjugationResult = document.getElementById('conjugation-result');
+        console.log('🔄 重新获取conjugationResult:', { exists: !!conjugationResult });
+        if (conjugationResult) {
+            console.log('✅ 重新获取成功，开始设置显示样式');
+            conjugationResult.classList.remove('hidden', 'd-none', 'invisible');
+            conjugationResult.style.display = 'block';
+            conjugationResult.style.visibility = 'visible';
+            conjugationResult.style.opacity = '1';
+            console.log('✅ 强制设置显示样式完成');
+        }
+    }
+
+    // 添加动画效果
+    setTimeout(() => {
+        const items = document.querySelectorAll('.conjugation-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('show');
+            }, index * 100);
+        });
+    }, 100);
+}
+
+// 练习模式
+function startPractice() {
+    const items = document.querySelectorAll('#conjugation-list .conjugation-item');
+    items.forEach(item => {
+        const originalText = item.textContent;
+        item.textContent = '';
+        item.classList.add('border-b', 'border-gray-300', 'pb-1');
+
+        // 创建输入框
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'bg-transparent border-none outline-none w-full';
+        input.placeholder = '输入变位...';
+        item.appendChild(input);
+
+        // 验证答案
+        input.addEventListener('blur', () => {
+            if (input.value.toLowerCase() === originalText.toLowerCase()) {
+                input.classList.add('text-green-600');
+                input.disabled = true;
+            } else {
+                input.classList.add('text-red-600');
+                setTimeout(() => {
+                    input.classList.remove('text-red-600');
+                }, 1000);
+            }
+        });
+    });
+
+    practiceBtn.textContent = '检查答案';
+    // 移除旧的事件监听器
+    practiceBtn.removeEventListener('click', startPractice);
+    practiceBtn.removeEventListener('click', checkAnswers);
+    // 添加新的事件监听器
+    practiceBtn.addEventListener('click', checkAnswers);
+}
+
+// 检查答案
+function checkAnswers() {
+    const verb = verbSelect.value;
+    const tense = tenseSelect.value;
+    const conjugations = verbConjugations[verb][tense];
+    const inputs = document.querySelectorAll('#conjugation-list input');
+    let allCorrect = true;
+
+    inputs.forEach((input, index) => {
+        if (input.value.toLowerCase() === conjugations[index].toLowerCase()) {
+            input.classList.add('text-green-600');
+            input.disabled = true;
+        } else {
+            input.classList.add('text-red-600');
+            input.value = conjugations[index];
+            input.disabled = true;
+            allCorrect = false;
+        }
+    });
+
+    if (allCorrect) {
+        alert('太棒了！所有答案都正确！');
+    } else {
+        alert('有些答案不正确，请再试一次！');
+    }
+
+    practiceBtn.textContent = '练习这个动词';
+    // 移除旧的事件监听器
+    practiceBtn.removeEventListener('click', checkAnswers);
+    practiceBtn.removeEventListener('click', startPractice);
+    // 添加新的事件监听器
+    practiceBtn.addEventListener('click', startPractice);
+}
+
+// 随机选择下一个动词（已在前面定义）
+
+// 添加事件监听器
+console.log('Adding event listeners...');
+
+// 确保获取DOM元素
+verbSelect = document.getElementById('verb') || verbSelect;
+console.log('verbSelect:', verbSelect);
+
+tenseSelect = document.getElementById('tense') || tenseSelect;
+console.log('tenseSelect:', tenseSelect);
+
+difficultySelect = document.getElementById('difficulty') || difficultySelect;
+console.log('difficultySelect:', difficultySelect);
+
+generateBtn = document.getElementById('generate') || generateBtn;
+console.log('generateBtn:', generateBtn);
+
+practiceBtn = document.getElementById('practice') || practiceBtn;
+console.log('practiceBtn:', practiceBtn);
+
+nextBtn = document.getElementById('next') || nextBtn;
+console.log('nextBtn:', nextBtn);
+
+conjugationResult = document.getElementById('conjugation-result') || conjugationResult;
+console.log('conjugationResult:', conjugationResult);
+
+// 添加事件监听器
+if (verbSelect) verbSelect.addEventListener('change', generateConjugation);
+else console.error('verbSelect is null, cannot add change event listener');
+
+if (tenseSelect) tenseSelect.addEventListener('change', generateConjugation);
+else console.error('tenseSelect is null, cannot add change event listener');
+
+if (difficultySelect) difficultySelect.addEventListener('change', filterVerbsByDifficulty);
+else console.error('difficultySelect is null, cannot add change event listener');
+
+if (generateBtn) {
+    generateBtn.addEventListener('click', generateConjugation);
+    console.log('Click event listener added to generateBtn');
+} else {
+    console.error('generateBtn is null, cannot add click event listener');
+}
+
+if (practiceBtn) practiceBtn.addEventListener('click', startPractice);
+else console.error('practiceBtn is null, cannot add click event listener');
+
+if (nextBtn) nextBtn.addEventListener('click', nextVerb);
+else console.error('nextBtn is null, cannot add click event listener');
+
+// 页面加载完成后初始化
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM加载完成，开始初始化...');
+    filterVerbsByDifficulty(); // 初始化动词列表（考虑难度）
+    tenseSelect.value = 'presente'; // 设置默认时态
+    console.log('准备生成初始变位...');
+    generateConjugation(); // 生成初始变位
+    console.log('初始变位生成完成');
+});

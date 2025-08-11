@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Conjugação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3a5ae7;
+        }
+        #conjugation-result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debug Verbo Conjugação</h1>
+
+    <div class="container">
+        <label for="verb">Verbo:</label>
+        <select id="verb">
+            <option value="saber">saber</option>
+            <option value="falar">falar</option>
+            <option value="ir">ir</option>
+        </select>
+
+        <label for="tense">Tempo:</label>
+        <select id="tense">
+            <option value="presente">Presente</option>
+            <option value="pretérito">Pretérito</option>
+            <option value="futuro">Futuro</option>
+        </select>
+
+        <button id="generate-btn">Gerar Conjugação</button>
+    </div>
+
+    <div id="conjugation-result" class="hidden"></div>
+
+    <script>
+        // Função simplificada para testar a exibição de resultados
+        function testGenerateConjugation() {
+            console.log("Iniciando testGenerateConjugation");
+
+            // Obter elementos
+            const verbSelect = document.getElementById('verb');
+            const tenseSelect = document.getElementById('tense');
+            const resultDiv = document.getElementById('conjugation-result');
+
+            console.log("Elementos obtidos:", {
+                verbSelect: !!verbSelect,
+                tenseSelect: !!tenseSelect,
+                resultDiv: !!resultDiv
+            });
+
+            // Simular dados de conjugação
+            const verb = verbSelect.value;
+            const tense = tenseSelect.value;
+
+            // Dados simulados para alguns verbos e tempos
+            const conjugationData = {
+                'saber': {
+                    'presente': {
+                        'eu': 'sei',
+                        'tu': 'sabes',
+                        'ele/ela/você': 'sabe',
+                        'nós': 'sabemos',
+                        'vós': 'sabeis',
+                        'eles/elas/vocês': 'sabem'
+                    },
+                    'pretérito': {
+                        'eu': 'soube',
+                        'tu': 'soubeste',
+                        'ele/ela/você': 'soube',
+                        'nós': 'soubemos',
+                        'vós': 'soubestis',
+                        'eles/elas/vocês': 'souberam'
+                    }
+                },
+                'falar': {
+                    'presente': {
+                        'eu': 'falo',
+                        'tu': 'falas',
+                        'ele/ela/você': 'fala',
+                        'nós': 'falamos',
+                        'vós': 'falais',
+                        'eles/elas/vocês': 'falam'
+                    }
+                },
+                'ir': {
+                    'presente': {
+                        'eu': 'vou',
+                        'tu': 'vais',
+                        'ele/ela/você': 'vai',
+                        'nós': 'vamos',
+                        'vós': 'vais',
+                        'eles/elas/vocês': 'vão'
+                    }
+                }
+            };
+
+            // Verificar se há dados para o verbo e tempo selecionados
+            if (conjugationData[verb] && conjugationData[verb][tense]) {
+                const conjugation = conjugationData[verb][tense];
+                let html = `<h3>${verb} - ${tense}</h3><ul>`;
+
+                for (const [person, form] of Object.entries(conjugation)) {
+                    html += `<li><strong>${person}:</strong> ${form}</li>`;
+                }
+
+                html += `</ul>`;
+                resultDiv.innerHTML = html;
+
+                console.log("Resultado gerado:", html);
+            } else {
+                resultDiv.innerHTML = `<p>Dados não disponíveis para ${verb} no ${tense}</p>`;
+                console.log("Dados não disponíveis");
+            }
+
+            // Forçar exibição do resultado
+            console.log("Classes antes de remover 'hidden':", resultDiv.classList);
+            resultDiv.classList.remove('hidden');
+            console.log("Classes após remover 'hidden':", resultDiv.classList);
+
+            // Forçar exibição via estilo inline
+            resultDiv.style.display = 'block';
+            resultDiv.style.visibility = 'visible';
+            resultDiv.style.opacity = '1';
+
+            console.log("Estilos aplicados:", {
+                display: resultDiv.style.display,
+                visibility: resultDiv.style.visibility,
+                opacity: resultDiv.style.opacity
+            });
+
+            console.log("testGenerateConjugation concluído");
+        }
+
+        // Adicionar ouvinte de evento
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-btn');
+            console.log("Botão obtido:", !!generateBtn);
+
+            if (generateBtn) {
+                generateBtn.addEventListener('click', testGenerateConjugation);
+                console.log("Ouvinte de evento adicionado");
+            } else {
+                console.error("Botão não encontrado");
+            }
+        });
+    </script>
+</body>
+</html>

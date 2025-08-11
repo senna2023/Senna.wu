@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简化版测试</title>
+</head>
+<body>
+    <div id="app">
+        <h1>葡萄牙语动词变位测试</h1>
+        <div>
+            <label for="verb">动词:</label>
+            <select id="verb">
+                <option value="ser">ser (是)</option>
+            </select>
+        </div>
+        <div>
+            <label for="tense">时态:</label>
+            <select id="tense">
+                <option value="presente">现在时</option>
+            </select>
+        </div>
+        <button id="generate">生成变位</button>
+        <div id="conjugation-result" style="display: none;">
+            <h2 id="result-title"></h2>
+            <ul id="conjugation-list"></ul>
+        </div>
+    </div>
+
+    <script src="test_script.js"></script>
+</body>
+</html>
