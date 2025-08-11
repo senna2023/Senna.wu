@@ -3028,13 +3028,21 @@ function filterVerbsByDifficulty() {
     });
     
     // 等待DOM加载完成后再初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        // 如果有动词，则选中第一个
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            // 如果有动词，则选中第一个
+            if (verbSelect.options.length > 0) {
+                verbSelect.selectedIndex = 0;
+                generateConjugation();
+            }
+        });
+    } else {
+        // 如果DOM已经加载完成，直接初始化
         if (verbSelect.options.length > 0) {
             verbSelect.selectedIndex = 0;
             generateConjugation();
         }
-    });
+    }
     console.log('Filtered verbs count:', verbSelect.options.length);
 }
 
@@ -3064,35 +3072,124 @@ function nextVerb() {
 
 // 生成变位结果
 function generateConjugation() {
-    // 确保获取DOM元素
-    verbSelect = document.getElementById('verb');
-    tenseSelect = document.getElementById('tense');
-    conjugationList = document.getElementById('conjugation-list');
-    resultTitle = document.getElementById('result-title');
-    conjugationResult = document.getElementById('conjugation-result');
+    // 记录函数调用时间
+    console.log('[' + new Date().toLocaleTimeString() + '] generateConjugation function called');
 
-    // 检查DOM元素是否存在
-    if (!verbSelect || !tenseSelect || !conjugationList || !resultTitle || !conjugationResult) {
-        console.error('缺少必要的DOM元素');
-        return;
+    // 检查DOM元素是否正确获取
+    console.log('检查DOM元素:');
+    // 详细检查DOM元素是否存在
+    console.log('verbSelect元素:', { exists: !!verbSelect, value: verbSelect ? verbSelect.value : 'null' });
+    if (!verbSelect) {
+        console.error('❌ verbSelect不存在');
+        verbSelect = document.getElementById('verb');
+        console.log('🔄 尝试重新获取verbSelect:', { exists: !!verbSelect });
+    } else {
+        console.log('✅ verbSelect存在，值为:', verbSelect.value);
     }
 
-    const verb = verbSelect.value;
-    const tense = tenseSelect.value;
-
-    // 检查动词和时态数据
-    if (!verbConjugations || !verbConjugations[verb] || !verbConjugations[verb][tense]) {
-        console.error('未找到动词变位数据');
-        resultTitle.textContent = '未找到变位数据';
-        conjugationList.innerHTML = '';
-        return;
+    console.log('tenseSelect元素:', { exists: !!tenseSelect, value: tenseSelect ? tenseSelect.value : 'null' });
+    if (!tenseSelect) {
+        console.error('❌ tenseSelect不存在');
+        tenseSelect = document.getElementById('tense');
+        console.log('🔄 尝试重新获取tenseSelect:', { exists: !!tenseSelect });
+    } else {
+        console.log('✅ tenseSelect存在，值为:', tenseSelect.value);
     }
 
+    console.log('conjugationList元素:', { exists: !!conjugationList });
+    if (!conjugationList) {
+        console.error('❌ conjugationList不存在');
+        conjugationList = document.getElementById('conjugation-list');
+        console.log('🔄 尝试重新获取conjugationList:', { exists: !!conjugationList });
+    }
+
+    console.log('resultTitle元素:', { exists: !!resultTitle });
+    if (!resultTitle) {
+        console.error('❌ resultTitle不存在');
+        resultTitle = document.getElementById('result-title');
+        console.log('🔄 尝试重新获取resultTitle:', { exists: !!resultTitle });
+    }
+
+    console.log('conjugationResult元素:', { exists: !!conjugationResult });
+    if (conjugationResult) {
+        console.log('✅ conjugationResult存在，当前类:', conjugationResult.classList.toString());
+        console.log('✅ conjugationResult显示状态:', {
+            display: window.getComputedStyle(conjugationResult).display,
+            visibility: window.getComputedStyle(conjugationResult).visibility,
+            opacity: window.getComputedStyle(conjugationResult).opacity
+        });
+    } else {
+        console.error('❌ conjugationResult不存在');
+        conjugationResult = document.getElementById('conjugation-result');
+        console.log('🔄 尝试重新获取conjugationResult:', { exists: !!conjugationResult });
+        if (conjugationResult) {
+            console.log('✅ 重新获取成功，当前类:', conjugationResult.classList.toString());
+            console.log('✅ 显示状态:', {
+                display: window.getComputedStyle(conjugationResult).display,
+                visibility: window.getComputedStyle(conjugationResult).visibility,
+                opacity: window.getComputedStyle(conjugationResult).opacity
+            });
+        }
+    }
+    if (!tenseSelect) {
+        console.error('tenseSelect is null');
+        tenseSelect = document.getElementById('tense');
+        console.log('尝试重新获取tenseSelect:', tenseSelect);
+    }
+    if (!conjugationList) {
+        console.error('conjugationList is null');
+        conjugationList = document.getElementById('conjugation-list');
+        console.log('尝试重新获取conjugationList:', conjugationList);
+    }
+    if (!resultTitle) {
+        console.error('resultTitle is null');
+        resultTitle = document.getElementById('result-title');
+        console.log('尝试重新获取resultTitle:', resultTitle);
+    }
+    if (!conjugationResult) {
+        console.error('conjugationResult is null');
+        conjugationResult = document.getElementById('conjugation-result');
+        console.log('尝试重新获取conjugationResult:', conjugationResult);
+    }
+    
+    const verb = verbSelect ? verbSelect.value : 'ser';
+    const tense = tenseSelect ? tenseSelect.value : 'presente';
+    
+    console.log('Selected verb:', verb);
+    console.log('Selected tense:', tense);
+    
+    // 检查verbConjugations是否定义
+    if (!verbConjugations) {
+        console.error('verbConjugations is not defined');
+        alert('系统错误：未找到动词变位数据');
+        return;
+    }
+    
+    // 检查verbConjugations是否包含该动词
+    if (!verbConjugations[verb]) {
+        console.error('Verb not found in verbConjugations:', verb);
+        alert('未找到该动词的变位数据: ' + verb);
+        return;
+    }
+    
+    // 检查该动词是否包含该时态
+    if (!verbConjugations[verb][tense]) {
+        console.error('Tense not found for verb:', verb, 'tense:', tense);
+        alert('未找到该动词的' + tense + '时态数据');
+        return;
+    }
+    
+    // 检查变位数据是否为数组
     const conjugations = verbConjugations[verb][tense];
-    if (!Array.isArray(conjugations) || conjugations.length === 0) {
-        console.error('变位数据格式错误');
-        resultTitle.textContent = '变位数据格式错误';
-        conjugationList.innerHTML = '';
+    if (!Array.isArray(conjugations)) {
+        console.error('Conjugations data is not an array for verb:', verb, 'tense:', tense);
+        alert('动词变位数据格式错误');
+        return;
+    }
+    
+    if (conjugations.length === 0) {
+        console.error('Conjugations array is empty for verb:', verb, 'tense:', tense);
+        alert('该动词的' + tense + '时态没有可用的变位数据');
         return;
     }
 
@@ -3104,86 +3201,30 @@ function generateConjugation() {
     // 清空之前的结果
     conjugationList.innerHTML = '';
 
-    // 添加新的变位结果 - 确保人称和变位对齐
-    const persons = ['Eu (我)', 'Tu (你)', 'Ele/Ela/Você (他/她/您)', 'Nós (我们)', 'Vós (你们)', 'Eles/Elas/Vocês (他们/她们/您们)'];
-    
-    // 清空之前的结果
-    conjugationList.innerHTML = '';
-    
-    // 根据index.html的结构，我们需要填充到现有的列表中
-    // 先获取人称列表元素
-    const personList = document.querySelector('.verb-card.bg-indigo-50 ul');
-    if (personList) {
-        personList.innerHTML = '';
-    }
-    
-    // 清空变位列表
-    conjugationList.innerHTML = '';
-    
-    // 同时填充人称和变位列表，确保对齐
+    // 添加新的变位结果
     conjugations.forEach((conj, index) => {
-        // 创建人称列表项
-        if (personList) {
-            const personLi = document.createElement('li');
-            personLi.className = 'conjugation-item p-2 border-b border-gray-200';
-            personLi.textContent = persons[index];
-            personList.appendChild(personLi);
-        }
-        
-        // 创建变位列表项
-        const conjLi = document.createElement('li');
-        conjLi.className = 'conjugation-item p-2 border-b border-gray-200';
-        conjLi.textContent = conj;
-        conjugationList.appendChild(conjLi);
+        const li = document.createElement('li');
+        li.className = 'conjugation-item';
+        li.textContent = conj;
+        conjugationList.appendChild(li);
     });
-    
-    // 确保两列具有相同的高度
-    setTimeout(() => {
-        const personItems = document.querySelectorAll('.verb-card.bg-indigo-50 .conjugation-item');
-        const conjItems = document.querySelectorAll('#conjugation-list .conjugation-item');
-        
-        if (personItems.length === conjItems.length) {
-            for (let i = 0; i < personItems.length; i++) {
-                const personHeight = personItems[i].offsetHeight;
-                const conjHeight = conjItems[i].offsetHeight;
-                const maxHeight = Math.max(personHeight, conjHeight);
-                
-                personItems[i].style.minHeight = `${maxHeight}px`;
-                conjItems[i].style.minHeight = `${maxHeight}px`;
-            }
-        }
-    }, 100);
-
-    // 已在函数开头初始化过conjugationResult
-    if (!conjugationResult) {
-        console.error('❌ conjugation-result元素未找到');
-        return;
-    }
-
-    // 确保结果区域可见
-    conjugationResult.classList.remove('hidden', 'd-none', 'invisible');
-    conjugationResult.style.display = 'block';
-    conjugationResult.style.visibility = 'visible';
-    conjugationResult.style.opacity = '1';
-
-    // 验证数据是否已正确加载
-    console.log('Selected verb:', verb);
-    console.log('Selected tense:', tense);
-    console.log('Conjugations count:', conjugations.length);
 
     // 强制显示结果
     console.log('🔍 尝试显示conjugationResult');
     console.log('当前时间戳:', Date.now());
-    // 写入日志文件
-    try {
-        const logEntry = '[' + new Date().toISOString() + '] 尝试显示conjugationResult\n';
-        fetch('write_log.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'text/plain'},
-            body: logEntry
-        }).catch(e => console.error('写入日志失败:', e));
-    } catch(e) {
-        console.error('日志写入异常:', e);
+    // 仅在开发环境写入日志
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        // 写入日志文件
+        try {
+            const logEntry = '[' + new Date().toISOString() + '] 尝试显示conjugationResult\n';
+            fetch('write_log.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'text/plain'},
+                body: logEntry
+            }).catch(e => console.error('写入日志失败:', e));
+        } catch(e) {
+            console.error('日志写入异常:', e);
+        }
     }
     if (conjugationResult) {
         // 记录当前状态
@@ -3301,9 +3342,9 @@ function startPractice() {
 
 // 检查答案
 function checkAnswers() {
-    const selectedVerb = verbSelect.value;
+    const verb = verbSelect.value;
     const tense = tenseSelect.value;
-    const conjugations = verbConjugations[selectedVerb][tense];
+    const conjugations = verbConjugations[verb][tense];
     const inputs = document.querySelectorAll('#conjugation-list input');
     let allCorrect = true;
 
