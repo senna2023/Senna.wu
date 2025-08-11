@@ -3104,26 +3104,55 @@ function generateConjugation() {
     // 清空之前的结果
     conjugationList.innerHTML = '';
 
-    // 添加新的变位结果 - 包含人称和变位
-    const persons = ['Eu', 'Tu', 'Ele/Ela', 'Nós', 'Vós', 'Eles/Elas'];
+    // 添加新的变位结果 - 确保人称和变位对齐
+    const persons = ['Eu (我)', 'Tu (你)', 'Ele/Ela/Você (他/她/您)', 'Nós (我们)', 'Vós (你们)', 'Eles/Elas/Vocês (他们/她们/您们)'];
+    
+    // 清空之前的结果
+    conjugationList.innerHTML = '';
+    
+    // 根据index.html的结构，我们需要填充到现有的列表中
+    // 先获取人称列表元素
+    const personList = document.querySelector('.verb-card.bg-indigo-50 ul');
+    if (personList) {
+        personList.innerHTML = '';
+    }
+    
+    // 清空变位列表
+    conjugationList.innerHTML = '';
+    
+    // 同时填充人称和变位列表，确保对齐
     conjugations.forEach((conj, index) => {
-        const li = document.createElement('li');
-        li.className = 'conjugation-item flex justify-between items-center p-2 border-b border-gray-200';
-
-        // 创建人称元素
-        const personSpan = document.createElement('span');
-        personSpan.className = 'font-medium w-24';
-        personSpan.textContent = persons[index];
-        li.appendChild(personSpan);
-
-        // 创建变位元素
-        const conjSpan = document.createElement('span');
-        conjSpan.className = 'flex-1 text-left pl-4';
-        conjSpan.textContent = conj;
-        li.appendChild(conjSpan);
-
-        conjugationList.appendChild(li);
+        // 创建人称列表项
+        if (personList) {
+            const personLi = document.createElement('li');
+            personLi.className = 'conjugation-item p-2 border-b border-gray-200';
+            personLi.textContent = persons[index];
+            personList.appendChild(personLi);
+        }
+        
+        // 创建变位列表项
+        const conjLi = document.createElement('li');
+        conjLi.className = 'conjugation-item p-2 border-b border-gray-200';
+        conjLi.textContent = conj;
+        conjugationList.appendChild(conjLi);
     });
+    
+    // 确保两列具有相同的高度
+    setTimeout(() => {
+        const personItems = document.querySelectorAll('.verb-card.bg-indigo-50 .conjugation-item');
+        const conjItems = document.querySelectorAll('#conjugation-list .conjugation-item');
+        
+        if (personItems.length === conjItems.length) {
+            for (let i = 0; i < personItems.length; i++) {
+                const personHeight = personItems[i].offsetHeight;
+                const conjHeight = conjItems[i].offsetHeight;
+                const maxHeight = Math.max(personHeight, conjHeight);
+                
+                personItems[i].style.minHeight = `${maxHeight}px`;
+                conjItems[i].style.minHeight = `${maxHeight}px`;
+            }
+        }
+    }, 100);
 
     // 确保结果区域可见
     conjugationResult.classList.remove('hidden', 'd-none', 'invisible');
