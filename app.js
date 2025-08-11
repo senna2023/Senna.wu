@@ -3154,21 +3154,17 @@ function generateConjugation() {
         }
     }, 100);
 
+    // 已在函数开头初始化过conjugationResult
+    if (!conjugationResult) {
+        console.error('❌ conjugation-result元素未找到');
+        return;
+    }
+
     // 确保结果区域可见
     conjugationResult.classList.remove('hidden', 'd-none', 'invisible');
     conjugationResult.style.display = 'block';
     conjugationResult.style.visibility = 'visible';
     conjugationResult.style.opacity = '1';
-
-    // 添加动画效果
-    setTimeout(() => {
-        const items = document.querySelectorAll('.conjugation-item');
-        items.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.add('show');
-            }, index * 100);
-        });
-    }, 100);
 
     // 验证数据是否已正确加载
     console.log('Selected verb:', verb);
